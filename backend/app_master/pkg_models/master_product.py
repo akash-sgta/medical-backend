@@ -1,7 +1,7 @@
 # ========================================================================
 from django.db import models
 
-from app_master.pkg_models.check_product_type import REQUIREMENT_TYPE
+from app_cdn.pkg_models.master_file import FILE
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.check_product_type import PRODUCT_TYPE
 
@@ -20,6 +20,9 @@ class PRODUCT(CHANGE_LOG):
 
     id = models.BigAutoField(primary_key=True)
     type = models.ForeignKey(PRODUCT_TYPE, on_delete=models.SET_NULL, null=True)
+    image_01 = models.ForeignKey(FILE, related_name="image_01", null=True, blank=True)
+    image_02 = models.ForeignKey(FILE, related_name="image_02", null=True, blank=True)
+    image_03 = models.ForeignKey(FILE, related_name="image_03", null=True, blank=True)
 
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)

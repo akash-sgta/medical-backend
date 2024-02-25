@@ -1,6 +1,7 @@
 # ========================================================================
 from django.db import models
 
+from app_cdn.pkg_models.master_file import FILE
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.master_credential import CREDENTIAL
 from app_master.pkg_models.master_address import ADDRESS
@@ -25,6 +26,7 @@ class PROFILE(CHANGE_LOG):
     address = models.ForeignKey(
         ADDRESS, on_delete=models.SET_NULL, unique=True, null=True, blank=True
     )
+    image = models.ForeignKey(FILE, null=True, blank=True)
 
     first_name = models.CharField(max_length=128)
     middle_name = models.CharField(max_length=128, blank=True, null=True)
