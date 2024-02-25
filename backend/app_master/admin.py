@@ -12,16 +12,16 @@ from app_master.pkg_admins.requirement_connection import (
 from app_master.pkg_admins.language import Language
 from app_master.pkg_admins.text import Text
 
-from app_master.pkg_models.requirement_type import (
+from app_master.pkg_models.check_product_type import (
     REQUIREMENT_TYPE,
     REQUIREMENT_TYPE_T,
 )
-from app_master.pkg_models.requirement import REQUIREMENT, REQUIREMENT_T
+from app_master.pkg_models.master_product import REQUIREMENT, REQUIREMENT_T
 from app_master.pkg_models.requirement_connection import (
     REQUIREMENT_CONNECTION,
 )
-from app_master.pkg_models.language import LANGUAGE
-from app_master.pkg_models.text import TEXT
+from app_master.pkg_models.check_language import LANGUAGE
+from app_master.pkg_models.master_text import TEXT
 
 # ========================================================================
 

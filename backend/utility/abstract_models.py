@@ -5,6 +5,7 @@ from utility.methods import get_current_ts
 
 # ========================================================================
 
+
 class CHANGE_LOG(models.Model):
     created_on = models.FloatField(default=0, blank=True)
     changed_on = models.FloatField(default=0, blank=True)

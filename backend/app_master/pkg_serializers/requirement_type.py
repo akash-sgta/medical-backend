@@ -1,5 +1,5 @@
 # ========================================================================
-from app_master.pkg_models.requirement_type import REQUIREMENT_TYPE
+from app_master.pkg_models.check_product_type import REQUIREMENT_TYPE
 from utility.abstract_serializer import Serializer
 
 

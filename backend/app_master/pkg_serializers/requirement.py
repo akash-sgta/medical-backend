@@ -1,5 +1,5 @@
 # ========================================================================
-from app_master.pkg_models.requirement import REQUIREMENT
+from app_master.pkg_models.master_product import REQUIREMENT
 from utility.abstract_serializer import Serializer
 
 

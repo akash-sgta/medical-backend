@@ -2,7 +2,7 @@
 from django.db import models
 
 from utility.abstract_models import CHANGE_LOG
-from app_master.pkg_models.language import LANGUAGE
+from app_master.pkg_models.check_language import LANGUAGE
 
 
 # ========================================================================
@@ -21,4 +21,4 @@ class TEXT(CHANGE_LOG):
         super(TEXT, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}...".format(self.lang.eng_name, self.text[:32])
+        return "[{}] {}...".format(self.lang.eng_name, self.text[:8])

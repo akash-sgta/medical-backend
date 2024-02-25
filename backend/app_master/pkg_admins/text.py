@@ -1,6 +1,6 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_master.pkg_models.text import TEXT
+from app_master.pkg_models.master_text import TEXT
 
 
 # ========================================================================

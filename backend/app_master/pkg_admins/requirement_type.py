@@ -1,6 +1,6 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_master.pkg_models.requirement_type import (
+from app_master.pkg_models.check_product_type import (
     REQUIREMENT_TYPE,
     REQUIREMENT_TYPE_T,
 )

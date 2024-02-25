@@ -2,7 +2,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.text import TEXT
+from app_master.pkg_models.master_text import TEXT
 from app_master.pkg_serializers.text import (
     Text as Text_Serializer,
 )

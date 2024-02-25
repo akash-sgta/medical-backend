@@ -1,5 +1,5 @@
 # ========================================================================
-from app_master.pkg_models.text import TEXT
+from app_master.pkg_models.master_text import TEXT
 from utility.abstract_serializer import Serializer
 
 

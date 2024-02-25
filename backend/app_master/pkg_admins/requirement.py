@@ -1,6 +1,6 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_master.pkg_models.requirement import REQUIREMENT, REQUIREMENT_T
+from app_master.pkg_models.master_product import REQUIREMENT, REQUIREMENT_T
 
 
 # ========================================================================

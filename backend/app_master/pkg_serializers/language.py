@@ -1,5 +1,5 @@
 # ========================================================================
-from app_master.pkg_models.language import LANGUAGE
+from app_master.pkg_models.check_language import LANGUAGE
 from utility.abstract_serializer import Serializer
 
 

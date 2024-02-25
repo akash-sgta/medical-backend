@@ -1,6 +1,6 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_master.pkg_models.language import LANGUAGE
+from app_master.pkg_models.check_language import LANGUAGE
 
 
 # ========================================================================
