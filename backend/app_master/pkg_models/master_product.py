@@ -23,14 +23,14 @@ class PRODUCT(CHANGE_LOG):
 
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)
-    manufacturer = models.CharField(max_length=100)
-    dosage = models.CharField(max_length=50)
-    formulation = models.CharField(max_length=50)
+    manufacturer = models.CharField(max_length=128)
+    dosage = models.CharField(max_length=64)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     storage_instructions = models.TextField()
     side_effects = models.TextField()
     warnings_precautions = models.TextField()
     contraindications = models.TextField()
+    url = models.URLField(blank=True, null=True)
     is_prescription_required = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
