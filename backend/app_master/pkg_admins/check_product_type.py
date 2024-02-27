@@ -8,7 +8,6 @@ class Product_Type(Change_Log):
     list_display = ("name",) + super().list_display
     list_filter = ("name",)
     search_fields = ("name__icontains",)
-    readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")
 
     def created(self, obj):
         return super().created(PRODUCT_TYPE.objects.get(id=obj.id))

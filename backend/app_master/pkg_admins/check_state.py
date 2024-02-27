@@ -14,7 +14,6 @@ class State(Change_Log):
         "eng_name__icontains",
     )
     list_filter = ("country__eng_name",)
-    readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")
 
     def country_name(self, obj):
         return obj.country.eng_name

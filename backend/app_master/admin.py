@@ -1,7 +1,7 @@
 # ========================================================================
 from django.contrib import admin
 
-from app_master.pkg_admins.requirement_type import (
+from app_master.pkg_admins.check_unit_of_measurement import (
     Requirement_Type,
     Requirement_Type_T,
 )
@@ -10,7 +10,7 @@ from app_master.pkg_admins.check_state import (
     Requirement_Connection,
 )
 from app_master.pkg_admins.check_language import Language
-from app_master.pkg_admins.text import Text
+from app_master.pkg_admins.master_text import Text
 
 from app_master.pkg_models.check_product_type import (
     REQUIREMENT_TYPE,
