@@ -6,7 +6,7 @@ from app_master.pkg_admins.requirement_type import (
     Requirement_Type_T,
 )
 from app_master.pkg_admins.check_product_type import Requirement, Requirement_T
-from app_master.pkg_admins.requirement_connection import (
+from app_master.pkg_admins.check_state import (
     Requirement_Connection,
 )
 from app_master.pkg_admins.check_language import Language

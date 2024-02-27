@@ -5,7 +5,7 @@ from app_master.pkg_models.check_product_type import PRODUCT_TYPE, PRODUCT_TYPE_
 
 # ========================================================================
 class Product_Type(Change_Log):
-    list_display = ("name", "created", "changed")
+    list_display = ("name",) + super().list_display
     list_filter = ("name",)
     search_fields = ("name__icontains",)
     readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")

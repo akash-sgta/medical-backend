@@ -5,7 +5,11 @@ from app_master.pkg_models.check_city import CITY
 
 # ========================================================================
 class City(Change_Log):
-    list_display = ("state", "eng_name", "local_name", "created", "changed")
+    list_display = (
+        "state",
+        "eng_name",
+        "local_name",
+    ) + super().list_display
     search_fields = ("eng_name__icontains", "local_name__icontains")
     readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")
 

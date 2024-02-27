@@ -7,6 +7,8 @@ from utility.methods import get_date_time_from_ts, post_error_to_terminal
 
 
 class Change_Log(admin.ModelAdmin):
+    list_display = ("created", "changed")
+
     def created(self, result):
         try:
             date, time = get_date_time_from_ts(result.created_on)
