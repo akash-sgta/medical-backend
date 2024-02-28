@@ -40,4 +40,4 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
         super(PRODUCT_CONNECTION, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.name)
+        return "[{}] {} - {}".format(self.id, self.parent.name, self.child.name)

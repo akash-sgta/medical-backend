@@ -1,6 +1,8 @@
 # medical
-Well diversified Hospital Management System
+### Well diversified Hospital Management System
+
 ---
+
 > Linux Pre-requisites
 >> $ ``` sudo apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config libmysqlclient-dev default-libmysqlclient-dev mysqlclient ```
 
@@ -35,3 +37,10 @@ Well diversified Hospital Management System
 >> sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 >> sudo docker run hello-world
 > ```
+
+---
+> External Api(s) used:
+> 
+>> 1. <a>https://api.freecurrencyapi.com/v1/latest?apikey=GET_YOUR_OWN_KEY</a>
+>> 2. 
+

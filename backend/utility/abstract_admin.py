@@ -7,8 +7,17 @@ from utility.methods import get_date_time_from_ts, post_error_to_terminal
 
 
 class Change_Log(admin.ModelAdmin):
-    list_display = ("created", "changed")
-    readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")
+    list_display = (
+        "created",
+        "changed",
+        "company_code",
+    )
+    readonly_fields = (
+        "created_on",
+        "changed_on",
+        "created_by",
+        "changed_by",
+    )
 
     def created(self, result):
         try:
