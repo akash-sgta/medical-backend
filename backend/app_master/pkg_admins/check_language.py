@@ -5,7 +5,11 @@ from app_master.pkg_models.check_currency import CURRENCY
 
 # ========================================================================
 class Language(Change_Log):
-    list_display = ("eng_name", "local_name", "symbol") + super().list_display
+    list_display = (
+        "eng_name",
+        "local_name",
+        "symbol",
+    ) + super().list_display
     search_fields = (
         "eng_name__icontains",
         "local_name__icontains",

@@ -18,6 +18,7 @@ class Change_Log(admin.ModelAdmin):
         "created_by",
         "changed_by",
     )
+    list_filter = ("company_code",)
 
     def created(self, result):
         try:

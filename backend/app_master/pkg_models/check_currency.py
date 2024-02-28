@@ -19,13 +19,15 @@ class CURRENCY(CHANGE_LOG):
 
     id = models.BigAutoField(primary_key=True)
 
+    code = models.CharField(max_length=3, unique=True)
     eng_name = models.CharField(max_length=128, unique=True)
     local_name = models.CharField(max_length=128, unique=True)
     symbol = models.CharField(max_length=8)
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()
-        super(COUNTRY, self).save(*args, **kwargs)
+        self.code = self.code.upper()
+        super(CURRENCY, self).save(*args, **kwargs)
 
     def __str__(self):
         return "[{}] {} {}".format(self.id, self.symbol, self.eng_name)

@@ -20,6 +20,7 @@ C_USER = "USER"
 C_PASSWORD = "PASSWORD"
 C_HOST = "HOST"
 C_PORT = "PORT"
+C_CURRENCY_CONV_KEY = "CURRENCY_CONV_KEY"
 
 C_TYPE = "DEV"
 # ========================================================================
@@ -28,13 +29,12 @@ C_TYPE = "DEV"
 # ========================================================================
 
 try:
-    with open(
-        os.path.join(PARENT_DIR, C_SECRET, C_SECRET_FILE_NAME), "r"
-    ) as fp:
+    with open(os.path.join(PARENT_DIR, C_SECRET, C_SECRET_FILE_NAME), "r") as fp:
         file = json.load(fp)
         SECRET_KEY = file[C_TYPE][C_SECRET_KEY]
         DEBUG = file[C_TYPE][C_DEBUG]
         ALLOWED_HOSTS = file[C_TYPE][C_ALLOWED_HOSTS]
+        CURRENCY_CONV_KEY = file[C_TYPE][C_CURRENCY_CONV_KEY]
         DATABASES = {
             C_DEFAULT: {
                 C_ENGINE: file[C_TYPE][C_DATABASES][C_ENGINE],

@@ -6,8 +6,8 @@ from app_master.pkg_models.check_product_type import PRODUCT_TYPE, PRODUCT_TYPE_
 # ========================================================================
 class Product_Type(Change_Log):
     list_display = ("name",) + super().list_display
-    list_filter = ("name",)
     search_fields = ("name__icontains",)
+    list_filter = ("name",) + super().list_filter
 
     def created(self, obj):
         return super().created(PRODUCT_TYPE.objects.get(id=obj.id))

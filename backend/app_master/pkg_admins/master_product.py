@@ -13,7 +13,7 @@ class Product(Change_Log):
         "rx",
     ) + super().list_display
     search_fields = ("email__icontains",)
-    list_filter = ("type",)
+    list_filter = ("type",) + super().list_filter
 
     def rx(self, obj):
         return obj.is_prescription_required

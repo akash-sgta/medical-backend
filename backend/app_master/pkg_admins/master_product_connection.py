@@ -21,7 +21,7 @@ class Product_Connection(Change_Log):
     list_filter = (
         "parent__name",
         "child__name",
-    )
+    ) + super().list_filter
 
     def parent_name(self, obj):
         return obj.parent.name

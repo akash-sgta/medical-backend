@@ -14,12 +14,12 @@ class Address(Change_Log):
         "latitude",
         "longitude",
     ) + super().list_display
-    list_filter = [
+    search_fields = ("id__icontains",)
+    list_filter = (
         "city__state__country__eng_name",
         "city__state__eng_name",
         "city__eng_name",
-    ]
-    search_fields = ("id__icontains",)
+    ) + super().list_filter
 
     def country_name(self, obj):
         return "{}".format(obj.city.state.country.eng_name)

@@ -13,7 +13,7 @@ class UOM(Change_Log):
         "unit__name__icontains",
         "name__icontains",
     )
-    list_filter = ("unit__name",)
+    list_filter = ("unit__name",) + super().list_filter
 
     def unit_name(self, obj):
         return obj.unit.name

@@ -13,7 +13,7 @@ class State(Change_Log):
         "country__eng_name__icontains",
         "eng_name__icontains",
     )
-    list_filter = ("country__eng_name",)
+    list_filter = ("country__eng_name",) + super().list_filter
 
     def country_name(self, obj):
         return obj.country.eng_name
