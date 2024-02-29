@@ -13,7 +13,7 @@ class Product_Connection(Change_Log):
         "child_name",
         "child_uom",
         "child_quantity",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = (
         "parent__name__icontains",
         "child__name__icontains",
@@ -21,7 +21,7 @@ class Product_Connection(Change_Log):
     list_filter = (
         "parent__name",
         "child__name",
-    ) + super().list_filter
+    ) + Change_Log.list_filter
 
     def parent_name(self, obj):
         return obj.parent.name

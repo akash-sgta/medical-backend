@@ -10,13 +10,13 @@ class Credential(Change_Log):
         "is_admin",
         "is_internal_user",
         "is_external_user",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = ("email__icontains",)
     list_filter = (
         "is_admin",
         "is_internal_user",
         "is_external_user",
-    ) + super().list_filter
+    ) + Change_Log.list_filter
 
     def created(self, obj):
         return super().created(CREDENTIAL.objects.get(id=obj.id))

@@ -8,7 +8,7 @@ class Text(Change_Log):
     list_display = (
         "id",
         "lang_name",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = ("id__icontains",)
 
     def lang_name(self, obj):

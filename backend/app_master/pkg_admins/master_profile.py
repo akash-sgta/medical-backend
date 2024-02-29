@@ -13,7 +13,7 @@ class Profile(Change_Log):
         "last_name",
         "phone_number",
         "address_short",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = (
         "cred__email__icontains",
         "first_name__icontains",

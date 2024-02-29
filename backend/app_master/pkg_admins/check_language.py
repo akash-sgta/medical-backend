@@ -9,7 +9,7 @@ class Language(Change_Log):
         "eng_name",
         "local_name",
         "symbol",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = (
         "eng_name__icontains",
         "local_name__icontains",

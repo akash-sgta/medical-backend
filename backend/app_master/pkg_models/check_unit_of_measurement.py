@@ -17,8 +17,7 @@ class UOM(CHANGE_LOG):
         managed = True
         verbose_name = "UOM"
         verbose_name_plural = "UOMs"
-        ordering = ["eng_name"]
-        unique_together = ("eng_name", "continent")
+        ordering = ["name"]
 
     id = models.BigAutoField(primary_key=True)
 

@@ -11,9 +11,9 @@ class Product(Change_Log):
         "price",
         "currency",
         "rx",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = ("email__icontains",)
-    list_filter = ("type",) + super().list_filter
+    list_filter = ("type",) + Change_Log.list_filter
 
     def rx(self, obj):
         return obj.is_prescription_required

@@ -19,7 +19,7 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
         verbose_name = "Product Connection"
         verbose_name_plural = "Product Connections"
         ordering = ["parent", "child"]
-        unique_together = ("parent_product", "child_product")
+        unique_together = ("parent", "child")
 
     id = models.BigAutoField(primary_key=True)
     parent = models.ForeignKey(

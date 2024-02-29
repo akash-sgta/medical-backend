@@ -10,7 +10,7 @@ class Currency(Change_Log):
         "eng_name",
         "local_name",
         "symbol",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = (
         "code__icontains",
         "eng_name__icontains",

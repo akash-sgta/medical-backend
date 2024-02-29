@@ -17,7 +17,6 @@ class CURRENCY(CHANGE_LOG):
         verbose_name = "Currency"
         verbose_name_plural = "Currencies"
         ordering = ["eng_name"]
-        unique_together = ("eng_name", "continent")
 
     id = models.BigAutoField(primary_key=True)
 

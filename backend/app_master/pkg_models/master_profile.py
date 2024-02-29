@@ -24,9 +24,9 @@ class PROFILE(CHANGE_LOG):
 
     id = models.BigAutoField(primary_key=True)
 
-    cred = models.ForeignKey(CREDENTIAL, on_delete=models.CASCADE, unique=True)
-    address = models.ForeignKey(
-        ADDRESS, on_delete=models.SET_NULL, unique=True, null=True, blank=True
+    cred = models.OneToOneField(CREDENTIAL, on_delete=models.CASCADE)
+    address = models.OneToOneField(
+        ADDRESS, on_delete=models.SET_NULL, null=True, blank=True
     )
     image = models.ForeignKey(FILE, on_delete=models.SET_NULL, null=True, blank=True)
 

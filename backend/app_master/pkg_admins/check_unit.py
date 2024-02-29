@@ -5,7 +5,7 @@ from app_master.pkg_models.check_unit import UNIT
 
 # ========================================================================
 class Unit(Change_Log):
-    list_display = ("name",) + super().list_display
+    list_display = ("name",) + Change_Log.list_display
     search_fields = ("name__icontains",)
 
     def created(self, obj):

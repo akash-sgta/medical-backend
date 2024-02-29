@@ -8,12 +8,12 @@ class Uom(Change_Log):
     list_display = (
         "unit_name",
         "name",
-    ) + super().list_display
+    ) + Change_Log.list_display
     search_fields = (
         "unit__name__icontains",
         "name__icontains",
     )
-    list_filter = ("unit__name",) + super().list_filter
+    list_filter = ("unit__name",) + Change_Log.list_filter
 
     def unit_name(self, obj):
         return obj.unit.name
