@@ -14,6 +14,7 @@ class Serializer(serializers.ModelSerializer):
             "changed_on": {"read_only": True},
             "created_by": {"read_only": True},
             "changed_by": {"read_only": True},
+            "company_code": {"read_only": True},
         }
         return extra_kwargs
 

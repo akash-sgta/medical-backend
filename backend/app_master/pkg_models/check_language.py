@@ -7,6 +7,8 @@ from utility.abstract_models import CHANGE_LOG
 # ========================================================================
 class LANGUAGE(CHANGE_LOG):
     class Meta:
+        db_table = "master_check_language"
+        managed = True
         verbose_name = "Language"
         verbose_name_plural = "Languages"
         ordering = ["eng_name"]

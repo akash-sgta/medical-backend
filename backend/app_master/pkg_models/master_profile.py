@@ -1,6 +1,7 @@
 # ========================================================================
 from django.db import models
 
+from app_cdn.pkg_models.master_file import FILE
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.master_credential import CREDENTIAL
 from app_master.pkg_models.master_address import ADDRESS
@@ -15,16 +16,19 @@ class PROFILE(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_profile"
+        managed = True
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
         ordering = ["cred"]
 
     id = models.BigAutoField(primary_key=True)
 
-    cred = models.ForeignKey(CREDENTIAL, on_delete=models.CASCADE, unique=True)
-    address = models.ForeignKey(
-        ADDRESS, on_delete=models.SET_NULL, unique=True, null=True, blank=True
+    cred = models.OneToOneField(CREDENTIAL, on_delete=models.CASCADE)
+    address = models.OneToOneField(
+        ADDRESS, on_delete=models.SET_NULL, null=True, blank=True
     )
+    image = models.ForeignKey(FILE, on_delete=models.SET_NULL, null=True, blank=True)
 
     first_name = models.CharField(max_length=128)
     middle_name = models.CharField(max_length=128, blank=True, null=True)

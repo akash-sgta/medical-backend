@@ -3,6 +3,8 @@ from datetime import datetime
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import freecurrencyapi
+from django.conf import settings
 
 
 # ========================================================================
@@ -42,3 +44,33 @@ def post_message_to_terminal(text: str):
 
 def am_i_authorized(request, name) -> tuple:
     return True, None
+
+
+def currency_convert(source, *targets):
+    rate_out = {}
+    client = freecurrencyapi.Client(settings.C_CURRENCY_CONV_KEY)
+    post_message_to_terminal(str(client.status()))
+    currencies = client.currencies(currencies=[])
+    try:
+        currencies = currencies["data"]
+        if source not in currencies.keys():
+            raise Exception(
+                "Invalid Source Currency - Choose from {}".format(currencies.keys())
+            )
+        for target in targets:
+            if target not in currencies.keys():
+                raise Exception(
+                    "Invalid Target Currency - Choose from {}".format(currencies.keys())
+                )
+    except Exception as e:
+        post_error_to_terminal(str(e))
+    else:
+        exchange_rate = client.latest(base_currency=source, currencies=targets)
+        try:
+            exchange_rate = exchange_rate["data"]
+        except Exception:
+            pass
+        else:
+            rate_out[source] = exchange_rate
+
+    return rate_out

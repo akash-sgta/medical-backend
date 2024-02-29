@@ -1,6 +1,6 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_cdn.pkg_models.file import FILE
+from app_cdn.pkg_models.master_file import FILE
 
 
 # ========================================================================

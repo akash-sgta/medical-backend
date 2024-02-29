@@ -2,7 +2,7 @@
 from django.db import models
 
 from utility.abstract_models import CHANGE_LOG
-from app_cdn.pkg_models.file_type import FILE_TYPE
+from app_cdn.pkg_models.check_file_type import FILE_TYPE
 
 
 # ========================================================================
@@ -14,6 +14,8 @@ class FILE(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "cdn_master_file"
+        managed = True
         verbose_name = "File"
         verbose_name_plural = "Files"
 
@@ -21,7 +23,7 @@ class FILE(CHANGE_LOG):
     type = models.ForeignKey(FILE_TYPE, on_delete=models.SET_NULL, null=True)
     size = models.FloatField(default=0)  # in Bytes
     name = models.CharField(max_length=128, unique=True)
-    location = models.TextField(blank=True)
+    url = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()

@@ -9,6 +9,8 @@ from app_master.pkg_models.master_text import TEXT
 
 class PRODUCT_TYPE(CHANGE_LOG):
     class Meta:
+        db_table = "master_check_product_type"
+        managed = True
         verbose_name = "Product Type"
         verbose_name_plural = "Product Types"
         ordering = ["name"]

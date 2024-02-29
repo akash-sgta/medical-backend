@@ -161,3 +161,8 @@ cython_debug/
 /backend/secret/keys.json
 /document/.$medical.drawio.bkp
 /document/.$medical.drawio.dtmp
+/.idea/runConfigurations/makemigrations.xml
+/.idea/runConfigurations/migrate.xml
+/.idea/runConfigurations/runserver.xml
+/backend/app_master/migrations/
+/backend/app_cdn/migrations/

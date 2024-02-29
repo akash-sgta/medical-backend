@@ -4,9 +4,17 @@ from utility.methods import get_current_ts
 
 
 # ========================================================================
+COMPANY_CODE = (
+    (0, "DEFAULT_DEV"),
+    (1, "DEFAULT_QAL"),
+    (2, "DEFAULT_PRE_PROD"),
+    # ==========================
+    (3, "Shyama Prasad Diagnostics"),
+)
 
 
 class CHANGE_LOG(models.Model):
+    company_code = models.SmallIntegerField(default=0, choices=COMPANY_CODE)
     created_on = models.FloatField(default=0, blank=True)
     changed_on = models.FloatField(default=0, blank=True)
     created_by = models.CharField(default="DEMO", max_length=16, blank=True)

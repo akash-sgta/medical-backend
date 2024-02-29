@@ -1,6 +1,6 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_cdn.pkg_models.file_type import FILE_TYPE
+from app_cdn.pkg_models.check_file_type import FILE_TYPE
 
 
 # ========================================================================

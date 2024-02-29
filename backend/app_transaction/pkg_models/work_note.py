@@ -1,7 +1,7 @@
 # ========================================================================
 from django.db import models
 
-from app_cdn.pkg_models.file import FILE
+from app_cdn.pkg_models.master_file import FILE
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.master_product import REQUIREMENT
 

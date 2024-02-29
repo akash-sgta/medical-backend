@@ -5,9 +5,11 @@ from app_master.pkg_models.master_text import TEXT
 
 # ========================================================================
 class Text(Change_Log):
-    list_display = ("id", "lang_name", "created", "changed")
+    list_display = (
+        "id",
+        "lang_name",
+    ) + Change_Log.list_display
     search_fields = ("id__icontains",)
-    readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")
 
     def lang_name(self, obj):
         return "{}_{}".format(obj.lang.eng_name, obj.lang.local_name)

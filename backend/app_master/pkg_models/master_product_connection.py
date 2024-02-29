@@ -14,10 +14,12 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_product_connection"
+        managed = True
         verbose_name = "Product Connection"
         verbose_name_plural = "Product Connections"
         ordering = ["parent", "child"]
-        unique_together = ("parent_product", "child_product")
+        unique_together = ("parent", "child")
 
     id = models.BigAutoField(primary_key=True)
     parent = models.ForeignKey(
@@ -40,4 +42,4 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
         super(PRODUCT_CONNECTION, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.name)
+        return "[{}] {} - {}".format(self.id, self.parent.name, self.child.name)
