@@ -4,7 +4,7 @@ from app_master.pkg_models.check_unit_of_measurement import UOM
 
 
 # ========================================================================
-class UOM(Change_Log):
+class Uom(Change_Log):
     list_display = (
         "unit_name",
         "name",

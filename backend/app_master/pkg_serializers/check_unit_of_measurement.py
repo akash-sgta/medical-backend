@@ -4,7 +4,7 @@ from utility.abstract_serializer import Serializer
 
 
 # ========================================================================
-class UOM(Serializer):
+class Uom(Serializer):
     class Meta:
         model = UOM
         fields = "__all__"

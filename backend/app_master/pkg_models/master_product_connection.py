@@ -14,6 +14,8 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_product_connection"
+        managed = True
         verbose_name = "Product Connection"
         verbose_name_plural = "Product Connections"
         ordering = ["parent", "child"]

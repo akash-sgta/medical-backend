@@ -4,7 +4,7 @@ from app_master.pkg_models.check_currency import CURRENCY
 
 
 # ========================================================================
-class Country(Change_Log):
+class Currency(Change_Log):
     list_display = (
         "code",
         "eng_name",

@@ -15,15 +15,23 @@ class PRODUCT(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_product"
+        managed = True
         verbose_name = "Product"
         verbose_name_plural = "Products"
         ordering = ["type", "id"]
 
     id = models.BigAutoField(primary_key=True)
     type = models.ForeignKey(PRODUCT_TYPE, on_delete=models.SET_NULL, null=True)
-    image_01 = models.ForeignKey(FILE, related_name="image_01", null=True, blank=True)
-    image_02 = models.ForeignKey(FILE, related_name="image_02", null=True, blank=True)
-    image_03 = models.ForeignKey(FILE, related_name="image_03", null=True, blank=True)
+    image_01 = models.ForeignKey(
+        FILE, on_delete=models.SET_NULL, related_name="image_01", null=True, blank=True
+    )
+    image_02 = models.ForeignKey(
+        FILE, on_delete=models.SET_NULL, related_name="image_02", null=True, blank=True
+    )
+    image_03 = models.ForeignKey(
+        FILE, on_delete=models.SET_NULL, related_name="image_03", null=True, blank=True
+    )
     currency = models.ForeignKey(
         CURRENCY, on_delete=models.SET_NULL, null=True, blank=True
     )

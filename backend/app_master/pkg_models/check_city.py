@@ -13,6 +13,8 @@ class CITY(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_city"
+        managed = True
         verbose_name = "City"
         verbose_name_plural = "Cities"
         ordering = ["eng_name"]

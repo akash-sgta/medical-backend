@@ -12,6 +12,8 @@ class COUNTRY(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_country"
+        managed = True
         verbose_name = "Country"
         verbose_name_plural = "Countries"
         ordering = ["eng_name"]

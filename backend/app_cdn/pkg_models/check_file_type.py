@@ -7,6 +7,8 @@ from utility.abstract_models import CHANGE_LOG
 # ========================================================================
 class FILE_TYPE(CHANGE_LOG):
     class Meta:
+        db_table = "cdn_check_file_type"
+        managed = True
         verbose_name = "File Type"
         verbose_name_plural = "File Types"
         ordering = ["name"]

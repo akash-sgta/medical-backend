@@ -12,6 +12,8 @@ class CURRENCY(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_currency"
+        managed = True
         verbose_name = "Currency"
         verbose_name_plural = "Currencies"
         ordering = ["eng_name"]

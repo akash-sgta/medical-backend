@@ -13,6 +13,8 @@ class ADDRESS(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_address"
+        managed = True
         verbose_name = "Address"
         verbose_name_plural = "Addresses"
         ordering = ["id"]

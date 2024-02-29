@@ -13,6 +13,8 @@ class UOM(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_uom"
+        managed = True
         verbose_name = "UOM"
         verbose_name_plural = "UOMs"
         ordering = ["eng_name"]

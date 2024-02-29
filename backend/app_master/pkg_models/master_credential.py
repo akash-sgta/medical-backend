@@ -12,6 +12,8 @@ class CREDENTIAL(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_credential"
+        managed = True
         verbose_name = "Credential"
         verbose_name_plural = "Credentials"
         ordering = ["id"]

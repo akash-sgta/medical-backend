@@ -14,6 +14,8 @@ class FILE(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "cdn_master_file"
+        managed = True
         verbose_name = "File"
         verbose_name_plural = "Files"
 

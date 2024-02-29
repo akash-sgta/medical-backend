@@ -8,6 +8,8 @@ from app_master.pkg_models.check_language import LANGUAGE
 # ========================================================================
 class TEXT(CHANGE_LOG):
     class Meta:
+        db_table = "master_master_text"
+        managed = True
         verbose_name = "Text"
         verbose_name_plural = "Texts"
         ordering = ["lang"]

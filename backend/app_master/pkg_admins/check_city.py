@@ -9,7 +9,7 @@ class City(Change_Log):
         "state",
         "eng_name",
         "local_name",
-    ) + super().list_display
+    ) + super(Change_Log).list_display
     search_fields = ("eng_name__icontains", "local_name__icontains")
 
     def created(self, obj):

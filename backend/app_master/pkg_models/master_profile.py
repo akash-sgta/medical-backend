@@ -16,6 +16,8 @@ class PROFILE(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_master_profile"
+        managed = True
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
         ordering = ["cred"]
@@ -26,7 +28,7 @@ class PROFILE(CHANGE_LOG):
     address = models.ForeignKey(
         ADDRESS, on_delete=models.SET_NULL, unique=True, null=True, blank=True
     )
-    image = models.ForeignKey(FILE, null=True, blank=True)
+    image = models.ForeignKey(FILE, on_delete=models.SET_NULL, null=True, blank=True)
 
     first_name = models.CharField(max_length=128)
     middle_name = models.CharField(max_length=128, blank=True, null=True)

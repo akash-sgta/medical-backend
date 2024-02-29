@@ -12,6 +12,8 @@ class UNIT(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_unit"
+        managed = True
         verbose_name = "Unit"
         verbose_name_plural = "Units"
         ordering = ["name"]

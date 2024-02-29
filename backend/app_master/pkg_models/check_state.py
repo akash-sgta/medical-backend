@@ -13,6 +13,8 @@ class STATE(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_state"
+        managed = True
         verbose_name = "State"
         verbose_name_plural = "States"
         ordering = ["eng_name"]
