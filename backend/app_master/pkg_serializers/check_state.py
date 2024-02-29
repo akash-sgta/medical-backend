@@ -1,13 +1,11 @@
 # ========================================================================
-from app_master.pkg_models.requirement_connection import (
-    REQUIREMENT_CONNECTION,
-)
+from app_master.pkg_models.check_state import STATE
 from utility.abstract_serializer import Serializer
 
 
 # ========================================================================
-class Requirement_Connection(Serializer):
+class State(Serializer):
     class Meta:
-        model = REQUIREMENT_CONNECTION
+        model = STATE
         fields = "__all__"
         extra_kwargs = Serializer().extra()
