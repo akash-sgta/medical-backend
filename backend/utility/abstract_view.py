@@ -3,13 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from utility.methods import am_i_authorized
 from rest_framework.response import Response
+from rest_framework.generics import GenericAPIView
 
 
 # ========================================================================
 
 
-class View(APIView):
-    renderer_classes = [JSONRenderer]
+class View(GenericAPIView):
+    # renderer_classes = [JSONRenderer]
 
     def create_payload(self, success: bool, message=None, data=[]) -> dict:
         data = {"success": success, "message": message, "data": data}

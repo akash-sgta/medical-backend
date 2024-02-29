@@ -2,9 +2,9 @@
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.check_language import LANGUAGE
-from app_master.pkg_serializers.check_language import (
-    Language as Language_Serializer,
+from app_master.pkg_models.check_city import CITY
+from app_master.pkg_serializers.check_city import (
+    City as City_Serializer,
 )
 from utility.abstract_view import View
 
@@ -12,9 +12,9 @@ from utility.abstract_view import View
 # ========================================================================
 
 
-class Language(View):
-    serializer_class = Language_Serializer
-    queryset = LANGUAGE.objects.all()
+class City(View):
+    serializer_class = City_Serializer
+    queryset = CITY.objects.all()
 
     def __init__(self):
         super().__init__()
@@ -22,17 +22,17 @@ class Language(View):
     def post(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        language_de_serialized = Language_Serializer(data=request.data)
-        if language_de_serialized.is_valid():
-            language_de_serialized.save()
+        city_de_serialized = City_Serializer(data=request.data)
+        if city_de_serialized.is_valid():
+            city_de_serialized.save()
             payload = super().create_payload(
-                success=True, data=[language_de_serialized.data]
+                success=True, data=[city_de_serialized.data]
             )
             return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(language_de_serialized.errors),
+                message="SERIALIZING_ERROR : {}".format(city_de_serialized.errors),
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -40,22 +40,20 @@ class Language(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            language_serialized = Language_Serializer(LANGUAGE.objects.all(), many=True)
-            payload = super().create_payload(
-                success=True, data=language_serialized.data
-            )
+            city_serialized = City_Serializer(CITY.objects.all(), many=True)
+            payload = super().create_payload(success=True, data=city_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
-                language_ref = LANGUAGE.objects.get(id=int(pk))
-                language_serialized = Language_Serializer(language_ref, many=False)
+                city_ref = CITY.objects.get(id=int(pk))
+                city_serialized = City_Serializer(city_ref, many=False)
                 payload = super().create_payload(
-                    success=True, data=[language_serialized.data]
+                    success=True, data=[city_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except LANGUAGE.DoesNotExist:
+            except CITY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="LANGUAGE_DOES_NOT_EXIST"
+                    success=False, message="CITY_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -64,32 +62,30 @@ class Language(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message="LANGUAGE_DOES_NOT_EXIST"
+                success=False, message="CITY_DOES_NOT_EXIST"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                language_ref = LANGUAGE.objects.get(id=int(pk))
-                language_de_serialized = Language_Serializer(
-                    language_ref, data=request.data
-                )
-                if language_de_serialized.is_valid():
-                    language_de_serialized.save()
+                city_ref = CITY.objects.get(id=int(pk))
+                city_de_serialized = City_Serializer(city_ref, data=request.data)
+                if city_de_serialized.is_valid():
+                    city_de_serialized.save()
                     payload = super().create_payload(
-                        success=True, data=[language_de_serialized.data]
+                        success=True, data=[city_de_serialized.data]
                     )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
                         message="SERIALIZING_ERROR : {}".format(
-                            language_de_serialized.errors
+                            city_de_serialized.errors
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except LANGUAGE.DoesNotExist:
+            except CITY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="LANGUAGE_DOES_NOT_EXIST"
+                    success=False, message="CITY_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -97,22 +93,20 @@ class Language(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            payload = super().create_payload(
-                success=False, data="LANGUAGE_DOES_NOT_EXIST"
-            )
+            payload = super().create_payload(success=False, data="CITY_DOES_NOT_EXIST")
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                language_ref = LANGUAGE.objects.get(id=int(pk))
-                language_de_serialized = Language_Serializer(language_ref)
-                language_ref.delete()
+                city_ref = CITY.objects.get(id=int(pk))
+                city_de_serialized = City_Serializer(city_ref)
+                city_ref.delete()
                 payload = super().create_payload(
-                    success=True, data=[language_de_serialized.data]
+                    success=True, data=[city_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except LANGUAGE.DoesNotExist:
+            except CITY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="LANGUAGE_DOES_NOT_EXIST"
+                    success=False, message="CITY_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -127,11 +121,13 @@ class Language(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
+            "state": "Integer : /master/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
+            "state": "Integer : /master/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }

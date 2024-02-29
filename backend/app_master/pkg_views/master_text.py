@@ -13,6 +13,9 @@ from utility.abstract_view import View
 
 
 class Text(View):
+    serializer_class = Text_Serializer
+    queryset = TEXT.objects.all()
+
     def __init__(self):
         super().__init__()
 
@@ -115,16 +118,16 @@ class Text(View):
         payload["HEADERS"] = dict()
         payload["HEADERS"]["Content-Type"] = "application/json"
         payload["HEADERS"]["Authorization"] = "Token JWT"
-        payload["name"] = "Text"
+        payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
+            "lang_id": "Integer : /master/language/0",
             "text": "String : 128",
-            "lang_id": "Integer",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
+            "lang_id": "Integer : /master/language/0",
             "text": "String : 128",
-            "lang_id": "Integer",
         }
         payload["method"]["DELETE"] = None
 

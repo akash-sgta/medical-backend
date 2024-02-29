@@ -10,7 +10,7 @@ class Text(Serializer):
         fields = "__all__"
         extra_kwargs = Serializer().extra()
 
-    def get_lang_id(self, result):
+    def get_lang_name(self, result):
         try:
             text = result.lang.eng_name
         except Exception as e:
@@ -20,7 +20,7 @@ class Text(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["lang"] = self.get_lang_id(instance)
+            data["lang"] = self.get_lang_name(instance)
         except Exception:
             pass
         return data

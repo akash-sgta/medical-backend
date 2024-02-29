@@ -23,4 +23,4 @@ class LANGUAGE(CHANGE_LOG):
         super(LANGUAGE, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.eng_name)
+        return "{}".format(self.eng_name)
