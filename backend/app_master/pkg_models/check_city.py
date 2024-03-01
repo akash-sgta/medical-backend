@@ -18,14 +18,26 @@ class CITY(CHANGE_LOG):
         verbose_name = "City"
         verbose_name_plural = "Cities"
         ordering = ["eng_name"]
-        unique_together = ("state", "eng_name")
+        unique_together = (
+            "state",
+            "eng_name",
+        ) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    state = models.ForeignKey(STATE, on_delete=models.CASCADE)
+    state = models.ForeignKey(
+        STATE,
+        on_delete=models.CASCADE,
+    )
 
-    eng_name = models.CharField(max_length=128, unique=True)
-    local_name = models.CharField(max_length=128, unique=True)
+    eng_name = models.CharField(
+        max_length=32,
+    )
+    local_name = models.CharField(
+        max_length=32,
+    )
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()

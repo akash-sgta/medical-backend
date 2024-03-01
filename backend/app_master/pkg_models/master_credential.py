@@ -17,14 +17,27 @@ class CREDENTIAL(CHANGE_LOG):
         verbose_name = "Credential"
         verbose_name_plural = "Credentials"
         ordering = ["id"]
+        unique_together = ("email",) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    email = models.EmailField(unique=True)
-    pwd = models.CharField(max_length=256)
-    is_admin = models.BooleanField(default=False)
-    is_internal_user = models.BooleanField(default=False)  # Employee
-    is_external_user = models.BooleanField(default=False)  # Customer
+    email = models.EmailField(
+        unique=True,
+    )
+    pwd = models.CharField(
+        max_length=256,
+    )
+    is_admin = models.BooleanField(
+        default=False,
+    )
+    is_internal_user = models.BooleanField(
+        default=False,
+    )  # Employee
+    is_external_user = models.BooleanField(
+        default=False,
+    )  # Customer
 
     def save(self, *args, **kwargs):
         self.email = self.email.upper()

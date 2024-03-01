@@ -18,14 +18,23 @@ class STATE(CHANGE_LOG):
         verbose_name = "State"
         verbose_name_plural = "States"
         ordering = ["eng_name"]
-        unique_together = ("country", "eng_name")
+        unique_together = ("country", "eng_name") + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    country = models.ForeignKey(COUNTRY, on_delete=models.CASCADE)
+    country = models.ForeignKey(
+        COUNTRY,
+        on_delete=models.CASCADE,
+    )
 
-    eng_name = models.CharField(max_length=128, unique=True)
-    local_name = models.CharField(max_length=128, unique=True)
+    eng_name = models.CharField(
+        max_length=128,
+    )
+    local_name = models.CharField(
+        max_length=128,
+    )
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()

@@ -19,24 +19,39 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
         verbose_name = "Product Connection"
         verbose_name_plural = "Product Connections"
         ordering = ["parent", "child"]
-        unique_together = ("parent", "child")
+        unique_together = ("parent", "child") + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
+
     parent = models.ForeignKey(
-        PRODUCT, related_name="parent_product", on_delete=models.CASCADE
+        PRODUCT,
+        related_name="parent_product",
+        on_delete=models.CASCADE,
     )
     parent_uom = models.ForeignKey(
-        UOM, related_name="parent_uom", on_delete=models.CASCADE
+        UOM,
+        related_name="parent_uom",
+        on_delete=models.CASCADE,
     )
     child = models.ForeignKey(
-        PRODUCT, related_name="child_product", on_delete=models.CASCADE
+        PRODUCT,
+        related_name="child_product",
+        on_delete=models.CASCADE,
     )
     child_uom = models.ForeignKey(
-        UOM, related_name="child_uom", on_delete=models.CASCADE
+        UOM,
+        related_name="child_uom",
+        on_delete=models.CASCADE,
     )
 
-    parent_quantity = models.FloatField(default=1)
-    child_quantity = models.FloatField(default=1)
+    parent_quantity = models.FloatField(
+        default=1,
+    )
+    child_quantity = models.FloatField(
+        default=1,
+    )
 
     def save(self, *args, **kwargs):
         super(PRODUCT_CONNECTION, self).save(*args, **kwargs)

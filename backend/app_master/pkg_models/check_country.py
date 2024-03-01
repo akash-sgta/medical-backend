@@ -17,13 +17,24 @@ class COUNTRY(CHANGE_LOG):
         verbose_name = "Country"
         verbose_name_plural = "Countries"
         ordering = ["eng_name"]
-        unique_together = ("eng_name", "continent")
+        unique_together = (
+            "continent",
+            "eng_name",
+        ) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    eng_name = models.CharField(max_length=128, unique=True)
-    local_name = models.CharField(max_length=128, unique=True)
-    continent = models.CharField(max_length=128)
+    continent = models.CharField(
+        max_length=32,
+    )
+    eng_name = models.CharField(
+        max_length=32,
+    )
+    local_name = models.CharField(
+        max_length=32,
+    )
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()

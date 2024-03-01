@@ -18,11 +18,22 @@ class UOM(CHANGE_LOG):
         verbose_name = "UOM"
         verbose_name_plural = "UOMs"
         ordering = ["name"]
+        unique_together = (
+            "name",
+            "unit",
+        ) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    name = models.CharField(max_length=128, unique=True)
-    unit = models.ForeignKey(UNIT, on_delete=models.CASCADE)
+    name = models.CharField(
+        max_length=128,
+    )
+    unit = models.ForeignKey(
+        UNIT,
+        on_delete=models.CASCADE,
+    )
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()

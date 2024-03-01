@@ -12,11 +12,18 @@ class LANGUAGE(CHANGE_LOG):
         verbose_name = "Language"
         verbose_name_plural = "Languages"
         ordering = ["eng_name"]
+        unique_together = ("eng_name",) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    eng_name = models.CharField(max_length=32, unique=True)
-    local_name = models.CharField(max_length=32, unique=True)
+    eng_name = models.CharField(
+        max_length=32,
+    )
+    local_name = models.CharField(
+        max_length=32,
+    )
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()

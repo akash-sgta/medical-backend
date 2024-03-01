@@ -13,10 +13,15 @@ class TEXT(CHANGE_LOG):
         verbose_name = "Text"
         verbose_name_plural = "Texts"
         ordering = ["lang"]
-        unique_together = ("id", "lang")
 
-    id = models.BigAutoField(primary_key=True)
-    lang = models.ForeignKey(LANGUAGE, on_delete=models.CASCADE)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
+
+    lang = models.ForeignKey(
+        LANGUAGE,
+        on_delete=models.CASCADE,
+    )
     text = models.TextField()
 
     def save(self, *args, **kwargs):

@@ -20,25 +20,68 @@ class PROFILE(CHANGE_LOG):
         managed = True
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
-        ordering = ["cred"]
+        ordering = [
+            "cred",
+        ]
+        unique_together = (
+            "cred",
+            "address",
+        ) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
-
-    cred = models.OneToOneField(CREDENTIAL, on_delete=models.CASCADE)
-    address = models.OneToOneField(
-        ADDRESS, on_delete=models.SET_NULL, null=True, blank=True
+    id = models.BigAutoField(
+        primary_key=True,
     )
-    image = models.ForeignKey(FILE, on_delete=models.SET_NULL, null=True, blank=True)
 
-    first_name = models.CharField(max_length=128)
-    middle_name = models.CharField(max_length=128, blank=True, null=True)
-    last_name = models.CharField(max_length=128)
-    bio = models.TextField(null=True, blank=True)
-    phone_number = models.CharField(max_length=32, null=True, blank=True)
+    cred = models.OneToOneField(
+        CREDENTIAL,
+        on_delete=models.CASCADE,
+    )
+    address = models.OneToOneField(
+        ADDRESS,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+    image = models.ForeignKey(
+        FILE,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
+    first_name = models.CharField(
+        max_length=128,
+    )
+    middle_name = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+    last_name = models.CharField(
+        max_length=128,
+    )
+    bio = models.TextField(
+        null=True,
+        blank=True,
+    )
+    phone_number = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+    )
     date_of_birth = models.DateField()
-    facebook_profile = models.URLField(max_length=256, blank=True)
-    twitter_profile = models.URLField(max_length=256, blank=True)
-    linkedin_profile = models.URLField(max_length=256, blank=True)
+    facebook_profile = models.URLField(
+        max_length=256,
+        blank=True,
+    )
+    twitter_profile = models.URLField(
+        max_length=256,
+        blank=True,
+    )
+    linkedin_profile = models.URLField(
+        max_length=256,
+        blank=True,
+    )
 
     def save(self, *args, **kwargs):
         self.first_name = self.first_name.upper()

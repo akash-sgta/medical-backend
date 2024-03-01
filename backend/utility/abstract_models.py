@@ -20,6 +20,9 @@ class CHANGE_LOG(models.Model):
     created_by = models.CharField(default="DEMO", max_length=16, blank=True)
     changed_by = models.CharField(default="DEMO", max_length=16, blank=True)
 
+    def get_unique_together(self):
+        return ("company_code",)
+
     class Meta:
         abstract = True
 

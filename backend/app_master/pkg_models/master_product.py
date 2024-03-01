@@ -20,33 +20,75 @@ class PRODUCT(CHANGE_LOG):
         verbose_name = "Product"
         verbose_name_plural = "Products"
         ordering = ["type", "id"]
+        unique_together = (
+            "type",
+            "name",
+        ) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
-    type = models.ForeignKey(PRODUCT_TYPE, on_delete=models.SET_NULL, null=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
+
+    type = models.ForeignKey(
+        PRODUCT_TYPE,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
     image_01 = models.ForeignKey(
-        FILE, on_delete=models.SET_NULL, related_name="image_01", null=True, blank=True
+        FILE,
+        on_delete=models.SET_NULL,
+        related_name="image_01",
+        null=True,
+        blank=True,
     )
     image_02 = models.ForeignKey(
-        FILE, on_delete=models.SET_NULL, related_name="image_02", null=True, blank=True
+        FILE,
+        on_delete=models.SET_NULL,
+        related_name="image_02",
+        null=True,
+        blank=True,
     )
     image_03 = models.ForeignKey(
-        FILE, on_delete=models.SET_NULL, related_name="image_03", null=True, blank=True
+        FILE,
+        on_delete=models.SET_NULL,
+        related_name="image_03",
+        null=True,
+        blank=True,
     )
     currency = models.ForeignKey(
-        CURRENCY, on_delete=models.SET_NULL, null=True, blank=True
+        CURRENCY,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
-    name = models.CharField(max_length=128, unique=True)
-    description = models.TextField(null=True, blank=True)
-    manufacturer = models.CharField(max_length=128)
-    dosage = models.CharField(max_length=64)
-    price = models.FloatField(default=0.0)
+    name = models.CharField(
+        max_length=32,
+    )
+    description = models.TextField(
+        null=True,
+        blank=True,
+    )
+    manufacturer = models.CharField(
+        max_length=128,
+    )
+    dosage = models.CharField(
+        max_length=64,
+    )
+    price = models.FloatField(
+        default=0.0,
+    )
     storage_instructions = models.TextField()
     side_effects = models.TextField()
     warnings_precautions = models.TextField()
     contraindications = models.TextField()
-    url = models.URLField(blank=True, null=True)
-    is_prescription_required = models.BooleanField(default=False)
+    url = models.URLField(
+        blank=True,
+        null=True,
+    )
+    is_prescription_required = models.BooleanField(
+        default=False,
+    )
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()

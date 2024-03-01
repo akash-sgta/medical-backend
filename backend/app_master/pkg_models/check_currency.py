@@ -17,13 +17,27 @@ class CURRENCY(CHANGE_LOG):
         verbose_name = "Currency"
         verbose_name_plural = "Currencies"
         ordering = ["eng_name"]
+        unique_together = (
+            "code",
+            "eng_name",
+        ) + CHANGE_LOG().get_unique_together()
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    code = models.CharField(max_length=3, unique=True)
-    eng_name = models.CharField(max_length=128, unique=True)
-    local_name = models.CharField(max_length=128, unique=True)
-    symbol = models.CharField(max_length=8)
+    code = models.CharField(
+        max_length=4,
+    )
+    eng_name = models.CharField(
+        max_length=32,
+    )
+    local_name = models.CharField(
+        max_length=32,
+    )
+    symbol = models.CharField(
+        max_length=4,
+    )
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()
