@@ -17,11 +17,11 @@ class CITY(CHANGE_LOG):
         managed = True
         verbose_name = "City"
         verbose_name_plural = "Cities"
-        ordering = ["eng_name"]
-        unique_together = (
+        ordering = CHANGE_LOG.get_ordering() + ("eng_name",)
+        unique_together = CHANGE_LOG.get_unique_together() + (
             "state",
             "eng_name",
-        ) + CHANGE_LOG().get_unique_together()
+        )
 
     id = models.BigAutoField(
         primary_key=True,
@@ -44,4 +44,6 @@ class CITY(CHANGE_LOG):
         super(CITY, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.state.eng_name, self.eng_name)
+        return "[{}] {} -> {}".format(
+            self.company_code, self.state.eng_name, self.eng_name
+        )

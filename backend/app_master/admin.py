@@ -2,6 +2,7 @@
 from django.contrib import admin
 
 from app_master.pkg_admins.check_city import City
+from app_master.pkg_admins.check_continent import Continent
 from app_master.pkg_admins.check_country import Country
 from app_master.pkg_admins.check_currency import Currency
 from app_master.pkg_admins.check_product_type import Product_Type, Product_Type_T
@@ -17,6 +18,7 @@ from app_master.pkg_admins.master_text import Text
 
 
 from app_master.pkg_models.check_city import CITY
+from app_master.pkg_models.check_continent import CONTINENT
 from app_master.pkg_models.check_country import COUNTRY
 from app_master.pkg_models.check_currency import CURRENCY
 from app_master.pkg_models.check_product_type import PRODUCT_TYPE, PRODUCT_TYPE_T
@@ -33,17 +35,63 @@ from app_master.pkg_models.master_text import TEXT
 
 # ========================================================================
 
-admin.site.register(CITY, City)
-admin.site.register(COUNTRY, Country)
-admin.site.register(CURRENCY, Currency)
-admin.site.register(PRODUCT_TYPE, Product_Type)
-admin.site.register(PRODUCT_TYPE_T, Product_Type_T)
-admin.site.register(STATE, State)
-admin.site.register(UNIT, Unit)
-admin.site.register(UOM, Uom)
-admin.site.register(ADDRESS, Address)
-admin.site.register(CREDENTIAL, Credential)
-admin.site.register(PRODUCT, Product)
-admin.site.register(PRODUCT_CONNECTION, Product_Connection)
-admin.site.register(PROFILE, Profile)
-admin.site.register(TEXT, Text)
+admin.site.register(
+    CITY,
+    City,
+)
+admin.site.register(
+    CONTINENT,
+    Continent,
+)
+admin.site.register(
+    COUNTRY,
+    Country,
+)
+admin.site.register(
+    CURRENCY,
+    Currency,
+)
+admin.site.register(
+    PRODUCT_TYPE,
+    Product_Type,
+)
+admin.site.register(
+    PRODUCT_TYPE_T,
+    Product_Type_T,
+)
+admin.site.register(
+    STATE,
+    State,
+)
+admin.site.register(
+    UNIT,
+    Unit,
+)
+admin.site.register(
+    UOM,
+    Uom,
+)
+admin.site.register(
+    ADDRESS,
+    Address,
+)
+admin.site.register(
+    CREDENTIAL,
+    Credential,
+)
+admin.site.register(
+    PRODUCT,
+    Product,
+)
+admin.site.register(
+    PRODUCT_CONNECTION,
+    Product_Connection,
+)
+admin.site.register(
+    PROFILE,
+    Profile,
+)
+admin.site.register(
+    TEXT,
+    Text,
+)

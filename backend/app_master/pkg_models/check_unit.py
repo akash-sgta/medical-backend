@@ -16,8 +16,8 @@ class UNIT(CHANGE_LOG):
         managed = True
         verbose_name = "Unit"
         verbose_name_plural = "Units"
-        ordering = ["name"]
-        unique_together = ("name",) + CHANGE_LOG().get_unique_together()
+        ordering = CHANGE_LOG.get_ordering() + ("name",)
+        unique_together = CHANGE_LOG.get_unique_together() + ("name",)
 
     id = models.BigAutoField(
         primary_key=True,
@@ -32,6 +32,4 @@ class UNIT(CHANGE_LOG):
         super(UNIT, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {} - {}".format(
-            self.id, self.UNIT_CHOICES[self.unit][1], self.name
-        )
+        return "[{}] {}".format(self.company_code, self.name)

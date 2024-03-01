@@ -19,11 +19,14 @@ class PRODUCT(CHANGE_LOG):
         managed = True
         verbose_name = "Product"
         verbose_name_plural = "Products"
-        ordering = ["type", "id"]
-        unique_together = (
+        ordering = CHANGE_LOG.get_ordering() + (
+            "type",
+            "id",
+        )
+        unique_together = CHANGE_LOG.get_unique_together() + (
             "type",
             "name",
-        ) + CHANGE_LOG().get_unique_together()
+        )
 
     id = models.BigAutoField(
         primary_key=True,
@@ -97,4 +100,4 @@ class PRODUCT(CHANGE_LOG):
         super(PRODUCT, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.name)
+        return "[{}] {} -> {}".format(self.company_code, self.type, self.name)

@@ -17,22 +17,23 @@ class UOM(CHANGE_LOG):
         managed = True
         verbose_name = "UOM"
         verbose_name_plural = "UOMs"
-        ordering = ["name"]
-        unique_together = (
+        ordering = CHANGE_LOG.get_ordering() + ("name",)
+        unique_together = CHANGE_LOG.get_unique_together() + (
             "name",
             "unit",
-        ) + CHANGE_LOG().get_unique_together()
+        )
 
     id = models.BigAutoField(
         primary_key=True,
     )
 
-    name = models.CharField(
-        max_length=128,
-    )
     unit = models.ForeignKey(
         UNIT,
         on_delete=models.CASCADE,
+    )
+
+    name = models.CharField(
+        max_length=128,
     )
 
     def save(self, *args, **kwargs):
@@ -40,4 +41,4 @@ class UOM(CHANGE_LOG):
         super(UOM, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {} - {}".format(self.id, self.unit.name, self.name)
+        return "[{}] {} -> {}".format(self.company_code, self.unit, self.name)

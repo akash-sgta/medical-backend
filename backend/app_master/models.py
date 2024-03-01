@@ -1,5 +1,6 @@
 # ========================================================================
 from app_master.pkg_models.check_city import CITY
+from app_master.pkg_models.check_continent import CONTINENT
 from app_master.pkg_models.check_country import COUNTRY
 from app_master.pkg_models.check_currency import CURRENCY
 from app_master.pkg_models.check_product_type import PRODUCT_TYPE, PRODUCT_TYPE_T

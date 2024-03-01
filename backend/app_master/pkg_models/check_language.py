@@ -11,8 +11,8 @@ class LANGUAGE(CHANGE_LOG):
         managed = True
         verbose_name = "Language"
         verbose_name_plural = "Languages"
-        ordering = ["eng_name"]
-        unique_together = ("eng_name",) + CHANGE_LOG().get_unique_together()
+        ordering = CHANGE_LOG.get_ordering() + ("eng_name",)
+        unique_together = CHANGE_LOG.get_unique_together() + ("eng_name",)
 
     id = models.BigAutoField(
         primary_key=True,
@@ -30,4 +30,4 @@ class LANGUAGE(CHANGE_LOG):
         super(LANGUAGE, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "{}".format(self.eng_name)
+        return "[{}] {}".format(self.company_code, self.eng_name)

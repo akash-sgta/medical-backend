@@ -1,12 +1,11 @@
 # ========================================================================
 from utility.abstract_admin import Change_Log
-from app_master.pkg_models.check_country import COUNTRY
+from app_master.pkg_models.check_continent import CONTINENT
 
 
 # ========================================================================
-class Country(Change_Log):
+class Continent(Change_Log):
     list_display = (
-        "continent",
         "eng_name",
         "local_name",
     ) + Change_Log.list_display
@@ -16,7 +15,7 @@ class Country(Change_Log):
     )
 
     def created(self, obj):
-        return super().created(COUNTRY.objects.get(id=obj.id))
+        return super().created(CONTINENT.objects.get(id=obj.id))
 
     def changed(self, obj):
-        return super().changed(COUNTRY.objects.get(id=obj.id))
+        return super().changed(CONTINENT.objects.get(id=obj.id))

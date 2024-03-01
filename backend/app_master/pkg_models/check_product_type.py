@@ -13,8 +13,8 @@ class PRODUCT_TYPE(CHANGE_LOG):
         managed = True
         verbose_name = "Product Type"
         verbose_name_plural = "Product Types"
-        ordering = ["name"]
-        unique_together = ("name",) + CHANGE_LOG().get_unique_together()
+        ordering = CHANGE_LOG.get_ordering() + ("name",)
+        unique_together = CHANGE_LOG.get_unique_together() + ("name",)
 
     id = models.BigAutoField(
         primary_key=True,
@@ -29,15 +29,21 @@ class PRODUCT_TYPE(CHANGE_LOG):
         super(PRODUCT_TYPE, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.name)
+        return "[{}] {}".format(self.company_code, self.name)
 
 
 class PRODUCT_TYPE_T(CHANGE_LOG):
     class Meta:
         verbose_name = "Product Type Text"
         verbose_name_plural = "Product Type Texts"
-        ordering = ["type", "text"]
-        unique_together = ("type", "text") + CHANGE_LOG().get_unique_together()
+        ordering = CHANGE_LOG.get_ordering() + (
+            "type",
+            "text",
+        )
+        unique_together = CHANGE_LOG.get_unique_together() + (
+            "type",
+            "text",
+        )
 
     id = models.BigAutoField(
         primary_key=True,
@@ -56,4 +62,4 @@ class PRODUCT_TYPE_T(CHANGE_LOG):
         super(PRODUCT_TYPE_T, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "{}-{}".format(self.req_type.name, self.text.lang.eng_name)
+        return "[{}] {} - {}".format(self.company_code, self.type, self.text.lang)

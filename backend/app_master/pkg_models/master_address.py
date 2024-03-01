@@ -17,7 +17,7 @@ class ADDRESS(CHANGE_LOG):
         managed = True
         verbose_name = "Address"
         verbose_name_plural = "Addresses"
-        ordering = ["id"]
+        ordering = CHANGE_LOG.get_ordering() + ("id",)
 
     id = models.BigAutoField(
         primary_key=True,
@@ -57,4 +57,4 @@ class ADDRESS(CHANGE_LOG):
         super(ADDRESS, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}]".format(self.id)
+        return "[{}] {}".format(self.company_code, self.id)

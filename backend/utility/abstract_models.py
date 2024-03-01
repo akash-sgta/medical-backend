@@ -20,7 +20,12 @@ class CHANGE_LOG(models.Model):
     created_by = models.CharField(default="DEMO", max_length=16, blank=True)
     changed_by = models.CharField(default="DEMO", max_length=16, blank=True)
 
-    def get_unique_together(self):
+    @staticmethod
+    def get_unique_together():
+        return ("company_code",)
+
+    @staticmethod
+    def get_ordering():
         return ("company_code",)
 
     class Meta:
