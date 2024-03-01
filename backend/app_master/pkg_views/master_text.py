@@ -1,4 +1,5 @@
 # ========================================================================
+from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -23,7 +24,9 @@ class Text(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         text_de_serialized = Text_Serializer(data=request.data)
+        text_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
         if text_de_serialized.is_valid():
+            # Integrity Check not required :)
             text_de_serialized.save()
             payload = super().create_payload(
                 success=True, data=[text_de_serialized.data]
@@ -53,7 +56,7 @@ class Text(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except TEXT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="TEXT_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -62,7 +65,7 @@ class Text(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message="TEXT_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -85,7 +88,7 @@ class Text(View):
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except TEXT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="TEXT_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -93,7 +96,9 @@ class Text(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            payload = super().create_payload(success=False, data="TEXT_DOES_NOT_EXIST")
+            payload = super().create_payload(
+                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+            )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
@@ -106,7 +111,7 @@ class Text(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except TEXT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="TEXT_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 

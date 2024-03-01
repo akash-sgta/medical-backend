@@ -20,7 +20,7 @@ class Country(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["continent"] = self.get_lang_name(instance)
+            data["continent"] = self.get_continent_name(instance)
         except Exception:
             pass
         return data

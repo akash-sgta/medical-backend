@@ -3,19 +3,18 @@ from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.check_country import COUNTRY
-from app_master.pkg_serializers.check_country import (
-    Country as Country_Serializer,
+from app_master.pkg_models.check_continent import CONTINENT
+from app_master.pkg_serializers.check_continent import (
+    Continent as Continent_Serializer,
 )
 from utility.abstract_view import View
-
 
 # ========================================================================
 
 
-class Country(View):
-    serializer_class = Country_Serializer
-    queryset = COUNTRY.objects.all()
+class Continent(View):
+    serializer_class = Continent_Serializer
+    queryset = CONTINENT.objects.all()
 
     def __init__(self):
         super().__init__()
@@ -23,19 +22,18 @@ class Country(View):
     def post(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        country_de_serialized = Country_Serializer(data=request.data)
-        country_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
-        if country_de_serialized.is_valid():
+        continent_de_serialized = Continent_Serializer(data=request.data)
+        continent_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        if continent_de_serialized.is_valid():
             try:
-                country_de_serialized.save()
+                continent_de_serialized.save()
             except IntegrityError:
                 payload = super().create_payload(
                     success=False,
-                    data=Country_Serializer(
-                        COUNTRY.objects.filter(
+                    data=Continent_Serializer(
+                        CONTINENT.objects.filter(
                             company_code=self.company_code,
-                            continent=country_de_serialized.validated_data["continent"],
-                            eng_name=country_de_serialized.validated_data[
+                            eng_name=continent_de_serialized.validated_data[
                                 "eng_name"
                             ].upper(),
                         ),
@@ -46,13 +44,14 @@ class Country(View):
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
                 payload = super().create_payload(
-                    success=True, data=[country_de_serialized.data]
+                    success=True,
+                    data=[continent_de_serialized.data],
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(country_de_serialized.errors),
+                message="SERIALIZING_ERROR : {}".format(continent_de_serialized.errors),
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -60,21 +59,24 @@ class Country(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            country_serialized = Country_Serializer(COUNTRY.objects.all(), many=True)
-            payload = super().create_payload(success=True, data=country_serialized.data)
+            continent_serialized = Continent_Serializer(
+                CONTINENT.objects.all(), many=True
+            )
+            payload = super().create_payload(
+                success=True, data=continent_serialized.data
+            )
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
-                country_ref = COUNTRY.objects.get(id=int(pk))
-                country_serialized = Country_Serializer(country_ref, many=False)
+                continent_ref = CONTINENT.objects.get(id=int(pk))
+                continent_serialized = Continent_Serializer(continent_ref, many=False)
                 payload = super().create_payload(
-                    success=True, data=[country_serialized.data]
+                    success=True, data=[continent_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except COUNTRY.DoesNotExist:
+            except CONTINENT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -88,27 +90,28 @@ class Country(View):
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                country_ref = COUNTRY.objects.get(id=int(pk))
-                country_de_serialized = Country_Serializer(
-                    country_ref, data=request.data
+                continent_ref = CONTINENT.objects.get(id=int(pk))
+                continent_de_serialized = Continent_Serializer(
+                    continent_ref, data=request.data
                 )
-                if country_de_serialized.is_valid():
-                    country_de_serialized.save()
+                if continent_de_serialized.is_valid():
+                    continent_de_serialized.save()
                     payload = super().create_payload(
-                        success=True, data=[country_de_serialized.data]
+                        success=True, data=[continent_de_serialized.data]
                     )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
                         message="SERIALIZING_ERROR : {}".format(
-                            country_de_serialized.errors
+                            continent_de_serialized.errors
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except COUNTRY.DoesNotExist:
+            except CONTINENT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False,
+                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -117,21 +120,23 @@ class Country(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False,
+                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                country_ref = COUNTRY.objects.get(id=int(pk))
-                country_de_serialized = Country_Serializer(country_ref)
-                country_ref.delete()
+                continent_ref = CONTINENT.objects.get(id=int(pk))
+                continent_de_serialized = Continent_Serializer(continent_ref)
+                continent_ref.delete()
                 payload = super().create_payload(
-                    success=True, data=[country_de_serialized.data]
+                    success=True, data=[continent_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except COUNTRY.DoesNotExist:
+            except CONTINENT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False,
+                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -146,13 +151,13 @@ class Country(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "contient": "Integer : /master/continent/0",
+            "state": "Integer : /master/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "contient": "Integer : /master/continent/0",
+            "state": "Integer : /master/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }

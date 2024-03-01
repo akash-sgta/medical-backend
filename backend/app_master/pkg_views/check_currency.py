@@ -3,9 +3,9 @@ from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.check_country import COUNTRY
-from app_master.pkg_serializers.check_country import (
-    Country as Country_Serializer,
+from app_master.pkg_models.check_currency import CURRENCY
+from app_master.pkg_serializers.check_currency import (
+    Currency as Currency_Serializer,
 )
 from utility.abstract_view import View
 
@@ -13,9 +13,9 @@ from utility.abstract_view import View
 # ========================================================================
 
 
-class Country(View):
-    serializer_class = Country_Serializer
-    queryset = COUNTRY.objects.all()
+class Currency(View):
+    serializer_class = Currency_Serializer
+    queryset = CURRENCY.objects.all()
 
     def __init__(self):
         super().__init__()
@@ -23,19 +23,19 @@ class Country(View):
     def post(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        country_de_serialized = Country_Serializer(data=request.data)
-        country_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
-        if country_de_serialized.is_valid():
+        currency_de_serialized = Currency_Serializer(data=request.data)
+        currency_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        if currency_de_serialized.is_valid():
             try:
-                country_de_serialized.save()
+                currency_de_serialized.save()
             except IntegrityError:
                 payload = super().create_payload(
                     success=False,
-                    data=Country_Serializer(
-                        COUNTRY.objects.filter(
+                    data=Currency_Serializer(
+                        CURRENCY.objects.filter(
                             company_code=self.company_code,
-                            continent=country_de_serialized.validated_data["continent"],
-                            eng_name=country_de_serialized.validated_data[
+                            code=currency_de_serialized.validated_data["code"].upper(),
+                            eng_name=currency_de_serialized.validated_data[
                                 "eng_name"
                             ].upper(),
                         ),
@@ -46,13 +46,13 @@ class Country(View):
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
                 payload = super().create_payload(
-                    success=True, data=[country_de_serialized.data]
+                    success=True, data=[currency_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(country_de_serialized.errors),
+                message="SERIALIZING_ERROR : {}".format(currency_de_serialized.errors),
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -60,21 +60,22 @@ class Country(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            country_serialized = Country_Serializer(COUNTRY.objects.all(), many=True)
-            payload = super().create_payload(success=True, data=country_serialized.data)
+            currency_serialized = Currency_Serializer(CURRENCY.objects.all(), many=True)
+            payload = super().create_payload(
+                success=True, data=currency_serialized.data
+            )
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
-                country_ref = COUNTRY.objects.get(id=int(pk))
-                country_serialized = Country_Serializer(country_ref, many=False)
+                currency_ref = CURRENCY.objects.get(id=int(pk))
+                currency_serialized = Currency_Serializer(currency_ref, many=False)
                 payload = super().create_payload(
-                    success=True, data=[country_serialized.data]
+                    success=True, data=[currency_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except COUNTRY.DoesNotExist:
+            except CURRENCY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -88,25 +89,25 @@ class Country(View):
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                country_ref = COUNTRY.objects.get(id=int(pk))
-                country_de_serialized = Country_Serializer(
-                    country_ref, data=request.data
+                currency_ref = CURRENCY.objects.get(id=int(pk))
+                currency_de_serialized = Currency_Serializer(
+                    currency_ref, data=request.data
                 )
-                if country_de_serialized.is_valid():
-                    country_de_serialized.save()
+                if currency_de_serialized.is_valid():
+                    currency_de_serialized.save()
                     payload = super().create_payload(
-                        success=True, data=[country_de_serialized.data]
+                        success=True, data=[currency_de_serialized.data]
                     )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
                         message="SERIALIZING_ERROR : {}".format(
-                            country_de_serialized.errors
+                            currency_de_serialized.errors
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except COUNTRY.DoesNotExist:
+            except CURRENCY.DoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -122,14 +123,14 @@ class Country(View):
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                country_ref = COUNTRY.objects.get(id=int(pk))
-                country_de_serialized = Country_Serializer(country_ref)
-                country_ref.delete()
+                currency_ref = CURRENCY.objects.get(id=int(pk))
+                currency_de_serialized = Currency_Serializer(currency_ref)
+                currency_ref.delete()
                 payload = super().create_payload(
-                    success=True, data=[country_de_serialized.data]
+                    success=True, data=[currency_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except COUNTRY.DoesNotExist:
+            except CURRENCY.DoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -146,13 +147,13 @@ class Country(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "contient": "Integer : /master/continent/0",
+            "state": "Integer : /master/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "contient": "Integer : /master/continent/0",
+            "state": "Integer : /master/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }

@@ -4,7 +4,7 @@ from utility.methods import get_current_ts
 
 
 # ========================================================================
-COMPANY_CODE = (
+COMPANY_CODE_CHOICES = (
     (0, "DEFAULT_DEV"),
     (1, "DEFAULT_QAL"),
     (2, "DEFAULT_PRE_PROD"),
@@ -12,13 +12,33 @@ COMPANY_CODE = (
     (3, "Shyama Prasad Diagnostics"),
 )
 
+COMPANY = 0
+COMPANY_CODE = "company_code"
+
 
 class CHANGE_LOG(models.Model):
-    company_code = models.SmallIntegerField(default=0, choices=COMPANY_CODE)
-    created_on = models.FloatField(default=0, blank=True)
-    changed_on = models.FloatField(default=0, blank=True)
-    created_by = models.CharField(default="DEMO", max_length=16, blank=True)
-    changed_by = models.CharField(default="DEMO", max_length=16, blank=True)
+    company_code = models.SmallIntegerField(
+        default=COMPANY,
+        choices=COMPANY_CODE_CHOICES,
+    )
+    created_on = models.FloatField(
+        default=0,
+        blank=True,
+    )
+    changed_on = models.FloatField(
+        default=0,
+        blank=True,
+    )
+    created_by = models.CharField(
+        default="DEMO",
+        max_length=16,
+        blank=True,
+    )
+    changed_by = models.CharField(
+        default="DEMO",
+        max_length=16,
+        blank=True,
+    )
 
     @staticmethod
     def get_unique_together():

@@ -40,7 +40,6 @@ class COUNTRY(CHANGE_LOG):
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.upper()
-        self.continent = self.continent.upper()
         super(COUNTRY, self).save(*args, **kwargs)
 
     def __str__(self):

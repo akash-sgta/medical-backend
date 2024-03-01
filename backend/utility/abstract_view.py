@@ -1,16 +1,23 @@
 # ========================================================================
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 from utility.methods import am_i_authorized
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 
+from utility.abstract_models import COMPANY, COMPANY_CODE
 
 # ========================================================================
 
 
 class View(GenericAPIView):
     # renderer_classes = [JSONRenderer]
+
+    def __init__(self):
+        super().__init__()
+        self.company_code = COMPANY
+        self.C_COMPANY_CODE = COMPANY_CODE
 
     def create_payload(self, success: bool, message=None, data=[]) -> dict:
         data = {"success": success, "message": message, "data": data}

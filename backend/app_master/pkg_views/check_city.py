@@ -1,4 +1,5 @@
 # ========================================================================
+from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -23,12 +24,31 @@ class City(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         city_de_serialized = City_Serializer(data=request.data)
+        city_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
         if city_de_serialized.is_valid():
-            city_de_serialized.save()
-            payload = super().create_payload(
-                success=True, data=[city_de_serialized.data]
-            )
-            return Response(data=payload, status=status.HTTP_201_CREATED)
+            try:
+                city_de_serialized.save()
+            except IntegrityError:
+                payload = super().create_payload(
+                    success=False,
+                    data=City_Serializer(
+                        CITY.objects.filter(
+                            company_code=self.company_code,
+                            state=city_de_serialized.validated_data["state"],
+                            eng_name=city_de_serialized.validated_data[
+                                "eng_name"
+                            ].upper(),
+                        ),
+                        many=True,
+                    ).data,
+                    message=f"{self.get_view_name()}_EXISTS",
+                )
+                return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                payload = super().create_payload(
+                    success=True, data=[city_de_serialized.data]
+                )
+                return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
@@ -53,7 +73,7 @@ class City(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except CITY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="CITY_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -62,7 +82,7 @@ class City(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message="CITY_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -85,7 +105,7 @@ class City(View):
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except CITY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="CITY_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -93,7 +113,9 @@ class City(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            payload = super().create_payload(success=False, data="CITY_DOES_NOT_EXIST")
+            payload = super().create_payload(
+                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+            )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
@@ -106,7 +128,7 @@ class City(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except CITY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="CITY_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
