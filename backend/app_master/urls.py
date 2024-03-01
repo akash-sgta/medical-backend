@@ -6,6 +6,10 @@ from app_master.pkg_views.check_continent import Continent
 from app_master.pkg_views.check_country import Country
 from app_master.pkg_views.check_currency import Currency
 from app_master.pkg_views.check_language import Language
+from app_master.pkg_views.check_product_type import (
+    Product_Type,
+    Product_Type_T,
+)
 from app_master.pkg_views.check_state import State
 from app_master.pkg_views.master_text import Text
 
@@ -36,6 +40,16 @@ urlpatterns = [
         r"language/(?P<pk>\d*)$",
         Language.as_view(),
         name="Check_Language",
+    ),
+    re_path(
+        r"product_type/(?P<pk>\d*)$",
+        Product_Type.as_view(),
+        name="Check_Product_Type",
+    ),
+    re_path(
+        r"product_type/text/(?P<pk>\d*)$",
+        Product_Type_T.as_view(),
+        name="Check_Product_Type_T",
     ),
     re_path(
         r"state/(?P<pk>\d*)$",
