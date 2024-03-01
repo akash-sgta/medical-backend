@@ -10,17 +10,10 @@ class City(Serializer):
         fields = "__all__"
         extra_kwargs = Serializer().extra()
 
-    def get_state_name(self, result):
-        try:
-            text = result.state.eng_name
-        except Exception as e:
-            text = None
-        return text
-
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["state"] = self.get_state_name(instance)
+            data["state"] = f"master/state/{instance.state.id}"
         except Exception:
             pass
         return data

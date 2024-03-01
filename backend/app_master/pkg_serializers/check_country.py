@@ -10,17 +10,10 @@ class Country(Serializer):
         fields = "__all__"
         extra_kwargs = Serializer().extra()
 
-    def get_continent_name(self, result):
-        try:
-            text = result.continent.eng_name
-        except Exception as e:
-            text = None
-        return text
-
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["continent"] = self.get_continent_name(instance)
+            data["continent"] = f"master/continent/{instance.continent.id}"
         except Exception:
             pass
         return data

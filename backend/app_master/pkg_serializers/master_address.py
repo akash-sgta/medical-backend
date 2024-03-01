@@ -9,3 +9,11 @@ class Address(Serializer):
         model = ADDRESS
         fields = "__all__"
         extra_kwargs = Serializer().extra()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        try:
+            data["city"] = f"master/city/{instance.city.id}"
+        except Exception:
+            pass
+        return data

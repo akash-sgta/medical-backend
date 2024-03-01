@@ -9,18 +9,3 @@ class Text(Serializer):
         model = TEXT
         fields = "__all__"
         extra_kwargs = Serializer().extra()
-
-    def get_lang_name(self, result):
-        try:
-            text = result.lang.eng_name
-        except Exception as e:
-            text = None
-        return text
-
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        try:
-            data["lang"] = self.get_lang_name(instance)
-        except Exception:
-            pass
-        return data

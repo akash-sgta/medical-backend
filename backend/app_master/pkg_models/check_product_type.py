@@ -1,6 +1,7 @@
 # ========================================================================
 from django.db import models
 
+from app_master.pkg_models.check_language import LANGUAGE
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.master_text import TEXT
 
@@ -38,10 +39,12 @@ class PRODUCT_TYPE_T(CHANGE_LOG):
         verbose_name_plural = "Product Type Texts"
         ordering = CHANGE_LOG.get_ordering() + (
             "type",
+            "lang",
             "text",
         )
         unique_together = CHANGE_LOG.get_unique_together() + (
             "type",
+            "lang",
             "text",
         )
 
@@ -51,6 +54,10 @@ class PRODUCT_TYPE_T(CHANGE_LOG):
 
     type = models.ForeignKey(
         PRODUCT_TYPE,
+        on_delete=models.CASCADE,
+    )
+    lang = models.ForeignKey(
+        LANGUAGE,
         on_delete=models.CASCADE,
     )
     text = models.ForeignKey(

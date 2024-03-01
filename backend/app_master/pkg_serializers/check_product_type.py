@@ -17,24 +17,18 @@ class Product_Type_T(Serializer):
         fields = "__all__"
         extra_kwargs = Serializer().extra()
 
-    def get_type_name(self, result):
-        try:
-            text = result.type.name
-        except Exception as e:
-            text = None
-        return text
-
-    def get_text_data(self, result):
-        try:
-            text = result.type.name
-        except Exception as e:
-            text = None
-        return text
-
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["continent"] = self.get_continent_name(instance)
+            data["type"] = f"/master/product_type/{instance.type.id}"
+        except Exception:
+            pass
+        try:
+            data["lang"] = f"/master/language/{instance.lang.id}"
+        except Exception:
+            pass
+        try:
+            data["text"] = f"/master/text/{instance.text.id}"
         except Exception:
             pass
         return data

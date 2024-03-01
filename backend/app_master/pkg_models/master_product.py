@@ -2,6 +2,7 @@
 from django.db import models
 
 from app_cdn.pkg_models.master_file import FILE
+from app_master.pkg_models.master_text import TEXT
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.check_product_type import PRODUCT_TYPE
 from app_master.pkg_models.check_currency import CURRENCY
@@ -21,7 +22,7 @@ class PRODUCT(CHANGE_LOG):
         verbose_name_plural = "Products"
         ordering = CHANGE_LOG.get_ordering() + (
             "type",
-            "id",
+            "name",
         )
         unique_together = CHANGE_LOG.get_unique_together() + (
             "type",
@@ -64,13 +65,44 @@ class PRODUCT(CHANGE_LOG):
         null=True,
         blank=True,
     )
+    description = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        related_name="description",
+        null=True,
+        blank=True,
+    )
+    storage_instructions = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        related_name="storage_instructions",
+        null=True,
+        blank=True,
+    )
+    side_effects = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        related_name="side_effects",
+        null=True,
+        blank=True,
+    )
+    warnings_precautions = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        related_name="warnings_precautions",
+        null=True,
+        blank=True,
+    )
+    contraindications = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        related_name="contraindications",
+        null=True,
+        blank=True,
+    )
 
     name = models.CharField(
         max_length=32,
-    )
-    description = models.TextField(
-        null=True,
-        blank=True,
     )
     manufacturer = models.CharField(
         max_length=128,
@@ -81,10 +113,7 @@ class PRODUCT(CHANGE_LOG):
     price = models.FloatField(
         default=0.0,
     )
-    storage_instructions = models.TextField()
-    side_effects = models.TextField()
-    warnings_precautions = models.TextField()
-    contraindications = models.TextField()
+
     url = models.URLField(
         blank=True,
         null=True,

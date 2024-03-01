@@ -43,6 +43,13 @@ class PROFILE(CHANGE_LOG):
         null=True,
         blank=True,
     )
+    bio = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        related_name="bio",
+        null=True,
+        blank=True,
+    )
 
     first_name = models.CharField(
         max_length=128,
@@ -54,10 +61,6 @@ class PROFILE(CHANGE_LOG):
     )
     last_name = models.CharField(
         max_length=128,
-    )
-    bio = models.TextField(
-        null=True,
-        blank=True,
     )
     phone_number = models.CharField(
         max_length=32,
