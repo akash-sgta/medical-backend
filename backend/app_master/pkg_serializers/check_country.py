@@ -9,3 +9,11 @@ class Country(Serializer):
         model = COUNTRY
         fields = "__all__"
         extra_kwargs = Serializer().extra()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        try:
+            data["continent"] = f"master/check/continent/{instance.continent.id}"
+        except Exception:
+            pass
+        return data

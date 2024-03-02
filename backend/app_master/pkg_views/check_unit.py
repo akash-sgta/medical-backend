@@ -1,10 +1,11 @@
 # ========================================================================
+from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.master_text import TEXT
-from app_master.pkg_serializers.master_text import (
-    Text as Text_Serializer,
+from app_master.pkg_models.check_unit import UNIT
+from app_master.pkg_serializers.check_unit import (
+    Unit as Unit_Serializer,
 )
 from utility.abstract_view import View
 
@@ -12,24 +13,43 @@ from utility.abstract_view import View
 # ========================================================================
 
 
-class Text(View):
+class Unit(View):
+    serializer_class = Unit_Serializer
+    queryset = UNIT.objects.filter(company_code=View().company_code)
+
     def __init__(self):
         super().__init__()
 
     def post(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        text_de_serialized = Text_Serializer(data=request.data)
-        if text_de_serialized.is_valid():
-            text_de_serialized.save()
-            payload = super().create_payload(
-                success=True, data=[text_de_serialized.data]
-            )
-            return Response(data=payload, status=status.HTTP_201_CREATED)
+        unit_de_serialized = Unit_Serializer(data=request.data)
+        unit_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        if unit_de_serialized.is_valid():
+            try:
+                unit_de_serialized.save()
+            except IntegrityError:
+                payload = super().create_payload(
+                    success=False,
+                    data=Unit_Serializer(
+                        UNIT.objects.filter(
+                            company_code=self.company_code,
+                            name=unit_de_serialized.validated_data["name"].upper(),
+                        ),
+                        many=True,
+                    ).data,
+                    message=f"{self.get_view_name()}_EXISTS",
+                )
+                return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                payload = super().create_payload(
+                    success=True, data=[unit_de_serialized.data]
+                )
+                return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(text_de_serialized.errors),
+                message="SERIALIZING_ERROR : {}".format(unit_de_serialized.errors),
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -37,20 +57,22 @@ class Text(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            text_serialized = Text_Serializer(TEXT.objects.all(), many=True)
-            payload = super().create_payload(success=True, data=text_serialized.data)
+            unit_serialized = Unit_Serializer(
+                UNIT.objects.filter(company_code=View().company_code), many=True
+            )
+            payload = super().create_payload(success=True, data=unit_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
-                text_ref = TEXT.objects.get(id=int(pk))
-                text_serialized = Text_Serializer(text_ref, many=False)
+                unit_ref = UNIT.objects.get(id=int(pk))
+                unit_serialized = Unit_Serializer(unit_ref, many=False)
                 payload = super().create_payload(
-                    success=True, data=[text_serialized.data]
+                    success=True, data=[unit_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except TEXT.DoesNotExist:
+            except UNIT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="TEXT_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -59,30 +81,32 @@ class Text(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message="TEXT_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                text_ref = TEXT.objects.get(id=int(pk))
-                text_de_serialized = Text_Serializer(text_ref, data=request.data)
-                if text_de_serialized.is_valid():
-                    text_de_serialized.save()
+                unit_ref = UNIT.objects.get(id=int(pk))
+                unit_de_serialized = Unit_Serializer(
+                    unit_ref, data=request.data, partial=True
+                )
+                if unit_de_serialized.is_valid():
+                    unit_de_serialized.save()
                     payload = super().create_payload(
-                        success=True, data=[text_de_serialized.data]
+                        success=True, data=[unit_de_serialized.data]
                     )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
                         message="SERIALIZING_ERROR : {}".format(
-                            text_de_serialized.errors
+                            unit_de_serialized.errors
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except TEXT.DoesNotExist:
+            except UNIT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="TEXT_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -90,20 +114,22 @@ class Text(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            payload = super().create_payload(success=False, data="TEXT_DOES_NOT_EXIST")
+            payload = super().create_payload(
+                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+            )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                text_ref = TEXT.objects.get(id=int(pk))
-                text_de_serialized = Text_Serializer(text_ref)
-                text_ref.delete()
+                unit_ref = UNIT.objects.get(id=int(pk))
+                unit_de_serialized = Unit_Serializer(unit_ref)
+                unit_ref.delete()
                 payload = super().create_payload(
-                    success=True, data=[text_de_serialized.data]
+                    success=True, data=[unit_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except TEXT.DoesNotExist:
+            except UNIT.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message="TEXT_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -115,16 +141,14 @@ class Text(View):
         payload["HEADERS"] = dict()
         payload["HEADERS"]["Content-Type"] = "application/json"
         payload["HEADERS"]["Authorization"] = "Token JWT"
-        payload["name"] = "Text"
+        payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "text": "String : 128",
-            "lang_id": "Integer",
+            "name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "text": "String : 128",
-            "lang_id": "Integer",
+            "name": "String : 32",
         }
         payload["method"]["DELETE"] = None
 

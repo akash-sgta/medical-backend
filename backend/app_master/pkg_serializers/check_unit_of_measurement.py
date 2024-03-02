@@ -9,3 +9,11 @@ class Uom(Serializer):
         model = UOM
         fields = "__all__"
         extra_kwargs = Serializer().extra()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        try:
+            data["unit"] = f"master/check/unit/{instance.unit.id}"
+        except Exception:
+            pass
+        return data

@@ -8,7 +8,10 @@ from utility.methods import post_message_to_terminal, post_error_to_terminal
 BASE_DIR = Path(__file__).resolve().parent
 PARENT_DIR = BASE_DIR.parent
 C_SECRET = "secret"
+C_TEMPFILES = "tempfiles"
+C_SQLITE_DB = "sqlite_db"
 C_SECRET_FILE_NAME = "keys.json"
+C_SYSTEM = "system"
 C_SECRET_KEY = "SECRET"
 C_DEBUG = "DEBUG"
 C_ALLOWED_HOSTS = "ALLOWED_HOSTS"
@@ -22,32 +25,46 @@ C_HOST = "HOST"
 C_PORT = "PORT"
 C_CURRENCY_CONV_KEY = "CURRENCY_CONV_KEY"
 
-C_TYPE = "DEV"
+C_DEV = "DEV"
+C_QAL = "QAL"
+C_PRD = "PRD"
 # ========================================================================
 
 
 # ========================================================================
 
 try:
+    with open(os.path.join(PARENT_DIR, C_SECRET, C_SYSTEM), "r") as fp:
+        C_TYPE = fp.readline()
     with open(os.path.join(PARENT_DIR, C_SECRET, C_SECRET_FILE_NAME), "r") as fp:
         file = json.load(fp)
         SECRET_KEY = file[C_TYPE][C_SECRET_KEY]
         DEBUG = file[C_TYPE][C_DEBUG]
         ALLOWED_HOSTS = file[C_TYPE][C_ALLOWED_HOSTS]
         CURRENCY_CONV_KEY = file[C_TYPE][C_CURRENCY_CONV_KEY]
-        DATABASES = {
-            C_DEFAULT: {
-                C_ENGINE: file[C_TYPE][C_DATABASES][C_ENGINE],
-                C_NAME: file[C_TYPE][C_DATABASES][C_NAME],
-                C_USER: file[C_TYPE][C_DATABASES][C_USER],
-                C_PASSWORD: file[C_TYPE][C_DATABASES][C_PASSWORD],
-                C_HOST: file[C_TYPE][C_DATABASES][C_HOST],
-                C_PORT: file[C_TYPE][C_DATABASES][C_PORT],
-                "OPTIONS": {
-                    "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
-                },
+        if C_TYPE == C_DEV:
+            DATABASES = {
+                C_DEFAULT: {
+                    C_ENGINE: "django.db.backends.sqlite3",
+                    C_NAME: os.path.join(
+                        PARENT_DIR, C_TEMPFILES, C_SQLITE_DB, "medical.dev.sqlite.db"
+                    ),
+                }
             }
-        }
+        else:
+            DATABASES = {
+                C_DEFAULT: {
+                    C_ENGINE: file[C_TYPE][C_DATABASES][C_ENGINE],
+                    C_NAME: file[C_TYPE][C_DATABASES][C_NAME],
+                    C_USER: file[C_TYPE][C_DATABASES][C_USER],
+                    C_PASSWORD: file[C_TYPE][C_DATABASES][C_PASSWORD],
+                    C_HOST: file[C_TYPE][C_DATABASES][C_HOST],
+                    C_PORT: file[C_TYPE][C_DATABASES][C_PORT],
+                }
+            }
+            DATABASES[C_DEFAULT]["OPTIONS"] = {
+                "init_command": "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
         del file
 except KeyError as e:
     post_error_to_terminal(str(e))
@@ -64,6 +81,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # ========================================================================
     "rest_framework",
+    "rest_framework_swagger",
+    "drf_yasg",
     # ========================================================================
     "app_master",
     "app_cdn",

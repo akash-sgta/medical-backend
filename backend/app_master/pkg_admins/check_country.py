@@ -10,7 +10,10 @@ class Country(Change_Log):
         "eng_name",
         "local_name",
     ) + Change_Log.list_display
-    search_fields = ("eng_name__icontains", "local_name__icontains")
+    search_fields = (
+        "eng_name__icontains",
+        "local_name__icontains",
+    )
 
     def created(self, obj):
         return super().created(COUNTRY.objects.get(id=obj.id))

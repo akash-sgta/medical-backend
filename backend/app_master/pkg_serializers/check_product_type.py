@@ -16,3 +16,19 @@ class Product_Type_T(Serializer):
         model = PRODUCT_TYPE_T
         fields = "__all__"
         extra_kwargs = Serializer().extra()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        try:
+            data["type"] = f"/master/check/product_type/{instance.type.id}"
+        except Exception:
+            pass
+        try:
+            data["lang"] = f"/master/check/language/{instance.lang.id}"
+        except Exception:
+            pass
+        try:
+            data["text"] = f"/master/check/text/{instance.text.id}"
+        except Exception:
+            pass
+        return data

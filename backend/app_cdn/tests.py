@@ -1,3 +1,7 @@
-from django.test import TestCase
+# ========================================================================
+from app_cdn.pkg_tests.check_file_type import (
+    FileTypeModelTestCase,
+    File_TypeViewTestCase,
+)
 
-# Create your tests here.
+# ========================================================================

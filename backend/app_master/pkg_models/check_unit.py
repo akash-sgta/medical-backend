@@ -16,17 +16,20 @@ class UNIT(CHANGE_LOG):
         managed = True
         verbose_name = "Unit"
         verbose_name_plural = "Units"
-        ordering = ["name"]
+        ordering = CHANGE_LOG.get_ordering() + ("name",)
+        unique_together = CHANGE_LOG.get_unique_together() + ("name",)
 
-    id = models.BigAutoField(primary_key=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
 
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(
+        max_length=32,
+    )
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
         super(UNIT, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {} - {}".format(
-            self.id, self.UNIT_CHOICES[self.unit][1], self.name
-        )
+        return "[{}] {}".format(self.company_code, self.name)
