@@ -18,12 +18,29 @@ class FILE(CHANGE_LOG):
         managed = True
         verbose_name = "File"
         verbose_name_plural = "Files"
+        unique_together = CHANGE_LOG.get_unique_together() + (
+            "type",
+            "name",
+        )
 
-    id = models.BigAutoField(primary_key=True)
-    type = models.ForeignKey(FILE_TYPE, on_delete=models.SET_NULL, null=True)
-    size = models.FloatField(default=0)  # in Bytes
-    name = models.CharField(max_length=128, unique=True)
-    url = models.URLField(blank=True, null=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
+
+    type = models.ForeignKey(
+        FILE_TYPE,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
+    name = models.CharField(max_length=128)
+    size = models.FloatField(
+        default=0,
+    )  # in Bytes
+    url = models.URLField(
+        blank=True,
+        null=True,
+    )
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()

@@ -5,10 +5,13 @@ from app_cdn.pkg_models.master_file import FILE
 
 # ========================================================================
 class File(Change_Log):
-    list_display = ("id", "file_type", "name", "created", "changed")
+    list_display = (
+        "id",
+        "file_type",
+        "name",
+    ) + Change_Log.list_display
     search_fields = ("name__icontains",)
-    list_filter = ("type__name",)
-    readonly_fields = ("created_on", "changed_on", "created_by", "changed_by")
+    list_filter = Change_Log.list_filter + ("type__name",)
 
     def file_type(self, obj):
         return "{}".format(obj.type.name)

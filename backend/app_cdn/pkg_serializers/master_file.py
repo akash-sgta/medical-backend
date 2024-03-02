@@ -9,3 +9,11 @@ class File(Serializer):
         model = FILE
         fields = "__all__"
         extra_kwargs = Serializer().extra()
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        try:
+            data["type"] = f"/cdn/check/file_type/{instance.type.id}"
+        except Exception:
+            pass
+        return data

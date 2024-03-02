@@ -1,7 +1,9 @@
 # ========================================================================
-from rest_framework import status
+from rest_framework import status, permissions
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
+
+from utility.custom_permission import CustomPermission
 from utility.methods import am_i_authorized
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
@@ -13,6 +15,7 @@ from utility.abstract_models import COMPANY, COMPANY_CODE
 
 class View(GenericAPIView):
     # renderer_classes = [JSONRenderer]
+    permission_classes = [permissions.IsAuthenticated]  # Default permission class
 
     def __init__(self):
         super().__init__()
@@ -42,3 +45,8 @@ class View(GenericAPIView):
             data[1][0] = True
 
         return data
+
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [CustomPermission()]  # Apply custom permission for POST method
+        return super().get_permissions()
