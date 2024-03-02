@@ -1,6 +1,8 @@
 # ========================================================================
 # Generated using : https://chat.openai.com/
 # ========================================================================
+import json
+
 from django.test import (
     TestCase,
     RequestFactory,
@@ -84,7 +86,7 @@ class File_TypeViewTestCase(TestCase):
         }
         request = self.factory.put(
             reverse("Check_File_Type", kwargs={"pk": self.file_type.id}),
-            data=data,
+            data=json.dumps(data),
             headers={"Content-Type": "application/json"},
         )
         view = File_Type.as_view()
