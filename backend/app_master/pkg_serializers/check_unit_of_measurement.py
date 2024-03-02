@@ -13,7 +13,7 @@ class Uom(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["unit"] = f"master/unit/{instance.unit.id}"
+            data["unit"] = f"master/check/unit/{instance.unit.id}"
         except Exception:
             pass
         return data

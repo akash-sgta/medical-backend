@@ -13,19 +13,19 @@ class Profile(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["cred"] = f"master/credential/{instance.cred.id}"
+            data["cred"] = f"master/master/credential/{instance.cred.id}"
         except Exception:
             pass
         try:
-            data["address"] = f"master/address/{instance.address.id}"
+            data["address"] = f"master/master/address/{instance.address.id}"
         except Exception:
             pass
         try:
-            data["image"] = f"cdn/file/{instance.image.id}"
+            data["image"] = f"cdn/master/file/{instance.image.id}"
         except Exception:
             pass
         try:
-            data["bio"] = f"master/text/{instance.bio.id}"
+            data["bio"] = f"master/master/text/{instance.bio.id}"
         except Exception:
             pass
         return data

@@ -20,15 +20,15 @@ class Product_Type_T(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["type"] = f"/master/product_type/{instance.type.id}"
+            data["type"] = f"/master/check/product_type/{instance.type.id}"
         except Exception:
             pass
         try:
-            data["lang"] = f"/master/language/{instance.lang.id}"
+            data["lang"] = f"/master/check/language/{instance.lang.id}"
         except Exception:
             pass
         try:
-            data["text"] = f"/master/text/{instance.text.id}"
+            data["text"] = f"/master/check/text/{instance.text.id}"
         except Exception:
             pass
         return data

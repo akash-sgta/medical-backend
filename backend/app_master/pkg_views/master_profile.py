@@ -3,18 +3,19 @@ from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.check_continent import CONTINENT
-from app_master.pkg_serializers.check_continent import (
-    Continent as Continent_Serializer,
+from app_master.pkg_models.master_profile import PROFILE
+from app_master.pkg_serializers.master_profile import (
+    Profile as Profile_Serializer,
 )
 from utility.abstract_view import View
+
 
 # ========================================================================
 
 
-class Continent(View):
-    serializer_class = Continent_Serializer
-    queryset = CONTINENT.objects.filter(company_code=View().company_code)
+class Profile(View):
+    serializer_class = Profile_Serializer
+    queryset = PROFILE.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -22,20 +23,18 @@ class Continent(View):
     def post(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        continent_de_serialized = Continent_Serializer(data=request.data)
-        continent_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
-        if continent_de_serialized.is_valid():
+        profile_de_serialized = Profile_Serializer(data=request.data)
+        profile_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        if profile_de_serialized.is_valid():
             try:
-                continent_de_serialized.save()
+                profile_de_serialized.save()
             except IntegrityError:
                 payload = super().create_payload(
                     success=False,
-                    data=Continent_Serializer(
-                        CONTINENT.objects.filter(
+                    data=Profile_Serializer(
+                        PROFILE.objects.filter(
                             company_code=self.company_code,
-                            eng_name=continent_de_serialized.validated_data[
-                                "eng_name"
-                            ].upper(),
+                            cred=profile_de_serialized.validated_data["cred"],
                         ),
                         many=True,
                     ).data,
@@ -44,14 +43,13 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
                 payload = super().create_payload(
-                    success=True,
-                    data=[continent_de_serialized.data],
+                    success=True, data=[profile_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(continent_de_serialized.errors),
+                message="SERIALIZING_ERROR : {}".format(profile_de_serialized.errors),
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -59,22 +57,21 @@ class Continent(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            continent_serialized = Continent_Serializer(
-                CONTINENT.objects.filter(company_code=View().company_code), many=True
+            profile_serialized = Profile_Serializer(
+                PROFILE.objects.filter(company_code=View().company_code),
+                many=True,
             )
-            payload = super().create_payload(
-                success=True, data=continent_serialized.data
-            )
+            payload = super().create_payload(success=True, data=profile_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
-                continent_ref = CONTINENT.objects.get(id=int(pk))
-                continent_serialized = Continent_Serializer(continent_ref, many=False)
+                profile_ref = PROFILE.objects.get(id=int(pk))
+                profile_serialized = Profile_Serializer(profile_ref, many=False)
                 payload = super().create_payload(
-                    success=True, data=[continent_serialized.data]
+                    success=True, data=[profile_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CONTINENT.DoesNotExist:
+            except PROFILE.DoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -90,28 +87,27 @@ class Continent(View):
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                continent_ref = CONTINENT.objects.get(id=int(pk))
-                continent_de_serialized = Continent_Serializer(
-                    continent_ref, data=request.data, partial=True
+                profile_ref = PROFILE.objects.get(id=int(pk))
+                profile_de_serialized = Profile_Serializer(
+                    profile_ref, data=request.data, partial=True
                 )
-                if continent_de_serialized.is_valid():
-                    continent_de_serialized.save()
+                if profile_de_serialized.is_valid():
+                    profile_de_serialized.save()
                     payload = super().create_payload(
-                        success=True, data=[continent_de_serialized.data]
+                        success=True, data=[profile_de_serialized.data]
                     )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
                         message="SERIALIZING_ERROR : {}".format(
-                            continent_de_serialized.errors
+                            profile_de_serialized.errors
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except CONTINENT.DoesNotExist:
+            except PROFILE.DoesNotExist:
                 payload = super().create_payload(
-                    success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -120,23 +116,21 @@ class Continent(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False,
-                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                continent_ref = CONTINENT.objects.get(id=int(pk))
-                continent_de_serialized = Continent_Serializer(continent_ref)
-                continent_ref.delete()
+                profile_ref = PROFILE.objects.get(id=int(pk))
+                profile_de_serialized = Profile_Serializer(profile_ref)
+                profile_ref.delete()
                 payload = super().create_payload(
-                    success=True, data=[continent_de_serialized.data]
+                    success=True, data=[profile_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CONTINENT.DoesNotExist:
+            except PROFILE.DoesNotExist:
                 payload = super().create_payload(
-                    success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -151,13 +145,31 @@ class Continent(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "cred": "Integer : /master/master/credential/0",
+            "address": "Integer : /master/master/address/0",
+            "image": "Integer : /cdn/master/file/0",
+            "bio": "Integer : /master/master/text/0",
+            "first_name": "String : 128",
+            "middle_name": "String : 128",
+            "last_name": "String : 128",
+            "date_of_birth": "Date : YYYYMMDD",
+            "facebook_profile": "String : 256",
+            "twitter_profile": "String : 256",
+            "linkedin_profile": "String : 256",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "cred": "Integer : /master/master/credential/0",
+            "address": "Integer : /master/master/address/0",
+            "image": "Integer : /cdn/master/file/0",
+            "bio": "Integer : /master/master/text/0",
+            "first_name": "String : 128",
+            "middle_name": "String : 128",
+            "last_name": "String : 128",
+            "date_of_birth": "Date : YYYYMMDD",
+            "facebook_profile": "String : 256",
+            "twitter_profile": "String : 256",
+            "linkedin_profile": "String : 256",
         }
         payload["method"]["DELETE"] = None
 

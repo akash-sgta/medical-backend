@@ -18,7 +18,7 @@ from utility.abstract_view import View
 
 class Product_Type(View):
     serializer_class = Product_Type_Serializer
-    queryset = PRODUCT_TYPE.objects.all()
+    queryset = PRODUCT_TYPE.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -66,7 +66,7 @@ class Product_Type(View):
 
         if int(pk) <= 0:
             product_type_serialized = Product_Type_Serializer(
-                PRODUCT_TYPE.objects.all(), many=True
+                PRODUCT_TYPE.objects.filter(company_code=View().company_code), many=True
             )
             payload = super().create_payload(
                 success=True, data=product_type_serialized.data
@@ -100,7 +100,7 @@ class Product_Type(View):
             try:
                 product_type_ref = PRODUCT_TYPE.objects.get(id=int(pk))
                 product_type_de_serialized = Product_Type_Serializer(
-                    product_type_ref, data=request.data
+                    product_type_ref, data=request.data, partial=True
                 )
                 if product_type_de_serialized.is_valid():
                     product_type_de_serialized.save()
@@ -159,15 +159,11 @@ class Product_Type(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "product_type": "Integer : /master/product_type/0",
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "product_type": "Integer : /master/product_type/0",
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "name": "String : 32",
         }
         payload["method"]["DELETE"] = None
 
@@ -176,7 +172,7 @@ class Product_Type(View):
 
 class Product_Type_T(View):
     serializer_class = Product_Type_T_Serializer
-    queryset = PRODUCT_TYPE_T.objects.all()
+    queryset = PRODUCT_TYPE_T.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -223,7 +219,8 @@ class Product_Type_T(View):
 
         if int(pk) <= 0:
             product_type_serialized = Product_Type_T_Serializer(
-                PRODUCT_TYPE_T.objects.all(), many=True
+                PRODUCT_TYPE_T.objects.filter(company_code=View().company_code),
+                many=True,
             )
             payload = super().create_payload(
                 success=True, data=product_type_serialized.data
@@ -257,7 +254,7 @@ class Product_Type_T(View):
             try:
                 product_type_ref = PRODUCT_TYPE_T.objects.get(id=int(pk))
                 product_type_de_serialized = Product_Type_T_Serializer(
-                    product_type_ref, data=request.data
+                    product_type_ref, data=request.data, partial=True
                 )
                 if product_type_de_serialized.is_valid():
                     product_type_de_serialized.save()
@@ -316,15 +313,15 @@ class Product_Type_T(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "product_type": "Integer : /master/product_type/0",
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "type": "Integer : /master/check/product_type/0",
+            "lang": "Integer : /master/check/language/0",
+            "text": "Integer : /master/master/text/0",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "product_type": "Integer : /master/product_type/0",
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "type": "Integer : /master/check/product_type/0",
+            "lang": "Integer : /master/check/language/0",
+            "text": "Integer : /master/master/text/0",
         }
         payload["method"]["DELETE"] = None
 

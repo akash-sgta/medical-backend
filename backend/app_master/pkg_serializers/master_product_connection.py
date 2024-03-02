@@ -13,19 +13,19 @@ class Product_Connection(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["parent"] = f"master/product/{instance.parent.id}"
+            data["parent"] = f"master/master/product/{instance.parent.id}"
         except Exception:
             pass
         try:
-            data["parent_uom"] = f"master/uom/{instance.parent_uom.id}"
+            data["parent_uom"] = f"master/check/uom/{instance.parent_uom.id}"
         except Exception:
             pass
         try:
-            data["child"] = f"master/product/{instance.child.id}"
+            data["child"] = f"master/master/product/{instance.child.id}"
         except Exception:
             pass
         try:
-            data["child_uom"] = f"master/uom/{instance.child_uom.id}"
+            data["child_uom"] = f"master/check/uom/{instance.child_uom.id}"
         except Exception:
             pass
         return data

@@ -13,43 +13,43 @@ class Product(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["type"] = f"master/type/{instance.type.id}"
+            data["type"] = f"master/check/type/{instance.type.id}"
         except Exception:
             pass
         try:
-            data["image_01"] = f"cdn/file/{instance.image_01.id}"
+            data["image_01"] = f"cdn/master/file/{instance.image_01.id}"
         except Exception:
             pass
         try:
-            data["image_02"] = f"cdn/file/{instance.image_02.id}"
+            data["image_02"] = f"cdn/master/file/{instance.image_02.id}"
         except Exception:
             pass
         try:
-            data["image_03"] = f"cdn/file/{instance.image_03.id}"
+            data["image_03"] = f"cdn/master/file/{instance.image_03.id}"
         except Exception:
             pass
         try:
-            data["currency"] = f"master/currency/{instance.currency.id}"
+            data["currency"] = f"master/check/currency/{instance.currency.id}"
         except Exception:
             pass
         try:
-            data["description"] = f"master/text/{instance.description.id}"
+            data["description"] = f"master/master/text/{instance.description.id}"
         except Exception:
             pass
         try:
             data[
                 "storage_instructions"
-            ] = f"master/text/{instance.storage_instructions.id}"
+            ] = f"master/master/text/{instance.storage_instructions.id}"
         except Exception:
             pass
         try:
-            data["side_effects"] = f"master/text/{instance.side_effects.id}"
+            data["side_effects"] = f"master/master/text/{instance.side_effects.id}"
         except Exception:
             pass
         try:
             data[
                 "warnings_precautions"
-            ] = f"master/text/{instance.warnings_precautions.id}"
+            ] = f"master/master/text/{instance.warnings_precautions.id}"
         except Exception:
             pass
         return data

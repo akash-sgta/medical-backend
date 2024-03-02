@@ -15,7 +15,7 @@ from utility.abstract_view import View
 
 class Country(View):
     serializer_class = Country_Serializer
-    queryset = COUNTRY.objects.all()
+    queryset = COUNTRY.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -60,7 +60,9 @@ class Country(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            country_serialized = Country_Serializer(COUNTRY.objects.all(), many=True)
+            country_serialized = Country_Serializer(
+                COUNTRY.objects.filter(company_code=View().company_code), many=True
+            )
             payload = super().create_payload(success=True, data=country_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
@@ -90,7 +92,7 @@ class Country(View):
             try:
                 country_ref = COUNTRY.objects.get(id=int(pk))
                 country_de_serialized = Country_Serializer(
-                    country_ref, data=request.data
+                    country_ref, data=request.data, partial=True
                 )
                 if country_de_serialized.is_valid():
                     country_de_serialized.save()
@@ -146,13 +148,13 @@ class Country(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "contient": "Integer : /master/continent/0",
+            "contient": "Integer : /master/check/continent/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "contient": "Integer : /master/continent/0",
+            "contient": "Integer : /master/check/continent/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }

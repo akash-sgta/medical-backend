@@ -15,7 +15,7 @@ from utility.abstract_view import View
 
 class City(View):
     serializer_class = City_Serializer
-    queryset = CITY.objects.all()
+    queryset = CITY.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -60,7 +60,9 @@ class City(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            city_serialized = City_Serializer(CITY.objects.all(), many=True)
+            city_serialized = City_Serializer(
+                CITY.objects.filter(company_code=View().company_code), many=True
+            )
             payload = super().create_payload(success=True, data=city_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
@@ -88,7 +90,9 @@ class City(View):
         else:
             try:
                 city_ref = CITY.objects.get(id=int(pk))
-                city_de_serialized = City_Serializer(city_ref, data=request.data)
+                city_de_serialized = City_Serializer(
+                    city_ref, data=request.data, partial=True
+                )
                 if city_de_serialized.is_valid():
                     city_de_serialized.save()
                     payload = super().create_payload(
@@ -143,13 +147,13 @@ class City(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "state": "Integer : /master/state/0",
+            "state": "Integer : /master/check/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "state": "Integer : /master/state/0",
+            "state": "Integer : /master/check/state/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }

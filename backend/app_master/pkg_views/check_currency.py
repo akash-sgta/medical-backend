@@ -15,7 +15,7 @@ from utility.abstract_view import View
 
 class Currency(View):
     serializer_class = Currency_Serializer
-    queryset = CURRENCY.objects.all()
+    queryset = CURRENCY.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -60,7 +60,9 @@ class Currency(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            currency_serialized = Currency_Serializer(CURRENCY.objects.all(), many=True)
+            currency_serialized = Currency_Serializer(
+                CURRENCY.objects.filter(company_code=View().company_code), many=True
+            )
             payload = super().create_payload(
                 success=True, data=currency_serialized.data
             )
@@ -91,7 +93,7 @@ class Currency(View):
             try:
                 currency_ref = CURRENCY.objects.get(id=int(pk))
                 currency_de_serialized = Currency_Serializer(
-                    currency_ref, data=request.data
+                    currency_ref, data=request.data, partial=True
                 )
                 if currency_de_serialized.is_valid():
                     currency_de_serialized.save()
@@ -147,15 +149,17 @@ class Currency(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "state": "Integer : /master/state/0",
+            "code": "String : 4",
             "eng_name": "String : 32",
             "local_name": "String : 32",
+            "symbol": "String : 4",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "state": "Integer : /master/state/0",
+            "code": "String : 4",
             "eng_name": "String : 32",
             "local_name": "String : 32",
+            "symbol": "String : 4",
         }
         payload["method"]["DELETE"] = None
 

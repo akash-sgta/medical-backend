@@ -15,7 +15,7 @@ from utility.abstract_view import View
 
 class Language(View):
     serializer_class = Language_Serializer
-    queryset = LANGUAGE.objects.all()
+    queryset = LANGUAGE.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -59,7 +59,9 @@ class Language(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            language_serialized = Language_Serializer(LANGUAGE.objects.all(), many=True)
+            language_serialized = Language_Serializer(
+                LANGUAGE.objects.filter(company_code=View().company_code), many=True
+            )
             payload = super().create_payload(
                 success=True, data=language_serialized.data
             )
@@ -90,7 +92,7 @@ class Language(View):
             try:
                 language_ref = LANGUAGE.objects.get(id=int(pk))
                 language_de_serialized = Language_Serializer(
-                    language_ref, data=request.data
+                    language_ref, data=request.data, partial=True
                 )
                 if language_de_serialized.is_valid():
                     language_de_serialized.save()

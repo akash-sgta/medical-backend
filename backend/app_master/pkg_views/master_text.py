@@ -15,7 +15,7 @@ from utility.abstract_view import View
 
 class Text(View):
     serializer_class = Text_Serializer
-    queryset = TEXT.objects.all()
+    queryset = TEXT.objects.filter(company_code=View().company_code)
 
     def __init__(self):
         super().__init__()
@@ -43,7 +43,9 @@ class Text(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            text_serialized = Text_Serializer(TEXT.objects.all(), many=True)
+            text_serialized = Text_Serializer(
+                TEXT.objects.filter(company_code=View().company_code), many=True
+            )
             payload = super().create_payload(success=True, data=text_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
@@ -71,7 +73,9 @@ class Text(View):
         else:
             try:
                 text_ref = TEXT.objects.get(id=int(pk))
-                text_de_serialized = Text_Serializer(text_ref, data=request.data)
+                text_de_serialized = Text_Serializer(
+                    text_ref, data=request.data, partial=True
+                )
                 if text_de_serialized.is_valid():
                     text_de_serialized.save()
                     payload = super().create_payload(

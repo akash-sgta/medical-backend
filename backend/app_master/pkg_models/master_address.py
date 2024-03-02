@@ -1,6 +1,7 @@
 # ========================================================================
 from django.db import models
 
+from app_master.pkg_models.master_text import TEXT
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.check_city import CITY
 
@@ -29,16 +30,18 @@ class ADDRESS(CHANGE_LOG):
         null=True,
         blank=True,
     )
+    additional_line = models.ForeignKey(
+        TEXT,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
 
     street = models.CharField(
         max_length=128,
     )
     postal_code = models.CharField(
         max_length=32,
-    )
-    additional_line = models.TextField(
-        blank=True,
-        null=True,
     )
     latitude = models.DecimalField(
         max_digits=9,

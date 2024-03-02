@@ -24,4 +24,4 @@ class TEXT(CHANGE_LOG):
         super(TEXT, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {} -> {}...".format(self.company_code, self.text[:8])
+        return "[{}] {}...".format(self.company_code, self.text[:8])

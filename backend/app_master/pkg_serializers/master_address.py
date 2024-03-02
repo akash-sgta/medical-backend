@@ -13,7 +13,13 @@ class Address(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["city"] = f"master/city/{instance.city.id}"
+            data["city"] = f"master/check/city/{instance.city.id}"
+        except Exception:
+            pass
+        try:
+            data[
+                "additional_line"
+            ] = f"master/master/text/{instance.additional_line.id}"
         except Exception:
             pass
         return data

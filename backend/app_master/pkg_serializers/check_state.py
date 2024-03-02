@@ -13,7 +13,7 @@ class State(Serializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         try:
-            data["country"] = f"master/country/{instance.country.id}"
+            data["country"] = f"master/check/country/{instance.country.id}"
         except Exception:
             pass
         return data

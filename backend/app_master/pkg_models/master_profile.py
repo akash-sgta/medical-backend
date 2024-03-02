@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.validators import RegexValidator
 from django.db import models
 
 from app_cdn.pkg_models.master_file import FILE
@@ -64,10 +65,24 @@ class PROFILE(CHANGE_LOG):
     )
     phone_number = models.CharField(
         max_length=32,
+        validators=[
+            RegexValidator(
+                regex="^\+(?:[0-9] ?){6,14}[0-9]$",
+                message="Use format +91 4567890120.",
+            )
+        ],
         null=True,
         blank=True,
     )
-    date_of_birth = models.DateField()
+    date_of_birth = models.CharField(
+        max_length=8,  # YYYYMMDD
+        validators=[
+            RegexValidator(
+                regex="^[1-9]{1}[0-9]{7}$",
+                message="Use format YYYYMMDD.",
+            )
+        ],
+    )
     facebook_profile = models.URLField(
         max_length=256,
         blank=True,

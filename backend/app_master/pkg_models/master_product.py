@@ -110,8 +110,10 @@ class PRODUCT(CHANGE_LOG):
     dosage = models.CharField(
         max_length=64,
     )
-    price = models.FloatField(
+    price = models.DecimalField(
         default=0.0,
+        max_digits=15,
+        decimal_places=2,
     )
 
     url = models.URLField(
