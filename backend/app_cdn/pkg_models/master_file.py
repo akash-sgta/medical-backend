@@ -47,4 +47,4 @@ class FILE(CHANGE_LOG):
         super(FILE, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.name)
+        return "[{}] {} -> {}".format(self.company_code, self.type, self.name)

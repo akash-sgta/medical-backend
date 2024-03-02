@@ -15,6 +15,6 @@ urlpatterns = [
     re_path(
         r"master/file/(?P<pk>\d*)$",
         File.as_view(),
-        name="Check_File",
+        name="Master_File",
     ),
 ]

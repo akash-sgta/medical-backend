@@ -21,4 +21,4 @@ class FILE_TYPE(CHANGE_LOG):
         super(FILE_TYPE, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {}".format(self.id, self.name)
+        return "[{}] {}".format(self.company_code, self.name)

@@ -1,7 +1,10 @@
 # ========================================================================
 # Generated using : https://chat.openai.com/
 # ========================================================================
-from django.test import TestCase, RequestFactory
+from django.test import (
+    TestCase,
+    RequestFactory,
+)
 from rest_framework import status
 from django.urls import reverse
 
@@ -13,17 +16,21 @@ from app_cdn.pkg_models.check_file_type import FILE_TYPE
 class FileTypeModelTestCase(TestCase):
     def setUp(self):
         # Create test data
-        self.file_type = FILE_TYPE.objects.create(name="test")
+        self.file_type = FILE_TYPE.objects.create(
+            name="test",
+        )
 
     def test_file_type_creation(self):
         # Test if the file type object was created successfully
         self.assertEqual(
-            self.file_type.name, "TEST"
+            self.file_type.name, "test".upper()
         )  # Check if the name is uppercased as expected
 
     def test_file_type_str_method(self):
         # Test the __str__ method
-        expected_result = "[{}] {}".format(self.file_type.id, self.file_type.name)
+        expected_result = "[{}] {}".format(
+            self.file_type.company_code, self.file_type.name
+        )
         self.assertEqual(str(self.file_type), expected_result)
 
     def test_file_type_unique_constraint(self):
@@ -37,7 +44,7 @@ class FileTypeModelTestCase(TestCase):
 class File_TypeViewTestCase(TestCase):
     def setUp(self):
         # Create test data for FILE_TYPE
-        self.file_type = FILE_TYPE.objects.create(name="Test")
+        self.file_type = FILE_TYPE.objects.create(name="TEST_00")
 
         # Initialize the request factory
         self.factory = RequestFactory()
@@ -60,7 +67,9 @@ class File_TypeViewTestCase(TestCase):
 
     def test_post_file_type(self):
         # Test POST request for creating a new file type
-        data = {"name": "NewFileType"}
+        data = {
+            "name": "TEST_01",
+        }
         request = self.factory.post(
             reverse("Check_File_Type", kwargs={"pk": 0}), data=data
         )
@@ -70,9 +79,13 @@ class File_TypeViewTestCase(TestCase):
 
     def test_put_file_type(self):
         # Test PUT request for updating an existing file type
-        data = {"name": "UpdatedFileType"}
+        data = {
+            "name": "TEST_02",
+        }
         request = self.factory.put(
-            reverse("Check_File_Type", kwargs={"pk": self.file_type.id}), data=data
+            reverse("Check_File_Type", kwargs={"pk": self.file_type.id}),
+            data=data,
+            headers={"Content-Type": "application/json"},
         )
         view = File_Type.as_view()
         response = view(request, pk=self.file_type.id)
