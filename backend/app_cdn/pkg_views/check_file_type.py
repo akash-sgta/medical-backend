@@ -23,7 +23,12 @@ class File_Type(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         file_type_de_serialized = File_Type_Serializer(data=request.data)
-        file_type_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            file_type_de_serialized.initial_data[
+                self.C_COMPANY_CODE
+            ] = self.company_code
+        except AttributeError:
+            pass
         if file_type_de_serialized.is_valid():
             try:
                 file_type_de_serialized.save()
@@ -56,7 +61,7 @@ class File_Type(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             file_type_serialized = File_Type_Serializer(
                 FILE_TYPE.objects.filter(company_code=View().company_code), many=True
             )
@@ -81,7 +86,7 @@ class File_Type(View):
     def put(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             payload = super().create_payload(
                 success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
             )

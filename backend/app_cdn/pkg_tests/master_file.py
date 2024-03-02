@@ -10,94 +10,108 @@ from django.test import (
 from rest_framework import status
 from django.urls import reverse
 
-from app_cdn.pkg_views.check_file_type import File_Type
-from app_cdn.pkg_models.check_file_type import FILE_TYPE
+from app_cdn.pkg_views.master_file import File
+from app_cdn.pkg_models.master_file import FILE, FILE_TYPE
 
 
 # ========================================================================
-class FileTypeModelTestCase(TestCase):
+class FileModelTestCase(TestCase):
     def setUp(self):
         # Create test data
         self.file_type = FILE_TYPE.objects.create(
             name="test",
         )
+        self.file = FILE.objects.create(
+            type=self.file_type,
+            name="test",
+            size=100.2,
+            url="https://1337x.to",
+        )
 
-    def test_file_type_creation(self):
+    def test_file_creation(self):
         # Test if the file type object was created successfully
         self.assertEqual(
-            self.file_type.name, "test".upper()
+            self.file.name, "test".upper()
         )  # Check if the name is uppercased as expected
 
-    def test_file_type_str_method(self):
+    def test_file_str_method(self):
         # Test the __str__ method
-        expected_result = "[{}] {}".format(
-            self.file_type.company_code, self.file_type.name
+        expected_result = "[{}] {} -> {}".format(
+            self.file.company_code, str(self.file.type), self.file.name
         )
-        self.assertEqual(str(self.file_type), expected_result)
+        self.assertEqual(str(self.file), expected_result)
 
-    def test_file_type_unique_constraint(self):
+    def test_file_unique_constraint(self):
         # Test uniqueness constraint for name field
         with self.assertRaises(Exception):
-            FILE_TYPE.objects.create(
-                name="test"
+            FILE.objects.create(
+                type=self.file_type,
+                name="test",
             )  # Try to create another file type with the same name
 
 
-class File_TypeViewTestCase(TestCase):
+class FileViewTestCase(TestCase):
     def setUp(self):
-        # Create test data for FILE_TYPE
-        self.file_type = FILE_TYPE.objects.create(name="TEST_00")
+        # Create test data for FILE
+        self.file_type = FILE_TYPE.objects.create(
+            name="test",
+        )
+        self.file = FILE.objects.create(
+            type=self.file_type,
+            name="test",
+            size=100.2,
+            url="https://1337x.to",
+        )
 
         # Initialize the request factory
         self.factory = RequestFactory()
 
-    def test_get_file_type_list(self):
+    def test_get_file_list(self):
         # Test GET request for fetching list of file types
-        request = self.factory.get(reverse("Check_File_Type", kwargs={"pk": 0}))
-        view = File_Type.as_view()
+        request = self.factory.get(reverse("Master_File", kwargs={"pk": 0}))
+        view = File.as_view()
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_get_file_type_detail(self):
+    def test_get_file_detail(self):
         # Test GET request for fetching detail of a file type
-        request = self.factory.get(
-            reverse("Check_File_Type", kwargs={"pk": self.file_type.id})
-        )
-        view = File_Type.as_view()
-        response = view(request, pk=self.file_type.id)
+        request = self.factory.get(reverse("Master_File", kwargs={"pk": self.file.id}))
+        view = File.as_view()
+        response = view(request, pk=self.file.id)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_post_file_type(self):
+    def test_post_file(self):
         # Test POST request for creating a new file type
         data = {
+            "type": self.file_type.id,
             "name": "TEST_01",
+            "size": 100.2,
+            "url": "https://1337x.to",
         }
-        request = self.factory.post(
-            reverse("Check_File_Type", kwargs={"pk": 0}), data=data
-        )
-        view = File_Type.as_view()
+        request = self.factory.post(reverse("Master_File", kwargs={"pk": 0}), data=data)
+        view = File.as_view()
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_put_file_type(self):
+    def test_put_file(self):
         # Test PUT request for updating an existing file type
         data = {
             "name": "TEST_02",
         }
         request = self.factory.put(
-            reverse("Check_File_Type", kwargs={"pk": self.file_type.id}),
+            reverse("Master_File", kwargs={"pk": self.file.id}),
             data=json.dumps(data),
             headers={"Content-Type": "application/json"},
         )
-        view = File_Type.as_view()
-        response = view(request, pk=self.file_type.id)
+        view = File.as_view()
+        response = view(request, pk=self.file.id)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete_file_type(self):
+    def test_delete_file(self):
         # Test DELETE request for deleting an existing file type
         request = self.factory.delete(
-            reverse("Check_File_Type", kwargs={"pk": self.file_type.id})
+            reverse("Master_File", kwargs={"pk": self.file.id})
         )
-        view = File_Type.as_view()
-        response = view(request, pk=self.file_type.id)
+        view = File.as_view()
+        response = view(request, pk=self.file.id)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
