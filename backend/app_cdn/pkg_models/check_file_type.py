@@ -12,9 +12,15 @@ class FILE_TYPE(CHANGE_LOG):
         verbose_name = "File Type"
         verbose_name_plural = "File Types"
         ordering = ["name"]
+        unique_together = CHANGE_LOG.get_unique_together() + ("name",)
 
-    id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=8, unique=True)
+    id = models.BigAutoField(
+        primary_key=True,
+    )
+
+    name = models.CharField(
+        max_length=8,
+    )
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()

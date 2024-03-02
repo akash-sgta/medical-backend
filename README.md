@@ -10,7 +10,7 @@
 >> $ ```sudo /opt/lampp/manager-linux-x64.run```
 
 > Python Pre-requisites
->> $ ```pip install -r requirements.txt```
+>> $ ```pip install -r requirements_python.txt```
 
 > Pycharm Pre-requisites
 >> Set **backend** as source root
@@ -42,5 +42,9 @@
 > External Api(s) used:
 > 
 >> 1. <a>https://api.freecurrencyapi.com/v1/latest?apikey=GET_YOUR_OWN_KEY</a>
->> 2. 
-
+---
+> Git Flow:
+>> ![medical-GIT FLOW.png](document%2Fmedical-GIT%20FLOW.png)
+---
+> ER Diagram:
+>> ![medical-ER Diagram.png](document%2Fmedical-ER%20Diagram.png)
