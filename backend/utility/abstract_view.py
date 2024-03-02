@@ -15,7 +15,7 @@ from utility.abstract_models import COMPANY, COMPANY_CODE
 
 class View(GenericAPIView):
     # renderer_classes = [JSONRenderer]
-    permission_classes = [permissions.IsAuthenticated]  # Default permission class
+    # permission_classes = [permissions.IsAuthenticated]  # Default permission class
 
     def __init__(self):
         super().__init__()
