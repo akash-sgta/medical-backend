@@ -24,7 +24,10 @@ class Currency(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         currency_de_serialized = Currency_Serializer(data=request.data)
-        currency_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            currency_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        except AttributeError:
+            pass
         if currency_de_serialized.is_valid():
             try:
                 currency_de_serialized.save()
@@ -59,7 +62,7 @@ class Currency(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             currency_serialized = Currency_Serializer(
                 CURRENCY.objects.filter(company_code=View().company_code), many=True
             )

@@ -23,7 +23,10 @@ class State(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         state_de_serialized = State_Serializer(data=request.data)
-        state_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            state_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        except AttributeError:
+            pass
         if state_de_serialized.is_valid():
             try:
                 state_de_serialized.save()
@@ -58,7 +61,7 @@ class State(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             state_serialized = State_Serializer(
                 STATE.objects.filter(company_code=View().company_code), many=True
             )

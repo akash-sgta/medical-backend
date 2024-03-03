@@ -24,7 +24,10 @@ class City(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         city_de_serialized = City_Serializer(data=request.data)
-        city_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            city_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        except AttributeError:
+            pass
         if city_de_serialized.is_valid():
             try:
                 city_de_serialized.save()
@@ -59,7 +62,7 @@ class City(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             city_serialized = City_Serializer(
                 CITY.objects.filter(company_code=View().company_code), many=True
             )

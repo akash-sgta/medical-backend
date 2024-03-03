@@ -24,7 +24,10 @@ class Country(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         country_de_serialized = Country_Serializer(data=request.data)
-        country_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            country_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        except AttributeError:
+            pass
         if country_de_serialized.is_valid():
             try:
                 country_de_serialized.save()
@@ -59,7 +62,7 @@ class Country(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             country_serialized = Country_Serializer(
                 COUNTRY.objects.filter(company_code=View().company_code), many=True
             )

@@ -10,15 +10,13 @@ from django.test import (
 from rest_framework import status
 from django.urls import reverse
 
-from app_master.pkg_views.check_city import City
-from app_master.pkg_models.check_city import CITY
-from app_master.pkg_models.check_state import STATE
+from app_master.pkg_views.check_country import Country
 from app_master.pkg_models.check_country import COUNTRY
 from app_master.pkg_models.check_continent import CONTINENT
 
 
 # ========================================================================
-class CityModelTestCase(TestCase):
+class CountryModelTestCase(TestCase):
     def setUp(self):
         # Create test data
         self.continent = CONTINENT.objects.create(
@@ -30,41 +28,33 @@ class CityModelTestCase(TestCase):
             eng_name="test",
             local_name="test",
         )
-        self.state = STATE.objects.create(
-            country=self.country,
-            eng_name="test",
-            local_name="test",
-        )
-        self.city = CITY.objects.create(
-            state=self.state,
-            eng_name="test",
-            local_name="test",
-        )
 
-    def test_city_creation(self):
+    def test_country_creation(self):
         # Test if the file type object was created successfully
         self.assertEqual(
-            self.city.eng_name, "test".upper()
+            self.country.eng_name, "test".upper()
         )  # Check if the name is uppercased as expected
 
-    def test_city_str_method(self):
+    def test_country_str_method(self):
         # Test the __str__ method
         expected_result = "[{}] {} -> {}".format(
-            self.city.company_code, self.city.state.eng_name, self.city.eng_name
+            self.country.company_code,
+            self.country.continent.eng_name,
+            self.country.eng_name,
         )
-        self.assertEqual(str(self.city), expected_result)
+        self.assertEqual(str(self.country), expected_result)
 
-    def test_city_unique_constraint(self):
+    def test_country_unique_constraint(self):
         # Test uniqueness constraint for name field
         with self.assertRaises(Exception):
-            CITY.objects.create(
-                state=self.state,
+            COUNTRY.objects.create(
+                continent=self.continent,
                 eng_name="test",
                 local_name="test",
             )  # Try to create another file type with the same name
 
 
-class CityViewTestCase(TestCase):
+class CountryViewTestCase(TestCase):
     def setUp(self):
         # Create test data for CITY
         self.continent = CONTINENT.objects.create(
@@ -76,67 +66,61 @@ class CityViewTestCase(TestCase):
             eng_name="test",
             local_name="test",
         )
-        self.state = STATE.objects.create(
-            country=self.country,
-            eng_name="test",
-            local_name="test",
-        )
-        self.city = CITY.objects.create(
-            state=self.state,
-            eng_name="test",
-            local_name="test",
-        )
 
         # Initialize the request factory
         self.factory = RequestFactory()
 
-    def test_get_city_list(self):
+    def test_get_country_list(self):
         # Test GET request for fetching list of file types
-        request = self.factory.get(reverse("Check_City", kwargs={"pk": 0}))
-        view = City.as_view()
+        request = self.factory.get(reverse("Check_Country", kwargs={"pk": 0}))
+        view = Country.as_view()
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_get_city_detail(self):
+    def test_get_country_detail(self):
         # Test GET request for fetching detail of a file type
-        request = self.factory.get(reverse("Check_City", kwargs={"pk": self.city.id}))
-        view = City.as_view()
-        response = view(request, pk=self.city.id)
+        request = self.factory.get(
+            reverse("Check_Country", kwargs={"pk": self.country.id})
+        )
+        view = Country.as_view()
+        response = view(request, pk=self.country.id)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_post_city(self):
+    def test_post_country(self):
         # Test POST request for creating a new file type
         data = {
-            "state": self.state.id,
+            "continent": self.continent.id,
             "eng_name": "test1",
             "local_name": "test1",
         }
-        request = self.factory.post(reverse("Check_City", kwargs={"pk": 0}), data=data)
-        view = City.as_view()
+        request = self.factory.post(
+            reverse("Check_Country", kwargs={"pk": 0}), data=data
+        )
+        view = Country.as_view()
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_put_city(self):
+    def test_put_country(self):
         # Test PUT request for updating an existing file type
         data = {
-            "state": self.state.id,
+            "continent": self.continent.id,
             "eng_name": "test2",
             "local_name": "test2",
         }
         request = self.factory.put(
-            reverse("Check_City", kwargs={"pk": self.city.id}),
+            reverse("Check_Country", kwargs={"pk": self.country.id}),
             data=json.dumps(data),
             headers={"Content-Type": "application/json"},
         )
-        view = City.as_view()
-        response = view(request, pk=self.city.id)
+        view = Country.as_view()
+        response = view(request, pk=self.country.id)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_delete_city(self):
+    def test_delete_country(self):
         # Test DELETE request for deleting an existing file type
         request = self.factory.delete(
-            reverse("Check_City", kwargs={"pk": self.city.id})
+            reverse("Check_Country", kwargs={"pk": self.country.id})
         )
-        view = City.as_view()
-        response = view(request, pk=self.city.id)
+        view = Country.as_view()
+        response = view(request, pk=self.country.id)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
