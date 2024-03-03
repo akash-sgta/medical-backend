@@ -1,6 +1,5 @@
 # medical
 ### Well diversified Hospital Management System
-
 ---
 
 > Linux Pre-requisites
@@ -39,9 +38,10 @@
 > ```
 
 ---
-> External Api(s) used:
+> External Api(s) and Tool(s) used:
 > 
->> 1. <a>https://api.freecurrencyapi.com/v1/latest?apikey=GET_YOUR_OWN_KEY</a>
+>> 1. <a href="https://freecurrencyapi.com/">Currency Conversion rate : FreeCurrencyAPI</a>
+>> 2. <a href="https://chat.openai.com/">Code Documentation Generated using : Chat GPT</a>
 ---
 > Git Flow:
 >> ![medical-GIT FLOW.png](document%2Fmedical-GIT%20FLOW.png)

@@ -8,7 +8,10 @@ from utility.abstract_models import CHANGE_LOG
 
 class UNIT(CHANGE_LOG):
     """
-    UNIT information
+    A model to represent unit information.
+
+    Attributes:
+        name (CharField): The name of the unit.
     """
 
     class Meta:
@@ -28,8 +31,14 @@ class UNIT(CHANGE_LOG):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure name is always in uppercase before saving.
+        """
         self.name = self.name.upper()
         super(UNIT, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the unit.
+        """
         return "[{}] {}".format(self.company_code, self.name)

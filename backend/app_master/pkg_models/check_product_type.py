@@ -9,6 +9,13 @@ from app_master.pkg_models.master_text import TEXT
 
 
 class PRODUCT_TYPE(CHANGE_LOG):
+    """
+    A model to represent product types.
+
+    Attributes:
+        name (CharField): The name of the product type.
+    """
+
     class Meta:
         db_table = "master_check_product_type"
         managed = True
@@ -26,14 +33,29 @@ class PRODUCT_TYPE(CHANGE_LOG):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure name is always in uppercase before saving.
+        """
         self.name = self.name.upper()
         super(PRODUCT_TYPE, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the product type.
+        """
         return "[{}] {}".format(self.company_code, self.name)
 
 
 class PRODUCT_TYPE_T(CHANGE_LOG):
+    """
+    A model to represent translations of product types.
+
+    Attributes:
+        type (ForeignKey to PRODUCT_TYPE): The product type.
+        lang (ForeignKey to LANGUAGE): The language of the translation.
+        text (ForeignKey to TEXT): The translated text.
+    """
+
     class Meta:
         verbose_name = "Product Type Text"
         verbose_name_plural = "Product Type Texts"
@@ -66,9 +88,15 @@ class PRODUCT_TYPE_T(CHANGE_LOG):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to customize behavior.
+        """
         super(PRODUCT_TYPE_T, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the product type translation.
+        """
         return "[{}] {} - {}".format(
             self.company_code, self.type.name, self.lang.eng_name
         )

@@ -13,6 +13,10 @@ from utility.abstract_view import View
 
 
 class File(View):
+    """
+    API endpoint for managing files.
+    """
+
     serializer_class = File_Serializer
     queryset = FILE.objects.filter(company_code=View().company_code)
 
@@ -20,6 +24,9 @@ class File(View):
         super().__init__()
 
     def post(self, request, pk=None):
+        """
+        API endpoint for managing files.
+        """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         file_de_serialized = File_Serializer(data=request.data)
@@ -58,6 +65,9 @@ class File(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
+        """
+        Handle GET request to retrieve file(s).
+        """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if pk is None or int(pk) <= 0:
@@ -81,6 +91,9 @@ class File(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
+        """
+        Handle PUT request to update an existing file.
+        """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if pk is None or int(pk) <= 0:
@@ -116,6 +129,9 @@ class File(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
+        """
+        Handle DELETE request to delete an existing file.
+        """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
@@ -141,6 +157,9 @@ class File(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
+        """
+        Handle OPTIONS request to provide information about supported methods and headers.
+        """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         payload = dict()

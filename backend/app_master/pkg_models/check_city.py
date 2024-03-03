@@ -1,6 +1,4 @@
 # ========================================================================
-# Comments Generated using : https://chat.openai.com/
-# ========================================================================
 from django.db import models
 
 from utility.abstract_models import CHANGE_LOG

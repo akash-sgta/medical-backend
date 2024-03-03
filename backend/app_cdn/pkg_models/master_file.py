@@ -10,7 +10,13 @@ from app_cdn.pkg_models.check_file_type import FILE_TYPE
 
 class FILE(CHANGE_LOG):
     """
-    File information
+    A model to represent file information.
+
+    Attributes:
+        type (ForeignKey to FILE_TYPE): The type of the file.
+        name (CharField): The name of the file.
+        size (FloatField): The size of the file in bytes.
+        url (URLField): The URL of the file.
     """
 
     class Meta:
@@ -43,8 +49,14 @@ class FILE(CHANGE_LOG):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure name is always in uppercase before saving.
+        """
         self.name = self.name.upper()
         super(FILE, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the file.
+        """
         return "[{}] {} -> {}".format(self.company_code, self.type, self.name)
