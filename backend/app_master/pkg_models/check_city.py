@@ -1,4 +1,6 @@
 # ========================================================================
+# Comments Generated using : https://chat.openai.com/
+# ========================================================================
 from django.db import models
 
 from utility.abstract_models import CHANGE_LOG
@@ -9,7 +11,12 @@ from app_master.pkg_models.check_state import STATE
 
 class CITY(CHANGE_LOG):
     """
-    City information
+    A model to represent city information.
+
+    Attributes:
+        state (ForeignKey to STATE): The state to which the city belongs.
+        eng_name (CharField): The name of the city in English.
+        local_name (CharField): The local name of the city.
     """
 
     class Meta:
@@ -40,10 +47,16 @@ class CITY(CHANGE_LOG):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure eng_name is always in uppercase before saving.
+        """
         self.eng_name = self.eng_name.upper()
         super(CITY, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the city.
+        """
         return "[{}] {} -> {}".format(
             self.company_code, self.state.eng_name, self.eng_name
         )

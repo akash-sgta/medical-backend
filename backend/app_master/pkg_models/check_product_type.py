@@ -69,4 +69,6 @@ class PRODUCT_TYPE_T(CHANGE_LOG):
         super(PRODUCT_TYPE_T, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "[{}] {} - {}".format(self.company_code, self.type, self.text.lang)
+        return "[{}] {} - {}".format(
+            self.company_code, self.type.name, self.lang.eng_name
+        )

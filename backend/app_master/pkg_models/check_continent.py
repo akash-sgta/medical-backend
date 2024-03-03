@@ -8,7 +8,11 @@ from utility.abstract_models import CHANGE_LOG
 
 class CONTINENT(CHANGE_LOG):
     """
-    Continent information
+    A model to represent continent information.
+
+    Attributes:
+        eng_name (CharField): The name of the continent in English.
+        local_name (CharField): The local name of the continent.
     """
 
     class Meta:
@@ -31,8 +35,14 @@ class CONTINENT(CHANGE_LOG):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure eng_name is always in uppercase before saving.
+        """
         self.eng_name = self.eng_name.upper()
         super(CONTINENT, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the continent.
+        """
         return "[{}] {}".format(self.company_code, self.eng_name)

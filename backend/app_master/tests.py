@@ -19,5 +19,15 @@ from app_master.pkg_tests.check_currency import (
     CurrencyModelTestCase,
     CurrencyViewTestCase,
 )
+from app_master.pkg_tests.check_language import (
+    LanguageModelTestCase,
+    LanguageViewTestCase,
+)
+from app_master.pkg_tests.check_product_type import (
+    Product_TypeModelTestCase,
+    Product_TypeViewTestCase,
+    Product_Type_TModelTestCase,
+    Product_Type_TModelTestCase,
+)
 
 # ========================================================================
