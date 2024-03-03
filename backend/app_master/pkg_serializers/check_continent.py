@@ -5,7 +5,15 @@ from utility.abstract_serializer import Serializer
 
 # ========================================================================
 class Continent(Serializer):
+    """
+    Serializer for Continent model.
+    """
+
     class Meta:
+        """
+        Metadata for Continent serializer.
+        """
+
         model = CONTINENT
         fields = "__all__"
         extra_kwargs = Serializer().extra()

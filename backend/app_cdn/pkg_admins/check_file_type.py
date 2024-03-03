@@ -19,11 +19,23 @@ class File_Type(Change_Log):
     def created(self, obj):
         """
         Method to display creation details of the file type in the admin interface.
+
+        Args:
+            obj: The object representing the file type.
+
+        Returns:
+            str: The creation details.
         """
         return super().created(FILE_TYPE.objects.get(id=obj.id))
 
     def changed(self, obj):
         """
         Method to display change details of the file type in the admin interface.
+
+        Args:
+            obj: The object representing the file type.
+
+        Returns:
+            str: The change details.
         """
         return super().changed(FILE_TYPE.objects.get(id=obj.id))

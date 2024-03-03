@@ -5,12 +5,29 @@ from utility.abstract_serializer import Serializer
 
 # ========================================================================
 class Product(Serializer):
+    """
+    Serializer for Product model.
+    """
+
     class Meta:
+        """
+        Metadata for Product serializer.
+        """
+
         model = PRODUCT
         fields = "__all__"
         extra_kwargs = Serializer().extra()
 
     def to_representation(self, instance):
+        """
+        Customizes the representation of Product instances.
+
+        Args:
+            instance: The instance of Product model.
+
+        Returns:
+            dict: Customized representation of the instance.
+        """
         data = super().to_representation(instance)
         try:
             data["type"] = f"master/check/type/{instance.type.id}"

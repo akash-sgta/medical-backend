@@ -10,7 +10,15 @@ from app_master.pkg_models.check_unit_of_measurement import UOM
 
 class PRODUCT_CONNECTION(CHANGE_LOG):
     """
-    Product Connection information
+    Product Connection information.
+
+    Attributes:
+        parent (ForeignKey to PRODUCT): The parent product in the connection.
+        parent_uom (ForeignKey to UOM): The unit of measure for the parent product.
+        child (ForeignKey to PRODUCT): The child product in the connection.
+        child_uom (ForeignKey to UOM): The unit of measure for the child product.
+        parent_quantity (FloatField): The quantity of the parent product.
+        child_quantity (FloatField): The quantity of the child product.
     """
 
     class Meta:
@@ -27,9 +35,7 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
             "child",
         )
 
-    id = models.BigAutoField(
-        primary_key=True,
-    )
+    id = models.BigAutoField(primary_key=True)
 
     parent = models.ForeignKey(
         PRODUCT,
@@ -52,17 +58,19 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
         on_delete=models.CASCADE,
     )
 
-    parent_quantity = models.FloatField(
-        default=1,
-    )
-    child_quantity = models.FloatField(
-        default=1,
-    )
+    parent_quantity = models.FloatField(default=1)
+    child_quantity = models.FloatField(default=1)
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to save the object.
+        """
         super(PRODUCT_CONNECTION, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the product connection.
+        """
         return "[{}] {} - {}".format(
             self.company_code, self.parent.name, self.child.name
         )

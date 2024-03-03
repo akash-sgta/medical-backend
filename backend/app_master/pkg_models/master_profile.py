@@ -13,7 +13,21 @@ from app_master.pkg_models.master_text import TEXT
 
 class PROFILE(CHANGE_LOG):
     """
-    Profile information
+    Profile information.
+
+    Attributes:
+        cred (OneToOneField to CREDENTIAL): The associated credential for the profile.
+        address (OneToOneField to ADDRESS): The associated address for the profile.
+        image (ForeignKey to FILE): The profile image file.
+        bio (ForeignKey to TEXT): The biography text for the profile.
+        first_name (CharField): The first name of the profile owner.
+        middle_name (CharField): The middle name of the profile owner.
+        last_name (CharField): The last name of the profile owner.
+        phone_number (CharField): The phone number of the profile owner.
+        date_of_birth (CharField): The date of birth of the profile owner (YYYYMMDD).
+        facebook_profile (URLField): The Facebook profile URL.
+        twitter_profile (URLField): The Twitter profile URL.
+        linkedin_profile (URLField): The LinkedIn profile URL.
     """
 
     class Meta:
@@ -24,9 +38,7 @@ class PROFILE(CHANGE_LOG):
         ordering = CHANGE_LOG.get_ordering() + ("cred",)
         unique_together = CHANGE_LOG.get_unique_together() + ("cred",)
 
-    id = models.BigAutoField(
-        primary_key=True,
-    )
+    id = models.BigAutoField(primary_key=True)
 
     cred = models.OneToOneField(
         CREDENTIAL,
@@ -52,17 +64,9 @@ class PROFILE(CHANGE_LOG):
         blank=True,
     )
 
-    first_name = models.CharField(
-        max_length=128,
-    )
-    middle_name = models.CharField(
-        max_length=128,
-        blank=True,
-        null=True,
-    )
-    last_name = models.CharField(
-        max_length=128,
-    )
+    first_name = models.CharField(max_length=128)
+    middle_name = models.CharField(max_length=128, blank=True, null=True)
+    last_name = models.CharField(max_length=128)
     phone_number = models.CharField(
         max_length=32,
         validators=[
@@ -83,26 +87,23 @@ class PROFILE(CHANGE_LOG):
             )
         ],
     )
-    facebook_profile = models.URLField(
-        max_length=256,
-        blank=True,
-    )
-    twitter_profile = models.URLField(
-        max_length=256,
-        blank=True,
-    )
-    linkedin_profile = models.URLField(
-        max_length=256,
-        blank=True,
-    )
+    facebook_profile = models.URLField(max_length=256, blank=True)
+    twitter_profile = models.URLField(max_length=256, blank=True)
+    linkedin_profile = models.URLField(max_length=256, blank=True)
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure name fields are in uppercase before saving.
+        """
         self.first_name = self.first_name.upper()
-        self.middle_name = self.middle_name.upper()
+        self.middle_name = self.middle_name.upper() if self.middle_name else None
         self.last_name = self.last_name.upper()
         super(PROFILE, self).save(*args, **kwargs)
 
     def __str__(self):
+        """
+        Returns a string representation of the profile.
+        """
         return "[{}] {} -> {}.{}".format(
             self.company_code, self.cred, self.first_name, self.last_name
         )
