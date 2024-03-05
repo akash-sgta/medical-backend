@@ -24,7 +24,12 @@ class Credential(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         credential_de_serialized = Credential_Serializer(data=request.data)
-        credential_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            credential_de_serialized.initial_data[
+                self.C_COMPANY_CODE
+            ] = self.company_code
+        except AttributeError:
+            pass
         if credential_de_serialized.is_valid():
             try:
                 credential_de_serialized.save()
@@ -60,7 +65,7 @@ class Credential(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             credential_serialized = Credential_Serializer(
                 CREDENTIAL.objects.filter(company_code=View().company_code), many=True
             )

@@ -24,7 +24,10 @@ class Profile(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         profile_de_serialized = Profile_Serializer(data=request.data)
-        profile_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            profile_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        except AttributeError:
+            pass
         if profile_de_serialized.is_valid():
             try:
                 profile_de_serialized.save()
@@ -56,7 +59,7 @@ class Profile(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             profile_serialized = Profile_Serializer(
                 PROFILE.objects.filter(company_code=View().company_code),
                 many=True,

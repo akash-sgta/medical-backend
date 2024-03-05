@@ -41,5 +41,13 @@ from app_master.pkg_tests.master_address import (
     AddressModelTestCase,
     AddressViewTestCase,
 )
+from app_master.pkg_tests.master_credential import (
+    CredentialViewTestCase,
+    CredentialModelTestCase,
+)
+from app_master.pkg_tests.master_profile import (
+    ProfileModelTestCase,
+    ProfileViewTestCase,
+)
 
 # ========================================================================
