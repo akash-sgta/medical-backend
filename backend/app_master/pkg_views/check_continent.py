@@ -13,6 +13,10 @@ from utility.abstract_view import View
 
 
 class Continent(View):
+    """
+    API endpoint for managing continents.
+    """
+
     serializer_class = Continent_Serializer
     queryset = CONTINENT.objects.filter(company_code=View().company_code)
 
@@ -20,7 +24,10 @@ class Continent(View):
         super().__init__()
 
     def post(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle POST request to create a new continent.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         continent_de_serialized = Continent_Serializer(data=request.data)
         try:
@@ -61,7 +68,10 @@ class Continent(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle GET request to retrieve continent(s).
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if pk is None or int(pk) <= 0:
             continent_serialized = Continent_Serializer(
@@ -86,7 +96,10 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle PUT request to update an existing continent.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
             payload = super().create_payload(
@@ -121,7 +134,10 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle DELETE request to delete an existing continent.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
             payload = super().create_payload(
@@ -146,7 +162,10 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle OPTIONS request to provide information about supported methods and headers.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         payload = dict()
         payload["Allow"] = "POST GET PUT DELETE OPTIONS".split()

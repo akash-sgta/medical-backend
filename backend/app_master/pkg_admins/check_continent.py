@@ -4,7 +4,7 @@ from app_master.pkg_models.check_continent import CONTINENT
 
 
 # ========================================================================
-class ContinentAdmin(Change_Log):
+class Continent(Change_Log):
     """
     Customizes the Django admin interface for managing continents.
 

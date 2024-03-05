@@ -24,7 +24,10 @@ class Address(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         address_de_serialized = Address_Serializer(data=request.data)
-        address_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        try:
+            address_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+        except AttributeError:
+            pass
         if address_de_serialized.is_valid():
             try:
                 address_de_serialized.save()
@@ -56,7 +59,7 @@ class Address(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             address_serialized = Address_Serializer(
                 ADDRESS.objects.filter(company_code=View().company_code), many=True
             )

@@ -24,9 +24,12 @@ class Uom(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         unit_of_measurement_de_serialized = Uom_Serializer(data=request.data)
-        unit_of_measurement_de_serialized.initial_data[
-            self.C_COMPANY_CODE
-        ] = self.company_code
+        try:
+            unit_of_measurement_de_serialized.initial_data[
+                self.C_COMPANY_CODE
+            ] = self.company_code
+        except AttributeError:
+            pass
         if unit_of_measurement_de_serialized.is_valid():
             try:
                 unit_of_measurement_de_serialized.save()
@@ -65,7 +68,7 @@ class Uom(View):
     def get(self, request, pk=None):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if int(pk) <= 0:
+        if pk is None or int(pk) <= 0:
             unit_of_measurement_serialized = Uom_Serializer(
                 UOM.objects.filter(company_code=View().company_code), many=True
             )

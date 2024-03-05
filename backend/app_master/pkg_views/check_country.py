@@ -14,6 +14,10 @@ from utility.abstract_view import View
 
 
 class Country(View):
+    """
+    API endpoint for managing countries.
+    """
+
     serializer_class = Country_Serializer
     queryset = COUNTRY.objects.filter(company_code=View().company_code)
 
@@ -21,7 +25,10 @@ class Country(View):
         super().__init__()
 
     def post(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle POST request to create a new country.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         country_de_serialized = Country_Serializer(data=request.data)
         try:
@@ -60,7 +67,10 @@ class Country(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle GET request to retrieve country(s).
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if pk is None or int(pk) <= 0:
             country_serialized = Country_Serializer(
@@ -84,7 +94,10 @@ class Country(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle PUT request to update an existing country.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
             payload = super().create_payload(
@@ -113,12 +126,16 @@ class Country(View):
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except COUNTRY.DoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False,
+                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle DELETE request to delete an existing country.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
             payload = super().create_payload(
@@ -141,7 +158,10 @@ class Country(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
-        auth = super().authorize(request=request)  # TODO : Do stuff
+        """
+        Handle OPTIONS request to provide information about supported methods and headers.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
         payload = dict()
         payload["Allow"] = "POST GET PUT DELETE OPTIONS".split()
@@ -151,13 +171,13 @@ class Country(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "contient": "Integer : /master/check/continent/0",
+            "continent": "Integer : /master/check/continent/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "contient": "Integer : /master/check/continent/0",
+            "continent": "Integer : /master/check/continent/0",
             "eng_name": "String : 32",
             "local_name": "String : 32",
         }

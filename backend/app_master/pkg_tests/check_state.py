@@ -60,7 +60,7 @@ class StateModelTestCase(TestCase):
 
 class StateViewTestCase(TestCase):
     def setUp(self):
-        # Create test data for CITY
+        # Create test data for STATE
         self.continent = CONTINENT.objects.create(
             eng_name="test",
             local_name="test",

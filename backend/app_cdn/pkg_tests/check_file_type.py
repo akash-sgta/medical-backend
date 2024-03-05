@@ -15,7 +15,7 @@ from app_cdn.pkg_models.check_file_type import FILE_TYPE
 # ========================================================================
 from django.test import TestCase
 from django.urls import reverse
-from rest_framework.test import RequestFactory
+from django.test import RequestFactory
 from rest_framework import status
 import json
 

@@ -29,5 +29,17 @@ from app_master.pkg_tests.check_product_type import (
     Product_Type_TModelTestCase,
     Product_Type_TModelTestCase,
 )
+from app_master.pkg_tests.check_unit import (
+    UnitModelTestCase,
+    UnitViewTestCase,
+)
+from app_master.pkg_tests.check_unit_of_measurement import (
+    UomModelTestCase,
+    UomViewTestCase,
+)
+from app_master.pkg_tests.master_address import (
+    AddressModelTestCase,
+    AddressViewTestCase,
+)
 
 # ========================================================================
