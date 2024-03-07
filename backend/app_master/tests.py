@@ -49,5 +49,13 @@ from app_master.pkg_tests.master_profile import (
     ProfileModelTestCase,
     ProfileViewTestCase,
 )
+from app_master.pkg_tests.master_product import (
+    ProductModelTestCase,
+    ProductViewTestCase,
+)
+from app_master.pkg_tests.master_product_connection import (
+    Product_ConnectionModelTestCase,
+    Product_ConnectionViewTestCase,
+)
 
 # ========================================================================
