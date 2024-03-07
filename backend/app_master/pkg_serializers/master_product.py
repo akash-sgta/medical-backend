@@ -46,10 +46,6 @@ class Product(Serializer):
         except Exception:
             pass
         try:
-            data["currency"] = f"master/check/currency/{instance.currency.id}"
-        except Exception:
-            pass
-        try:
             data["description"] = f"master/master/text/{instance.description.id}"
         except Exception:
             pass

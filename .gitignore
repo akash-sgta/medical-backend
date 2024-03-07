@@ -168,3 +168,4 @@ cython_debug/
 /backend/app_cdn/migrations/
 /backend/tempfiles/sqlite_db/medical.dev.sqlite.db
 /.idea/runConfigurations/test.xml
+/backend/app_transaction/migrations/

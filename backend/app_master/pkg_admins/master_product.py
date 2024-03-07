@@ -10,8 +10,6 @@ class Product(Change_Log):
 
     Attributes:
         name (CharField): The name of the product.
-        price (DecimalField): The price of the product.
-        currency (ForeignKey): The currency used for the product price.
         rx (BooleanField): Indicates whether a prescription is required for the product.
     """
 
@@ -19,8 +17,6 @@ class Product(Change_Log):
     list_display = (
         "id",
         "name",
-        "price",
-        "currency",
         "rx",
     ) + Change_Log.list_display
     search_fields = ("name__icontains",)
