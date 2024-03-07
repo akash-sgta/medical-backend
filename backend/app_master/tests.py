@@ -57,5 +57,9 @@ from app_master.pkg_tests.master_product_connection import (
     Product_ConnectionModelTestCase,
     Product_ConnectionViewTestCase,
 )
+from app_master.pkg_tests.master_text import (
+    TextModelTestCase,
+    TextViewTestCase,
+)
 
 # ========================================================================
