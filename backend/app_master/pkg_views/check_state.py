@@ -99,11 +99,31 @@ class State(View):
                     state_ref, data=request.data, partial=True
                 )
                 if state_de_serialized.is_valid():
-                    state_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[state_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        state_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=State_Serializer(
+                                STATE.objects.filter(
+                                    company_code=self.company_code,
+                                    eng_name=state_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True,
+                            data=[state_de_serialized.data],
+                        )
+                        return Response(data=payload, status=status.HTTP_200_OK)
                 else:
                     payload = super().create_payload(
                         success=False,

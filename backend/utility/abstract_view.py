@@ -22,8 +22,8 @@ class View(GenericAPIView):
         self.company_code = 1
         self.C_COMPANY_CODE = "company_code"
 
-    def update_pk(self, pk):
-        return 0 if pk is None else pk
+    def update_pk(self, pk=None) -> int:
+        return 0 if pk in (None, "") else pk
 
     def create_payload(self, success: bool, message=None, data=[]) -> dict:
         data = {"success": success, "message": message, "data": data}

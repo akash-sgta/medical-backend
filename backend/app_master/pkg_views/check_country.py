@@ -114,11 +114,33 @@ class Country(View):
                     country_ref, data=request.data, partial=True
                 )
                 if country_de_serialized.is_valid():
-                    country_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[country_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        country_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Country_Serializer(
+                                COUNTRY.objects.filter(
+                                    company_code=self.company_code,
+                                    continent=country_de_serialized.validated_data[
+                                        "continent"
+                                    ],
+                                    eng_name=country_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[country_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_200_OK)
                 else:
                     payload = super().create_payload(
                         success=False,

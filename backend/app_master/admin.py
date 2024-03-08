@@ -15,8 +15,9 @@ from app_master.pkg_admins.master_product import Product
 from app_master.pkg_admins.master_product_connection import Product_Connection
 from app_master.pkg_admins.master_profile import Profile
 from app_master.pkg_admins.master_text import Text
+from app_master.pkg_admins.master_company import Company
 
-
+from app_master.pkg_models.master_company import COMPANY
 from app_master.pkg_models.check_city import CITY
 from app_master.pkg_models.check_continent import CONTINENT
 from app_master.pkg_models.check_country import COUNTRY
@@ -36,13 +37,18 @@ from app_master.pkg_models.master_text import TEXT
 # ========================================================================
 
 admin.site.register(
-    CITY,
-    City,
+    COMPANY,
+    Company,
 )
 admin.site.register(
     CONTINENT,
     Continent,
 )
+admin.site.register(
+    CITY,
+    City,
+)
+
 admin.site.register(
     COUNTRY,
     Country,

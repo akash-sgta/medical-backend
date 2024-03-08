@@ -46,6 +46,9 @@ class CHANGE_LOG(models.Model):
         max_length=16,
         blank=True,
     )
+    is_deleted = models.BooleanField(
+        default=False,
+    )
 
     @staticmethod
     def get_unique_together():
@@ -53,10 +56,27 @@ class CHANGE_LOG(models.Model):
 
     @staticmethod
     def get_ordering():
-        return ("company_code",)
+        return (
+            "company_code",
+            "is_deleted",
+        )
 
     class Meta:
         abstract = True
+
+    def all(self, *args, **kwargs):
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            super(CHANGE_LOG, self).all(*args, **kwargs)
+        else:
+            kwargs["is_deleted"] = False
+            super(CHANGE_LOG, self).filter(*args, **kwargs)
+
+    def filter(self, *args, **kwargs):
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            super(CHANGE_LOG, self).filter(*args, **kwargs)
+        else:
+            kwargs["is_deleted"] = False
+            super(CHANGE_LOG, self).filter(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         if self.created_on == 0:
@@ -64,3 +84,10 @@ class CHANGE_LOG(models.Model):
         else:
             self.changed_on = get_current_ts()
         super(CHANGE_LOG, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            super(CHANGE_LOG, self).delete(*args, **kwargs)
+        else:
+            self.is_deleted = True
+            super(CHANGE_LOG, self).save(*args, **kwargs)
