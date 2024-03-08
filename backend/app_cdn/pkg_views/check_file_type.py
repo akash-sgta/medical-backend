@@ -24,6 +24,7 @@ class File_Type(View):
         super().__init__()
 
     def post(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle POST request to create a new file type.
         """
@@ -66,12 +67,13 @@ class File_Type(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle GET request to retrieve file type(s).
         """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if pk is None or int(pk) <= 0:
+        if int(pk) <= 0:
             file_type_serialized = File_Type_Serializer(
                 FILE_TYPE.objects.filter(company_code=View().company_code), many=True
             )
@@ -94,12 +96,13 @@ class File_Type(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle PUT request to update an existing file type.
         """
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if pk is None or int(pk) <= 0:
+        if int(pk) <= 0:
             payload = super().create_payload(
                 success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
             )
@@ -132,6 +135,7 @@ class File_Type(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle DELETE request to delete an existing file type.
         """
@@ -160,6 +164,7 @@ class File_Type(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle OPTIONS request to provide information about supported methods and headers.
         """

@@ -31,6 +31,7 @@ class Product_Inventory_Summary(View):
         super().__init__()
 
     def post(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle POST request to create a new product_inventory_summary.
         """
@@ -81,12 +82,13 @@ class Product_Inventory_Summary(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle GET request to retrieve product_inventory_summary(s).
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
-        if pk is None or int(pk) <= 0:
+        if int(pk) <= 0:
             product_inventory_summary_serialized = Product_Inventory_Summary_Serializer(
                 PRODUCT_INVENTORY_SUMMARY.objects.filter(
                     company_code=View().company_code
@@ -118,6 +120,7 @@ class Product_Inventory_Summary(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle PUT request to update an existing product_inventory_summary.
         """
@@ -160,6 +163,7 @@ class Product_Inventory_Summary(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle DELETE request to delete an existing product_inventory_summary.
         """
@@ -190,6 +194,7 @@ class Product_Inventory_Summary(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle OPTIONS request to provide information about supported methods and headers.
         """
