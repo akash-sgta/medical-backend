@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from utility.methods import get_current_ts
 from app_master.pkg_models.master_company import COMPANY
@@ -15,11 +16,37 @@ from app_master.pkg_models.master_company import COMPANY
 # COMPANY = 0
 # COMPANY_CODE = "company_code"
 
+
 # ORDER_STATUS_CHOICES = (
 #     (0, "IN_PROGRESS"),
 #     (1, "PLACED"),
 #     (3, "CANCELLED"),
 # )
+class BASE_MODEL_MANAGER(models.Manager):
+    def filter(self, *args, **kwargs):
+        return (
+            super(BASE_MODEL_MANAGER, self)
+            .get_queryset()
+            .filter(*args, **kwargs, is_deleted=False)
+        )
+
+    def all(self, *args, **kwargs):
+        return (
+            super(BASE_MODEL_MANAGER, self)
+            .get_queryset()
+            .filter(*args, **kwargs, is_deleted=False)
+        )
+
+    def get(self, *args, **kwargs):
+        data = (
+            super(BASE_MODEL_MANAGER, self)
+            .get_queryset()
+            .filter(*args, **kwargs, is_deleted=False)
+        )
+        if len(data) <= 0:
+            raise ObjectDoesNotExist
+        else:
+            return data[0]
 
 
 class CHANGE_LOG(models.Model):
@@ -50,6 +77,8 @@ class CHANGE_LOG(models.Model):
         default=False,
     )
 
+    object = objects = BASE_MODEL_MANAGER()
+
     @staticmethod
     def get_unique_together():
         return ("company_code",)
@@ -64,20 +93,6 @@ class CHANGE_LOG(models.Model):
     class Meta:
         abstract = True
 
-    def all(self, *args, **kwargs):
-        if "forced" in kwargs.keys() and kwargs["forced"] is True:
-            super(CHANGE_LOG, self).all(*args, **kwargs)
-        else:
-            kwargs["is_deleted"] = False
-            super(CHANGE_LOG, self).filter(*args, **kwargs)
-
-    def filter(self, *args, **kwargs):
-        if "forced" in kwargs.keys() and kwargs["forced"] is True:
-            super(CHANGE_LOG, self).filter(*args, **kwargs)
-        else:
-            kwargs["is_deleted"] = False
-            super(CHANGE_LOG, self).filter(*args, **kwargs)
-
     def save(self, *args, **kwargs):
         if self.created_on == 0:
             self.created_on = get_current_ts()
@@ -87,7 +102,7 @@ class CHANGE_LOG(models.Model):
 
     def delete(self, *args, **kwargs):
         if "forced" in kwargs.keys() and kwargs["forced"] is True:
-            super(CHANGE_LOG, self).delete(*args, **kwargs)
+            super(CHANGE_LOG, self).delete()
         else:
             self.is_deleted = True
-            super(CHANGE_LOG, self).save(*args, **kwargs)
+            super(CHANGE_LOG, self).save()

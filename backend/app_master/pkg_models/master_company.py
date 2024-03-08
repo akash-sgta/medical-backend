@@ -1,10 +1,36 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 from utility.methods import get_current_ts
 
 
 # ========================================================================
+class BASE_MODEL_MANAGERX(models.Manager):
+    def filter(self, *args, **kwargs):
+        return (
+            super(BASE_MODEL_MANAGERX, self)
+            .get_queryset()
+            .filter(*args, **kwargs, is_deleted=False)
+        )
+
+    def all(self, *args, **kwargs):
+        return (
+            super(BASE_MODEL_MANAGERX, self)
+            .get_queryset()
+            .filter(*args, **kwargs, is_deleted=False)
+        )
+
+    def get(self, *args, **kwargs):
+        data = (
+            super(BASE_MODEL_MANAGERX, self)
+            .get_queryset()
+            .filter(*args, **kwargs, is_deleted=False)
+        )
+        if len(data) <= 0:
+            raise ObjectDoesNotExist
+        else:
+            return data[0]
 
 
 class COMPANY(models.Model):
@@ -48,6 +74,11 @@ class COMPANY(models.Model):
         max_length=16,
         blank=True,
     )
+    is_deleted = models.BooleanField(
+        default=False,
+    )
+
+    objects = BASE_MODEL_MANAGERX()
 
     def save(self, *args, **kwargs):
         """
@@ -59,6 +90,13 @@ class COMPANY(models.Model):
         else:
             self.changed_on = get_current_ts()
         super(COMPANY, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            super(COMPANY, self).delete()
+        else:
+            self.is_deleted = True
+            super(COMPANY, self).save()
 
     def __str__(self):
         """

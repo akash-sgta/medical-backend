@@ -15,6 +15,7 @@ class Serializer(serializers.ModelSerializer):
             "created_by": {"read_only": True},
             "changed_by": {"read_only": True},
             "company_code": {"write_only": True},  # Adjusted in views
+            "is_deleted": {"write_only": True},  # Adjusted in models
         }
         return extra_kwargs
 
