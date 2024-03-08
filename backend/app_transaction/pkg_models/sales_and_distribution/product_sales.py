@@ -6,6 +6,7 @@ from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.master_product import PRODUCT
 from app_master.pkg_models.master_credential import CREDENTIAL
 from app_master.pkg_models.check_currency import CURRENCY
+from app_master.pkg_models.check_order_status import SALES_ORDER_STATUS
 
 # ========================================================================
 
@@ -32,6 +33,13 @@ class PRODUCT_SALES_SUMMARY(CHANGE_LOG):
         null=True,
         blank=True,
         related_name="sales_buyer",
+    )
+
+    status = models.ForeignKey(
+        SALES_ORDER_STATUS,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     def save(self, *args, **kwargs):

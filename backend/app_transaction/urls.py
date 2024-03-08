@@ -1,3 +1,13 @@
-from django.shortcuts import render
+# ========================================================================
+from django.urls import re_path
 
-# Create your views here.
+
+# ========================================================================
+
+urlpatterns = [
+    # re_path(
+    #     r"master/text/(?P<pk>\d*)$",
+    #     Text.as_view(),
+    #     name="Master_Text",
+    # ),
+]

@@ -6,6 +6,7 @@ from app_master.pkg_models.check_unit_of_measurement import UOM
 from utility.abstract_models import CHANGE_LOG
 from app_master.pkg_models.master_product import PRODUCT
 from app_master.pkg_models.master_credential import CREDENTIAL
+from app_master.pkg_models.check_order_status import INVENTORY_ORDER_STATUS
 
 # ========================================================================
 
@@ -32,6 +33,13 @@ class PRODUCT_INVENTORY_SUMMARY(CHANGE_LOG):
         null=True,
         blank=True,
         related_name="inventory_buyer",
+    )
+
+    status = models.ForeignKey(
+        INVENTORY_ORDER_STATUS,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     def save(self, *args, **kwargs):

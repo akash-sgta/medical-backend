@@ -24,6 +24,7 @@ class Continent(View):
         super().__init__()
 
     def post(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle POST request to create a new continent.
         """
@@ -39,7 +40,7 @@ class Continent(View):
         if continent_de_serialized.is_valid():
             try:
                 continent_de_serialized.save()
-            except IntegrityError:
+            except IntegrityError as e:
                 payload = super().create_payload(
                     success=False,
                     data=Continent_Serializer(
@@ -68,12 +69,13 @@ class Continent(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle GET request to retrieve continent(s).
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
-        if pk is None or int(pk) <= 0:
+        if int(pk) <= 0:
             continent_serialized = Continent_Serializer(
                 CONTINENT.objects.filter(company_code=View().company_code), many=True
             )
@@ -96,6 +98,7 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle PUT request to update an existing continent.
         """
@@ -134,6 +137,7 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle DELETE request to delete an existing continent.
         """
@@ -162,6 +166,7 @@ class Continent(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
+        pk = self.update_pk(pk)
         """
         Handle OPTIONS request to provide information about supported methods and headers.
         """

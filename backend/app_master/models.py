@@ -13,5 +13,9 @@ from app_master.pkg_models.master_product import PRODUCT
 from app_master.pkg_models.master_product_connection import PRODUCT_CONNECTION
 from app_master.pkg_models.master_profile import PROFILE
 from app_master.pkg_models.master_text import TEXT
+from app_master.pkg_models.check_order_status import (
+    SALES_ORDER_STATUS,
+    INVENTORY_ORDER_STATUS,
+)
 
 # ========================================================================

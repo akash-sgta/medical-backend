@@ -28,6 +28,7 @@ urlpatterns = [
     ),
     re_path(r"^master/", include("app_master.urls")),
     re_path(r"^cdn/", include("app_cdn.urls")),
+    re_path(r"^transaction/", include("app_transaction.urls")),
     re_path(
         "docs/",
         schema_view.with_ui("swagger", cache_timeout=0),

@@ -8,7 +8,7 @@ from utility.methods import am_i_authorized
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 
-from utility.abstract_models import COMPANY, COMPANY_CODE
+# from utility.abstract_models import COMPANY, COMPANY_CODE
 
 # ========================================================================
 
@@ -19,8 +19,11 @@ class View(GenericAPIView):
 
     def __init__(self):
         super().__init__()
-        self.company_code = COMPANY
-        self.C_COMPANY_CODE = COMPANY_CODE
+        self.company_code = 1
+        self.C_COMPANY_CODE = "company_code"
+
+    def update_pk(self, pk):
+        return 0 if pk is None else pk
 
     def create_payload(self, success: bool, message=None, data=[]) -> dict:
         data = {"success": success, "message": message, "data": data}

@@ -3,10 +3,13 @@ from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
 
-from app_master.pkg_models.master_company import COMPANY
-from app_master.pkg_models.check_city import CITY
-from app_master.pkg_serializers.check_city import (
-    City as City_Serializer,
+from app_transaction.pkg_models.inventory_management.product_inventory import (
+    PRODUCT_INVENTORY_SUMMARY,
+    PRODUCT_INVENTORY_ITEM,
+)
+from app_transaction.pkg_serializers.inventory_management.product_inventory import (
+    Product_Inventory_Summary as Product_Inventory_Summary_Serializer,
+    Product_Inventory_Item as Product_Inventory_Item_Serializer,
 )
 from utility.abstract_view import View
 
@@ -14,42 +17,49 @@ from utility.abstract_view import View
 # ========================================================================
 
 
-class City(View):
+class Product_Inventory_Summary(View):
     """
-    API endpoint for managing cities.
+    API endpoint for managing product_inventory_summaries.
     """
 
-    serializer_class = City_Serializer
-    queryset = CITY.objects.filter(company_code=View().company_code)
+    serializer_class = Product_Inventory_Summary_Serializer
+    queryset = PRODUCT_INVENTORY_SUMMARY.objects.filter(
+        company_code=View().company_code
+    )
 
     def __init__(self):
         super().__init__()
 
     def post(self, request, pk=None):
-        pk = self.update_pk(pk)
         """
-        Handle POST request to create a new city.
+        Handle POST request to create a new product_inventory_summary.
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
-        city_de_serialized = City_Serializer(data=request.data)
+        product_inventory_summary_de_serialized = Product_Inventory_Summary_Serializer(
+            data=request.data
+        )
         try:
-            city_de_serialized.initial_data[self.C_COMPANY_CODE] = self.company_code
+            product_inventory_summary_de_serialized.initial_data[
+                self.C_COMPANY_CODE
+            ] = self.company_code
         except AttributeError:
             pass
-        if city_de_serialized.is_valid():
+        if product_inventory_summary_de_serialized.is_valid():
             try:
-                city_de_serialized.save()
+                product_inventory_summary_de_serialized.save()
             except IntegrityError:
                 payload = super().create_payload(
                     success=False,
-                    data=City_Serializer(
-                        CITY.objects.filter(
+                    data=Product_Inventory_Summary_Serializer(
+                        PRODUCT_INVENTORY_SUMMARY.objects.filter(
                             company_code=self.company_code,
-                            state=city_de_serialized.validated_data["state"],
-                            eng_name=city_de_serialized.validated_data[
-                                "eng_name"
-                            ].upper(),
+                            buyer=product_inventory_summary_de_serialized.validated_data[
+                                "buyer"
+                            ],
+                            id=product_inventory_summary_de_serialized.validated_data[
+                                "id"
+                            ],
                         ),
                         many=True,
                     ).data,
@@ -58,47 +68,58 @@ class City(View):
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
                 payload = super().create_payload(
-                    success=True, data=[city_de_serialized.data]
+                    success=True, data=[product_inventory_summary_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(city_de_serialized.errors),
+                message="SERIALIZING_ERROR : {}".format(
+                    product_inventory_summary_de_serialized.errors
+                ),
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
-        pk = self.update_pk(pk)
         """
-        Handle GET request to retrieve city(s).
+        Handle GET request to retrieve product_inventory_summary(s).
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
-        if int(pk) <= 0:
-            city_serialized = City_Serializer(
-                CITY.objects.filter(company_code=View().company_code), many=True
+        if pk is None or int(pk) <= 0:
+            product_inventory_summary_serialized = Product_Inventory_Summary_Serializer(
+                PRODUCT_INVENTORY_SUMMARY.objects.filter(
+                    company_code=View().company_code
+                ),
+                many=True,
             )
-            payload = super().create_payload(success=True, data=city_serialized.data)
+            payload = super().create_payload(
+                success=True, data=product_inventory_summary_serialized.data
+            )
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
-                city_ref = CITY.objects.get(id=int(pk))
-                city_serialized = City_Serializer(city_ref, many=False)
+                product_inventory_summary_ref = PRODUCT_INVENTORY_SUMMARY.objects.get(
+                    id=int(pk)
+                )
+                product_inventory_summary_serialized = (
+                    Product_Inventory_Summary_Serializer(
+                        product_inventory_summary_ref, many=False
+                    )
+                )
                 payload = super().create_payload(
-                    success=True, data=[city_serialized.data]
+                    success=True, data=[product_inventory_summary_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CITY.DoesNotExist:
+            except PRODUCT_INVENTORY_SUMMARY.DoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
-        pk = self.update_pk(pk)
         """
-        Handle PUT request to update an existing city.
+        Handle PUT request to update an existing product_inventory_summary.
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
@@ -109,34 +130,38 @@ class City(View):
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                city_ref = CITY.objects.get(id=int(pk))
-                city_de_serialized = City_Serializer(
-                    city_ref, data=request.data, partial=True
+                product_inventory_summary_ref = PRODUCT_INVENTORY_SUMMARY.objects.get(
+                    id=int(pk)
                 )
-                if city_de_serialized.is_valid():
-                    city_de_serialized.save()
+                product_inventory_summary_de_serialized = (
+                    Product_Inventory_Summary_Serializer(
+                        product_inventory_summary_ref, data=request.data, partial=True
+                    )
+                )
+                if product_inventory_summary_de_serialized.is_valid():
+                    product_inventory_summary_de_serialized.save()
                     payload = super().create_payload(
-                        success=True, data=[city_de_serialized.data]
+                        success=True,
+                        data=[product_inventory_summary_de_serialized.data],
                     )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
                         message="SERIALIZING_ERROR : {}".format(
-                            city_de_serialized.errors
+                            product_inventory_summary_de_serialized.errors
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except CITY.DoesNotExist:
+            except PRODUCT_INVENTORY_SUMMARY.DoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
-        pk = self.update_pk(pk)
         """
-        Handle DELETE request to delete an existing city.
+        Handle DELETE request to delete an existing product_inventory_summary.
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
@@ -147,21 +172,24 @@ class City(View):
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
             try:
-                city_ref = CITY.objects.get(id=int(pk))
-                city_de_serialized = City_Serializer(city_ref)
-                city_ref.delete()
+                product_inventory_summary_ref = PRODUCT_INVENTORY_SUMMARY.objects.get(
+                    id=int(pk)
+                )
+                product_inventory_summary_de_serialized = (
+                    Product_Inventory_Summary_Serializer(product_inventory_summary_ref)
+                )
+                product_inventory_summary_ref.delete()
                 payload = super().create_payload(
-                    success=True, data=[city_de_serialized.data]
+                    success=True, data=[product_inventory_summary_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CITY.DoesNotExist:
+            except PRODUCT_INVENTORY_SUMMARY.DoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
-        pk = self.update_pk(pk)
         """
         Handle OPTIONS request to provide information about supported methods and headers.
         """
@@ -175,15 +203,13 @@ class City(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "state": "Integer : /master/check/state/0",
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "buyer": "Integer : /master/master/cred/0",
+            "status": "Integer : /master/check/order_stat/0",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "state": "Integer : /master/check/state/0",
-            "eng_name": "String : 32",
-            "local_name": "String : 32",
+            "buyer": "Integer : /master/master/cred/0",
+            "status": "Integer : /master/check/order_stat/0",
         }
         payload["method"]["DELETE"] = None
 

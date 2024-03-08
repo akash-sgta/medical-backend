@@ -19,10 +19,30 @@ from app_master.pkg_views.master_product import Product
 from app_master.pkg_views.master_product_connection import Product_Connection
 from app_master.pkg_views.master_profile import Profile
 from app_master.pkg_views.master_text import Text
+from app_master.pkg_views.master_company import Compamy
+from app_master.pkg_views.check_order_status import (
+    Sales_Order_Status,
+    Inventory_Order_Status,
+)
 
 # ========================================================================
 
 urlpatterns = [
+    re_path(
+        r"check/order_status/sales/(?P<pk>\d*)$",
+        Sales_Order_Status.as_view(),
+        name="Check_Sales_Order_Status",
+    ),
+    re_path(
+        r"check/order_status/inventory/(?P<pk>\d*)$",
+        Inventory_Order_Status.as_view(),
+        name="Check_Inventory_Order_Status",
+    ),
+    re_path(
+        r"master/company/(?P<pk>\d*)$",
+        Compamy.as_view(),
+        name="Master_Compamy",
+    ),
     re_path(
         r"check/city/(?P<pk>\d*)$",
         City.as_view(),

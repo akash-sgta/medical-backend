@@ -21,6 +21,7 @@ class Currency(View):
         super().__init__()
 
     def post(self, request, pk=None):
+        pk = self.update_pk(pk)
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         currency_de_serialized = Currency_Serializer(data=request.data)
@@ -60,9 +61,10 @@ class Currency(View):
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
+        pk = self.update_pk(pk)
         auth = super().authorize(request=request)  # TODO : Do stuff
 
-        if pk is None or int(pk) <= 0:
+        if int(pk) <= 0:
             currency_serialized = Currency_Serializer(
                 CURRENCY.objects.filter(company_code=View().company_code), many=True
             )
@@ -85,6 +87,7 @@ class Currency(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, pk=None):
+        pk = self.update_pk(pk)
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
@@ -119,6 +122,7 @@ class Currency(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def delete(self, request, pk=None):
+        pk = self.update_pk(pk)
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
@@ -142,6 +146,7 @@ class Currency(View):
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
     def options(self, request, pk=None):
+        pk = self.update_pk(pk)
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         payload = dict()

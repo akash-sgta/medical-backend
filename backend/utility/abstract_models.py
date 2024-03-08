@@ -1,26 +1,33 @@
 # ========================================================================
 from django.db import models
 from utility.methods import get_current_ts
-
+from app_master.pkg_models.master_company import COMPANY
 
 # ========================================================================
-COMPANY_CODE_CHOICES = (
-    (0, "DEFAULT_DEV"),
-    (1, "DEFAULT_QAL"),
-    (2, "DEFAULT_PRE_PROD"),
-    # ==========================
-    (3, "Shyama Prasad Diagnostics"),
-)
+# COMPANY_CODE_CHOICES = (
+#     (0, "DEFAULT_DEV"),
+#     (1, "DEFAULT_QAL"),
+#     (2, "DEFAULT_PRE_PROD"),
+#     # ==========================
+#     (3, "Shyama Prasad Diagnostics"),
+# )
+#
+# COMPANY = 0
+# COMPANY_CODE = "company_code"
 
-COMPANY = 0
-COMPANY_CODE = "company_code"
+# ORDER_STATUS_CHOICES = (
+#     (0, "IN_PROGRESS"),
+#     (1, "PLACED"),
+#     (3, "CANCELLED"),
+# )
 
 
 class CHANGE_LOG(models.Model):
-    company_code = models.SmallIntegerField(
-        default=COMPANY,
-        choices=COMPANY_CODE_CHOICES,
+    company_code = models.ForeignKey(
+        COMPANY,
+        on_delete=models.CASCADE,
     )
+
     created_on = models.FloatField(
         default=0,
         blank=True,
