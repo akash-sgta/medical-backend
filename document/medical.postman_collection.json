@@ -42,7 +42,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"name\": \"Company 4\"\n}",
+											"raw": "{\n    \"name\": \"Company_01\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -50,6 +50,35 @@
 											}
 										},
 										"url": "{{localhost}}{{master_master_company}}"
+									},
+									"response": []
+								},
+								{
+									"name": "create batch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+												"type": "text"
+											},
+											{
+												"key": "uauth",
+												"value": "Token aaa",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{localhost}}{{master_master_company}}batch/"
 									},
 									"response": []
 								},
@@ -171,7 +200,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_master_company}}4"
+										"url": "{{localhost}}{{master_master_company}}1"
 									},
 									"response": []
 								}

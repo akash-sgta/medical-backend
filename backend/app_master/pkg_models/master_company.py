@@ -125,11 +125,14 @@ class COMPANY(models.Model):
         super(COMPANY, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        if "forced" in kwargs.keys() and kwargs["forced"] is True:
-            super(COMPANY, self).delete()
+        if self.id == 1:
+            raise Exception("Can Not Delete Initial Company Code")
         else:
-            self.is_deleted = True
-            super(COMPANY, self).save()
+            if "forced" in kwargs.keys() and kwargs["forced"] is True:
+                super(COMPANY, self).delete()
+            else:
+                self.is_deleted = True
+                super(COMPANY, self).save()
 
     def __str__(self):
         """

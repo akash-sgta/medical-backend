@@ -20,7 +20,8 @@ class View(GenericAPIView):
     def __init__(self):
         super().__init__()
         self.company_code = 1
-        self.C_COMPANY_CODE = "company_code"
+        self.C_BATCH = "batch"
+        # self.C_COMPANY_CODE = "company_code"
 
     def update_pk(self, pk=None) -> int:
         return 0 if pk in (None, "") else pk
