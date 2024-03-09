@@ -19,7 +19,7 @@ class Continent(View):
     """
 
     serializer_class = Continent_Serializer
-    queryset = CONTINENT.objects.filter(company_code=View().company_code)
+    queryset = CONTINENT.objects.all()
 
     def __init__(self):
         super().__init__()

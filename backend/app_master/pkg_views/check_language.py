@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Language(View):
     serializer_class = Language_Serializer
-    queryset = LANGUAGE.objects.filter(company_code=View().company_code)
+    queryset = LANGUAGE.objects.all()
 
     def __init__(self):
         super().__init__()

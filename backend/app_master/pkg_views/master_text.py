@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Text(View):
     serializer_class = Text_Serializer
-    queryset = TEXT.objects.filter(company_code=View().company_code)
+    queryset = TEXT.objects.all()
 
     def __init__(self):
         super().__init__()

@@ -3,23 +3,52 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 from utility.methods import get_current_ts
+from utility.abstract_view import View
 
 
 # ========================================================================
 class BASE_MODEL_MANAGERX(models.Manager):
     def filter(self, *args, **kwargs):
-        return (
-            super(BASE_MODEL_MANAGERX, self)
-            .get_queryset()
-            .filter(*args, **kwargs, is_deleted=False)
-        )
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            return (
+                super(BASE_MODEL_MANAGERX, self)
+                .get_queryset()
+                .filter(
+                    *args,
+                    **kwargs,
+                )
+            )
+        else:
+            return (
+                super(BASE_MODEL_MANAGERX, self)
+                .get_queryset()
+                .filter(
+                    is_deleted=False,
+                    *args,
+                    **kwargs,
+                )
+            )
 
     def all(self, *args, **kwargs):
-        return (
-            super(BASE_MODEL_MANAGERX, self)
-            .get_queryset()
-            .filter(*args, **kwargs, is_deleted=False)
-        )
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            return (
+                super(BASE_MODEL_MANAGERX, self)
+                .get_queryset()
+                .filter(
+                    *args,
+                    **kwargs,
+                )
+            )
+        else:
+            return (
+                super(BASE_MODEL_MANAGERX, self)
+                .get_queryset()
+                .filter(
+                    is_deleted=False,
+                    *args,
+                    **kwargs,
+                )
+            )
 
     def get(self, *args, **kwargs):
         data = (

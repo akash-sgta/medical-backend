@@ -19,7 +19,7 @@ class File_Type(View):
     """
 
     serializer_class = File_Type_Serializer
-    queryset = FILE_TYPE.objects.filter(company_code=View().company_code)
+    queryset = FILE_TYPE.objects.all()
 
     def __init__(self):
         super().__init__()

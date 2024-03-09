@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Product(View):
     serializer_class = Product_Serializer
-    queryset = PRODUCT.objects.filter(company_code=View().company_code)
+    queryset = PRODUCT.objects.all()
 
     def __init__(self):
         super().__init__()

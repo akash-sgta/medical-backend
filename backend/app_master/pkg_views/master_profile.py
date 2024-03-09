@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Profile(View):
     serializer_class = Profile_Serializer
-    queryset = PROFILE.objects.filter(company_code=View().company_code)
+    queryset = PROFILE.objects.all()
 
     def __init__(self):
         super().__init__()

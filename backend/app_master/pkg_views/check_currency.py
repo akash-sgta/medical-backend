@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Currency(View):
     serializer_class = Currency_Serializer
-    queryset = CURRENCY.objects.filter(company_code=View().company_code)
+    queryset = CURRENCY.objects.all()
 
     def __init__(self):
         super().__init__()

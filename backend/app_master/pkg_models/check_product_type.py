@@ -57,6 +57,7 @@ class PRODUCT_TYPE_T(CHANGE_LOG):
     """
 
     class Meta:
+        db_table = "master_check_product_type_text"
         verbose_name = "Product Type Text"
         verbose_name_plural = "Product Type Texts"
         ordering = CHANGE_LOG.get_ordering() + (

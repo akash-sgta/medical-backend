@@ -21,7 +21,7 @@ class City(View):
     """
 
     serializer_class = City_Serializer
-    queryset = CITY.objects.filter(company_code=View().company_code)
+    queryset = CITY.objects.all()
 
     def __init__(self):
         super().__init__()

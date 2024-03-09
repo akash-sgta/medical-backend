@@ -24,9 +24,7 @@ class Product_Inventory_Summary(View):
     """
 
     serializer_class = Product_Inventory_Summary_Serializer
-    queryset = PRODUCT_INVENTORY_SUMMARY.objects.filter(
-        company_code=View().company_code
-    )
+    queryset = PRODUCT_INVENTORY_SUMMARY.objects.all()
 
     def __init__(self):
         super().__init__()
@@ -250,7 +248,7 @@ class Product_Inventory_Item(View):
     """
 
     serializer_class = Product_Inventory_Item_Serializer
-    queryset = PRODUCT_INVENTORY_ITEM.objects.filter(company_code=View().company_code)
+    queryset = PRODUCT_INVENTORY_ITEM.objects.all()
 
     def __init__(self):
         super().__init__()

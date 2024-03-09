@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Address(View):
     serializer_class = Address_Serializer
-    queryset = ADDRESS.objects.filter(company_code=View().company_code)
+    queryset = ADDRESS.objects.all()
 
     def __init__(self):
         super().__init__()

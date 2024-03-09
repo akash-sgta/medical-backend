@@ -13,6 +13,7 @@ from app_master.pkg_models.check_order_status import INVENTORY_ORDER_STATUS
 
 class PRODUCT_INVENTORY_SUMMARY(CHANGE_LOG):
     class Meta:
+        db_table = "transaction_inventory_management_product_inventory_summary"
         verbose_name = "Product Inventory Summary"
         verbose_name_plural = "Product Inventory Summaries"
         ordering = CHANGE_LOG.get_ordering() + (
@@ -51,6 +52,7 @@ class PRODUCT_INVENTORY_SUMMARY(CHANGE_LOG):
 
 class PRODUCT_INVENTORY_ITEM(CHANGE_LOG):
     class Meta:
+        db_table = "transaction_inventory_management_product_inventory_item"
         verbose_name = "Product Inventory Item"
         verbose_name_plural = "Product Inventory Items"
         ordering = CHANGE_LOG.get_ordering() + (

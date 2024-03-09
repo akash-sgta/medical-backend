@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Uom(View):
     serializer_class = Uom_Serializer
-    queryset = UOM.objects.filter(company_code=View().company_code)
+    queryset = UOM.objects.all()
 
     def __init__(self):
         super().__init__()

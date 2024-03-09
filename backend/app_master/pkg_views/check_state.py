@@ -15,7 +15,7 @@ from utility.abstract_view import View
 
 class State(View):
     serializer_class = State_Serializer
-    queryset = STATE.objects.filter(company_code=View().company_code)
+    queryset = STATE.objects.all()
 
     def __init__(self):
         super().__init__()

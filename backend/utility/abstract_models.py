@@ -1,6 +1,8 @@
 # ========================================================================
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+
+from utility.abstract_view import View
 from utility.methods import get_current_ts
 from app_master.pkg_models.master_company import COMPANY
 
@@ -24,18 +26,50 @@ from app_master.pkg_models.master_company import COMPANY
 # )
 class BASE_MODEL_MANAGER(models.Manager):
     def filter(self, *args, **kwargs):
-        return (
-            super(BASE_MODEL_MANAGER, self)
-            .get_queryset()
-            .filter(*args, **kwargs, is_deleted=False)
-        )
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            return (
+                super(BASE_MODEL_MANAGER, self)
+                .get_queryset()
+                .filter(
+                    company_code=View().company_code,
+                    *args,
+                    **kwargs,
+                )
+            )
+        else:
+            return (
+                super(BASE_MODEL_MANAGER, self)
+                .get_queryset()
+                .filter(
+                    company_code=View().company_code,
+                    is_deleted=False,
+                    *args,
+                    **kwargs,
+                )
+            )
 
     def all(self, *args, **kwargs):
-        return (
-            super(BASE_MODEL_MANAGER, self)
-            .get_queryset()
-            .filter(*args, **kwargs, is_deleted=False)
-        )
+        if "forced" in kwargs.keys() and kwargs["forced"] is True:
+            return (
+                super(BASE_MODEL_MANAGER, self)
+                .get_queryset()
+                .filter(
+                    company_code=View().company_code,
+                    *args,
+                    **kwargs,
+                )
+            )
+        else:
+            return (
+                super(BASE_MODEL_MANAGER, self)
+                .get_queryset()
+                .filter(
+                    company_code=View().company_code,
+                    is_deleted=False,
+                    *args,
+                    **kwargs,
+                )
+            )
 
     def get(self, *args, **kwargs):
         data = (

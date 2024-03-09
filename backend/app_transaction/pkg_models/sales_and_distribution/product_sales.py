@@ -13,6 +13,7 @@ from app_master.pkg_models.check_order_status import SALES_ORDER_STATUS
 
 class PRODUCT_SALES_SUMMARY(CHANGE_LOG):
     class Meta:
+        db_table = "transaction_sales_and_distribution_product_sales_summary"
         verbose_name = "Product Sales Summary"
         verbose_name_plural = "Product Sales Summaries"
         ordering = CHANGE_LOG.get_ordering() + (
@@ -51,6 +52,7 @@ class PRODUCT_SALES_SUMMARY(CHANGE_LOG):
 
 class PRODUCT_SALES_ITEM(CHANGE_LOG):
     class Meta:
+        db_table = "transaction_sales_and_distribution_product_sales_item"
         verbose_name = "Product Sales Item"
         verbose_name_plural = "Product Sales Items"
         ordering = CHANGE_LOG.get_ordering() + (
@@ -116,6 +118,7 @@ class PRODUCT_SALES_ITEM(CHANGE_LOG):
 
 class PRODUCT_SALES_REFERRAL(CHANGE_LOG):
     class Meta:
+        db_table = "transaction_sales_and_distribution_product_sales_referral"
         verbose_name = "Product Sales Referral"
         verbose_name_plural = "Product Sales Referrals"
         ordering = CHANGE_LOG.get_ordering() + (

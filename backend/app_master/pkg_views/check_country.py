@@ -20,7 +20,7 @@ class Country(View):
     """
 
     serializer_class = Country_Serializer
-    queryset = COUNTRY.objects.filter(company_code=View().company_code)
+    queryset = COUNTRY.objects.all()
 
     def __init__(self):
         super().__init__()

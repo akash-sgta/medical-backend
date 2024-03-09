@@ -23,7 +23,7 @@ class Sales_Order_Status(View):
     """
 
     serializer_class = Sales_Order_Status_Serializer
-    queryset = SALES_ORDER_STATUS.objects.filter(company_code=View().company_code)
+    queryset = SALES_ORDER_STATUS.objects.all()
 
     def __init__(self):
         super().__init__()
@@ -232,7 +232,7 @@ class Inventory_Order_Status(View):
     """
 
     serializer_class = Inventory_Order_Status_Serializer
-    queryset = INVENTORY_ORDER_STATUS.objects.filter(company_code=View().company_code)
+    queryset = INVENTORY_ORDER_STATUS.objects.all()
 
     def __init__(self):
         super().__init__()

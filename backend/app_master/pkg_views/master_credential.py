@@ -16,7 +16,7 @@ from utility.abstract_view import View
 
 class Credential(View):
     serializer_class = Credential_Serializer
-    queryset = CREDENTIAL.objects.filter(company_code=View().company_code)
+    queryset = CREDENTIAL.objects.all()
 
     def __init__(self):
         super().__init__()

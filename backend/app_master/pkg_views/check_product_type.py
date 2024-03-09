@@ -19,7 +19,7 @@ from utility.abstract_view import View
 
 class Product_Type(View):
     serializer_class = Product_Type_Serializer
-    queryset = PRODUCT_TYPE.objects.filter(company_code=View().company_code)
+    queryset = PRODUCT_TYPE.objects.all()
 
     def __init__(self):
         super().__init__()
@@ -202,7 +202,7 @@ class Product_Type(View):
 
 class Product_Type_T(View):
     serializer_class = Product_Type_T_Serializer
-    queryset = PRODUCT_TYPE_T.objects.filter(company_code=View().company_code)
+    queryset = PRODUCT_TYPE_T.objects.all()
 
     def __init__(self):
         super().__init__()
