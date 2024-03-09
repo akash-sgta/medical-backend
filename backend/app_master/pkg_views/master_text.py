@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -61,7 +62,7 @@ class Text(View):
                     success=True, data=[text_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except TEXT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -83,6 +84,7 @@ class Text(View):
                     text_ref, data=request.data, partial=True
                 )
                 if text_de_serialized.is_valid():
+                    # Integrity Check not required :)
                     text_de_serialized.save()
                     payload = super().create_payload(
                         success=True, data=[text_de_serialized.data]
@@ -96,7 +98,7 @@ class Text(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except TEXT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -120,7 +122,7 @@ class Text(View):
                     success=True, data=[text_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except TEXT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -85,7 +86,7 @@ class Credential(View):
                     success=True, data=[credential_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CREDENTIAL.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -107,11 +108,30 @@ class Credential(View):
                     credential_ref, data=request.data, partial=True
                 )
                 if credential_de_serialized.is_valid():
-                    credential_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[credential_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        credential_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            # data=Credential_Serializer(
+                            #     CREDENTIAL.objects.filter(
+                            #         company_code=self.company_code,
+                            #         email=credential_de_serialized.validated_data[
+                            #             "email"
+                            #         ].upper(),
+                            #     ),
+                            #     many=True,
+                            # ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[credential_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -120,7 +140,7 @@ class Credential(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except CREDENTIAL.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -144,7 +164,7 @@ class Credential(View):
                     success=True, data=[credential_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CREDENTIAL.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

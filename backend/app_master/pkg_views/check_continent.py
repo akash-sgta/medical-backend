@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -91,7 +92,7 @@ class Continent(View):
                     success=True, data=[continent_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CONTINENT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -129,7 +130,7 @@ class Continent(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except CONTINENT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",
@@ -158,7 +159,7 @@ class Continent(View):
                     success=True, data=[continent_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CONTINENT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",

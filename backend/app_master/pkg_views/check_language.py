@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -79,7 +80,7 @@ class Language(View):
                     success=True, data=[language_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except LANGUAGE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -101,11 +102,30 @@ class Language(View):
                     language_ref, data=request.data, partial=True
                 )
                 if language_de_serialized.is_valid():
-                    language_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[language_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        language_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Language_Serializer(
+                                LANGUAGE.objects.filter(
+                                    company_code=self.company_code,
+                                    eng_name=language_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[language_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -114,7 +134,7 @@ class Language(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except LANGUAGE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -138,7 +158,7 @@ class Language(View):
                     success=True, data=[language_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except LANGUAGE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

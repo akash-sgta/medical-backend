@@ -108,11 +108,29 @@ class Compamy(View):
                     company_ref, data=request.data, partial=True
                 )
                 if company_de_serialized.is_valid():
-                    company_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[company_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        company_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Compamy_Serializer(
+                                COMPANY.objects.filter(
+                                    name=company_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[company_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,

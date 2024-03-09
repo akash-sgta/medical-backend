@@ -1,72 +1,232 @@
 # ========================================================================
-from utility.abstract_admin import Change_Log
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import IntegrityError
+from rest_framework import status
+from rest_framework.response import Response
+
 from app_transaction.pkg_models.sales_and_distribution.product_sales import (
     PRODUCT_SALES_SUMMARY,
-    PRODUCT_SALES_ITEM,
-    PRODUCT_SALES_REFERRAL,
 )
+from app_transaction.pkg_serializers.sales_and_distribution.product_sales import (
+    Product_Sales_Summary as Product_Sales_Summary_Serializer,
+)
+from utility.abstract_view import View
 
 
 # ========================================================================
-class Product_Sales_Summary(Change_Log):
-    list_display = (
-        "buyer",
-        "id",
-    ) + Change_Log.list_display
-    search_fields = ("buyer__email__icontains",)
-    list_filter = ("buyer__email",)
-    ordering = (
-        "buyer",
-        "-id",
-    )
-
-    def created(self, obj):
-        return super().created(PRODUCT_SALES_SUMMARY.objects.get(id=obj.id))
-
-    def changed(self, obj):
-        return super().changed(PRODUCT_SALES_SUMMARY.objects.get(id=obj.id))
 
 
-class Product_Sales_Item(Change_Log):
-    list_display = (
-        "summary",
-        "product",
-        "id",
-    ) + Change_Log.list_display
-    search_fields = (
-        "summary__buyer__email__icontains",
-        "product__eng_name",
-    )
-    list_filter = ("summary__buyer__email",)
-    ordering = (
-        "summary",
-        "product",
-        "-id",
-    )
+class Product_Sales_Summary(View):
+    """
+    API endpoint for managing product_inventory_summaries.
+    """
 
-    def created(self, obj):
-        return super().created(PRODUCT_SALES_ITEM.objects.get(id=obj.id))
+    serializer_class = Product_Sales_Summary_Serializer
+    queryset = PRODUCT_SALES_SUMMARY.objects.filter(company_code=View().company_code)
 
-    def changed(self, obj):
-        return super().changed(PRODUCT_SALES_ITEM.objects.get(id=obj.id))
+    def __init__(self):
+        super().__init__()
 
+    def post(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle POST request to create a new product_sales_summary.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
-class Product_Sales_Referral(Change_Log):
-    list_display = (
-        "referral",
-        "summary",
-        "id",
-    ) + Change_Log.list_display
-    search_fields = ("referral__email__icontains",)
-    list_filter = ("referral__email",)
-    ordering = (
-        "referral",
-        "summary",
-        "-id",
-    )
+        product_sales_summary_de_serialized = Product_Sales_Summary_Serializer(
+            data=request.data
+        )
+        try:
+            product_sales_summary_de_serialized.initial_data[
+                self.C_COMPANY_CODE
+            ] = self.company_code
+        except AttributeError:
+            pass
+        if product_sales_summary_de_serialized.is_valid():
+            try:
+                product_sales_summary_de_serialized.save()
+            except IntegrityError:
+                payload = super().create_payload(
+                    success=False,
+                    data=Product_Sales_Summary_Serializer(
+                        PRODUCT_SALES_SUMMARY.objects.filter(
+                            company_code=self.company_code,
+                            buyer=product_sales_summary_de_serialized.validated_data[
+                                "buyer"
+                            ],
+                            id=product_sales_summary_de_serialized.validated_data["id"],
+                        ),
+                        many=True,
+                    ).data,
+                    message=f"{self.get_view_name()}_EXISTS",
+                )
+                return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                payload = super().create_payload(
+                    success=True, data=[product_sales_summary_de_serialized.data]
+                )
+                return Response(data=payload, status=status.HTTP_201_CREATED)
+        else:
+            payload = super().create_payload(
+                success=False,
+                message="SERIALIZING_ERROR : {}".format(
+                    product_sales_summary_de_serialized.errors
+                ),
+            )
+            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
-    def created(self, obj):
-        return super().created(PRODUCT_SALES_REFERRAL.objects.get(id=obj.id))
+    def get(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle GET request to retrieve product_sales_summary(s).
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
 
-    def changed(self, obj):
-        return super().changed(PRODUCT_SALES_REFERRAL.objects.get(id=obj.id))
+        if int(pk) <= 0:
+            product_sales_summary_serialized = Product_Sales_Summary_Serializer(
+                PRODUCT_SALES_SUMMARY.objects.filter(company_code=View().company_code),
+                many=True,
+            )
+            payload = super().create_payload(
+                success=True, data=product_sales_summary_serialized.data
+            )
+            return Response(data=payload, status=status.HTTP_200_OK)
+        else:
+            try:
+                product_sales_summary_ref = PRODUCT_SALES_SUMMARY.objects.get(
+                    id=int(pk)
+                )
+                product_sales_summary_serialized = Product_Sales_Summary_Serializer(
+                    product_sales_summary_ref, many=False
+                )
+                payload = super().create_payload(
+                    success=True, data=[product_sales_summary_serialized.data]
+                )
+                return Response(data=payload, status=status.HTTP_200_OK)
+            except ObjectDoesNotExist:
+                payload = super().create_payload(
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                )
+                return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle PUT request to update an existing product_sales_summary.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        if int(pk) <= 0:
+            payload = super().create_payload(
+                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+            )
+            return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
+        else:
+            try:
+                product_sales_summary_ref = PRODUCT_SALES_SUMMARY.objects.get(
+                    id=int(pk)
+                )
+                product_sales_summary_de_serialized = Product_Sales_Summary_Serializer(
+                    product_sales_summary_ref, data=request.data, partial=True
+                )
+                if product_sales_summary_de_serialized.is_valid():
+                    try:
+                        product_sales_summary_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Product_Sales_Summary_Serializer(
+                                PRODUCT_SALES_SUMMARY.objects.filter(
+                                    company_code=self.company_code,
+                                    buyer=product_sales_summary_de_serialized.validated_data[
+                                        "buyer"
+                                    ],
+                                    id=product_sales_summary_de_serialized.validated_data[
+                                        "id"
+                                    ],
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True,
+                            data=[product_sales_summary_de_serialized.data],
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message="SERIALIZING_ERROR : {}".format(
+                            product_sales_summary_de_serialized.errors
+                        ),
+                    )
+                    return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            except ObjectDoesNotExist:
+                payload = super().create_payload(
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                )
+                return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle DELETE request to delete an existing product_sales_summary.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        if int(pk) <= 0:
+            payload = super().create_payload(
+                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+            )
+            return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
+        else:
+            try:
+                product_sales_summary_ref = PRODUCT_SALES_SUMMARY.objects.get(
+                    id=int(pk)
+                )
+                product_sales_summary_de_serialized = Product_Sales_Summary_Serializer(
+                    product_sales_summary_ref
+                )
+                product_sales_summary_ref.delete()
+                payload = super().create_payload(
+                    success=True, data=[product_sales_summary_de_serialized.data]
+                )
+                return Response(data=payload, status=status.HTTP_200_OK)
+            except ObjectDoesNotExist:
+                payload = super().create_payload(
+                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                )
+                return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
+
+    def options(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle OPTIONS request to provide information about supported methods and headers.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        payload = dict()
+        payload["Allow"] = "POST GET PUT DELETE OPTIONS".split()
+        payload["HEADERS"] = dict()
+        payload["HEADERS"]["Content-Type"] = "application/json"
+        payload["HEADERS"]["Authorization"] = "Token JWT"
+        payload["name"] = self.get_view_name()
+        payload["method"] = dict()
+        payload["method"]["POST"] = {
+            "buyer": "Integer : /master/master/cred/0",
+            "status": "Integer : /master/check/order_stat/0",
+        }
+        payload["method"]["GET"] = None
+        payload["method"]["PUT"] = {
+            "buyer": "Integer : /master/master/cred/0",
+            "status": "Integer : /master/check/order_stat/0",
+        }
+        payload["method"]["DELETE"] = None
+
+        return Response(data=payload, status=status.HTTP_200_OK)

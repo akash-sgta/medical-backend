@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -88,7 +89,7 @@ class Uom(View):
                     success=True, data=[unit_of_measurement_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except UOM.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -110,10 +111,32 @@ class Uom(View):
                     unit_of_measurement_ref, data=request.data, partial=True
                 )
                 if unit_of_measurement_de_serialized.is_valid():
-                    unit_of_measurement_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[unit_of_measurement_de_serialized.data]
-                    )
+                    try:
+                        unit_of_measurement_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Uom_Serializer(
+                                UOM.objects.filter(
+                                    company_code=self.company_code,
+                                    unit=unit_of_measurement_de_serialized.validated_data[
+                                        "unit"
+                                    ],
+                                    name=unit_of_measurement_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[unit_of_measurement_de_serialized.data]
+                        )
                     return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
@@ -123,7 +146,7 @@ class Uom(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except UOM.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -149,7 +172,7 @@ class Uom(View):
                     success=True, data=[unit_of_measurement_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except UOM.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

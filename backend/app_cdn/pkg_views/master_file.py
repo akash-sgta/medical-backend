@@ -86,7 +86,7 @@ class File(View):
                     success=True, data=[file_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except FILE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -111,11 +111,31 @@ class File(View):
                     file_ref, data=request.data, partial=True
                 )
                 if file_de_serialized.is_valid():
-                    file_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[file_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        file_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=File_Serializer(
+                                FILE.objects.filter(
+                                    company_code=self.company_code,
+                                    type=file_de_serialized.validated_data["type"],
+                                    name=file_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[file_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -124,7 +144,7 @@ class File(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except FILE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",
@@ -153,7 +173,7 @@ class File(View):
                     success=True, data=[file_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except FILE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",

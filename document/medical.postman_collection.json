@@ -42,7 +42,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"name\": \"Company 1\"\n}",
+											"raw": "{\n    \"name\": \"Company 4\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -81,7 +81,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_master_company}}0"
+										"url": "{{localhost}}{{master_master_company}}"
 									},
 									"response": []
 								},
@@ -113,7 +113,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_master_company}}1"
+										"url": "{{localhost}}{{master_master_company}}4"
 									},
 									"response": []
 								},
@@ -171,7 +171,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_master_company}}2"
+										"url": "{{localhost}}{{master_master_company}}4"
 									},
 									"response": []
 								}
@@ -746,7 +746,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_check_state}}0"
+										"url": "{{localhost}}{{master_check_state}}"
 									},
 									"response": []
 								},
@@ -778,7 +778,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_check_country}}1"
+										"url": "{{localhost}}{{master_check_state}}1"
 									},
 									"response": []
 								},
@@ -800,14 +800,14 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"continent\": 2,\n    \"eng_name\": \"Country1\",\n    \"local_name\": \"Country1\"\n}",
+											"raw": "{\n    \"country\": 2,\n    \"eng_name\": \"State2\",\n    \"local_name\": \"State2\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_check_country}}1"
+										"url": "{{localhost}}{{master_check_state}}1"
 									},
 									"response": []
 								},
@@ -836,7 +836,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_check_country}}1"
+										"url": "{{localhost}}{{master_check_state}}1"
 									},
 									"response": []
 								}
@@ -872,7 +872,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"Ahh\",\n    \"local_name\": \"Uhh\"\n}",
+											"raw": "{\n    \"state\": 2,\n    \"eng_name\": \"City1\",\n    \"local_name\": \"City1\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -911,7 +911,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/0"
+										"url": "{{localhost}}{{master_check_city}}"
 									},
 									"response": []
 								},
@@ -943,7 +943,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/4"
+										"url": "{{localhost}}{{master_check_city}}1"
 									},
 									"response": []
 								},
@@ -965,14 +965,14 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"JAPANESE\",\n    \"local_name\": \"日本語 AHh\"\n}",
+											"raw": "{\n    \"state\": 2,\n    \"eng_name\": \"City1\",\n    \"local_name\": \"City1\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/4"
+										"url": "{{localhost}}{{master_check_city}}1"
 									},
 									"response": []
 								},
@@ -1001,7 +1001,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/5"
+										"url": "{{localhost}}{{master_check_city}}1"
 									},
 									"response": []
 								}
@@ -1015,7 +1015,7 @@
 									"request": {
 										"method": "OPTIONS",
 										"header": [],
-										"url": "http://127.0.0.1:8000/master/language/"
+										"url": "{{localhost}}{{master_check_language}}"
 									},
 									"response": []
 								},
@@ -1037,14 +1037,14 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"Ahh\",\n    \"local_name\": \"Uhh\"\n}",
+											"raw": "{\n    \"eng_name\": \"lang1\",\n    \"local_name\": \"lang1\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/"
+										"url": "{{localhost}}{{master_check_language}}"
 									},
 									"response": []
 								},
@@ -1076,7 +1076,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/0"
+										"url": "{{localhost}}{{master_check_language}}"
 									},
 									"response": []
 								},
@@ -1108,7 +1108,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/4"
+										"url": "{{localhost}}{{master_check_language}}1"
 									},
 									"response": []
 								},
@@ -1137,7 +1137,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/4"
+										"url": "{{localhost}}{{master_check_language}}1"
 									},
 									"response": []
 								},
@@ -1166,7 +1166,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/language/5"
+										"url": "{{localhost}}{{master_check_language}}1"
 									},
 									"response": []
 								}
@@ -1232,6 +1232,11 @@
 		{
 			"key": "master_check_state",
 			"value": "master/check/state/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_language",
+			"value": "master/check/language/",
 			"type": "string"
 		}
 	]

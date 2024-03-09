@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -80,7 +81,7 @@ class Currency(View):
                     success=True, data=[currency_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CURRENCY.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -102,11 +103,33 @@ class Currency(View):
                     currency_ref, data=request.data, partial=True
                 )
                 if currency_de_serialized.is_valid():
-                    currency_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[currency_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        currency_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Currency_Serializer(
+                                CURRENCY.objects.filter(
+                                    company_code=self.company_code,
+                                    code=currency_de_serialized.validated_data[
+                                        "code"
+                                    ].upper(),
+                                    eng_name=currency_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[currency_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -115,7 +138,7 @@ class Currency(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except CURRENCY.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -139,7 +162,7 @@ class Currency(View):
                     success=True, data=[currency_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except CURRENCY.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

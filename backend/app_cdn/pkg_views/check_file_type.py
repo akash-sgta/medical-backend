@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -89,7 +90,7 @@ class File_Type(View):
                     success=True, data=[file_type_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except FILE_TYPE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -114,11 +115,30 @@ class File_Type(View):
                     file_type_ref, data=request.data, partial=True
                 )
                 if file_type_de_serialized.is_valid():
-                    file_type_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[file_type_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        file_type_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=File_Type_Serializer(
+                                FILE_TYPE.objects.filter(
+                                    company_code=self.company_code,
+                                    name=file_type_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[file_type_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -127,7 +147,7 @@ class File_Type(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except FILE_TYPE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",
@@ -156,7 +176,7 @@ class File_Type(View):
                     success=True, data=[file_type_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except FILE_TYPE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",

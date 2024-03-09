@@ -96,8 +96,12 @@ class CHANGE_LOG(models.Model):
     def save(self, *args, **kwargs):
         if self.created_on == 0:
             self.created_on = get_current_ts()
+            if self.created_by in (None, ""):
+                self.created_by = "DEV"
         else:
             self.changed_on = get_current_ts()
+            if self.changed_by in (None, ""):
+                self.changed_by = "DEV"
         super(CHANGE_LOG, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):

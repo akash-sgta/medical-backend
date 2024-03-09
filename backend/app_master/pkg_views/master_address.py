@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -75,7 +76,7 @@ class Address(View):
                     success=True, data=[address_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except ADDRESS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -97,11 +98,30 @@ class Address(View):
                     address_ref, data=request.data, partial=True
                 )
                 if address_de_serialized.is_valid():
-                    address_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[address_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        address_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Address_Serializer(
+                                ADDRESS.objects.filter(
+                                    company_code=self.company_code,
+                                    name=address_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[address_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -110,7 +130,7 @@ class Address(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except ADDRESS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -134,7 +154,7 @@ class Address(View):
                     success=True, data=[address_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except ADDRESS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

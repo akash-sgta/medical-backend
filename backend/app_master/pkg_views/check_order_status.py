@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -104,7 +105,7 @@ class Sales_Order_Status(View):
                     success=True, data=[sales_order_status_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except SALES_ORDER_STATUS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -129,11 +130,30 @@ class Sales_Order_Status(View):
                     sales_order_status_ref, data=request.data, partial=True
                 )
                 if sales_order_status_de_serialized.is_valid():
-                    sales_order_status_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[sales_order_status_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        sales_order_status_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Sales_Order_Status_Serializer(
+                                SALES_ORDER_STATUS.objects.filter(
+                                    company_code=self.company_code,
+                                    name=sales_order_status_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[sales_order_status_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -142,7 +162,7 @@ class Sales_Order_Status(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except SALES_ORDER_STATUS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",
@@ -173,7 +193,7 @@ class Sales_Order_Status(View):
                     success=True, data=[sales_order_status_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except SALES_ORDER_STATUS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",
@@ -296,7 +316,7 @@ class Inventory_Order_Status(View):
                     success=True, data=[inventory_order_status_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except INVENTORY_ORDER_STATUS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -325,11 +345,31 @@ class Inventory_Order_Status(View):
                     )
                 )
                 if inventory_order_status_de_serialized.is_valid():
-                    inventory_order_status_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[inventory_order_status_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        inventory_order_status_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Inventory_Order_Status_Serializer(
+                                INVENTORY_ORDER_STATUS.objects.filter(
+                                    company_code=self.company_code,
+                                    name=inventory_order_status_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True,
+                            data=[inventory_order_status_de_serialized.data],
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -338,7 +378,7 @@ class Inventory_Order_Status(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except INVENTORY_ORDER_STATUS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",
@@ -371,7 +411,7 @@ class Inventory_Order_Status(View):
                     success=True, data=[inventory_order_status_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except INVENTORY_ORDER_STATUS.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
                     message=f"{self.get_view_name()}_DOES_NOT_EXIST",

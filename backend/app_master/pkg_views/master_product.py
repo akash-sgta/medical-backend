@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -76,7 +77,7 @@ class Product(View):
                     success=True, data=[product_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except PRODUCT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -98,11 +99,31 @@ class Product(View):
                     product_ref, data=request.data, partial=True
                 )
                 if product_de_serialized.is_valid():
-                    product_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[product_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        product_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Product_Serializer(
+                                PRODUCT.objects.filter(
+                                    company_code=self.company_code,
+                                    type=product_de_serialized.validated_data["type"],
+                                    name=product_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[product_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -111,7 +132,7 @@ class Product(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except PRODUCT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -135,7 +156,7 @@ class Product(View):
                     success=True, data=[product_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except PRODUCT.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )

@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -76,7 +77,7 @@ class Profile(View):
                     success=True, data=[profile_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except PROFILE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -98,11 +99,28 @@ class Profile(View):
                     profile_ref, data=request.data, partial=True
                 )
                 if profile_de_serialized.is_valid():
-                    profile_de_serialized.save()
-                    payload = super().create_payload(
-                        success=True, data=[profile_de_serialized.data]
-                    )
-                    return Response(data=payload, status=status.HTTP_201_CREATED)
+                    try:
+                        profile_de_serialized.save()
+                    except IntegrityError:
+                        payload = super().create_payload(
+                            success=False,
+                            data=Profile_Serializer(
+                                PROFILE.objects.filter(
+                                    company_code=self.company_code,
+                                    cred=profile_de_serialized.validated_data["cred"],
+                                ),
+                                many=True,
+                            ).data,
+                            message=f"{self.get_view_name()}_EXISTS",
+                        )
+                        return Response(
+                            data=payload, status=status.HTTP_400_BAD_REQUEST
+                        )
+                    else:
+                        payload = super().create_payload(
+                            success=True, data=[profile_de_serialized.data]
+                        )
+                        return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
                     payload = super().create_payload(
                         success=False,
@@ -111,7 +129,7 @@ class Profile(View):
                         ),
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
-            except PROFILE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
@@ -136,7 +154,7 @@ class Profile(View):
                     success=True, data=[profile_de_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
-            except PROFILE.DoesNotExist:
+            except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
                 )
