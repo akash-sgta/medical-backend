@@ -240,7 +240,7 @@ class Compamy_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{self.get_view_name()}_EXISTS")
+                        _message.append(f"{Compamy().get_view_name()}_EXISTS")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(company_de_serialized.data)
@@ -291,20 +291,4 @@ class Compamy_Batch(View):
                 },
             ]
         }
-        # payload["method"]["GET"] = None
-        # payload["method"]["PUT"] = {
-        #     "batch": [
-        #         {
-        #             "name1": "String : 32",
-        #         },
-        #         {
-        #             "name2": "String : 32",
-        #         },
-        #         {
-        #             "name3": "String : 32",
-        #         },
-        #     ]
-        # }
-        # payload["method"]["DELETE"] = None
-
         return Response(data=payload, status=status.HTTP_200_OK)

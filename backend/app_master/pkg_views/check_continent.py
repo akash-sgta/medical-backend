@@ -46,7 +46,6 @@ class Continent(View):
                     success=False,
                     data=Continent_Serializer(
                         CONTINENT.objects.filter(
-                            company_code=self.company_code,
                             eng_name=continent_de_serialized.validated_data[
                                 "eng_name"
                             ].upper(),
@@ -78,7 +77,7 @@ class Continent(View):
 
         if int(pk) <= 0:
             continent_serialized = Continent_Serializer(
-                CONTINENT.objects.filter(company_code=View().company_code), many=True
+                CONTINENT.objects.filter(), many=True
             )
             payload = super().create_payload(
                 success=True, data=continent_serialized.data
@@ -191,4 +190,96 @@ class Continent(View):
         }
         payload["method"]["DELETE"] = None
 
+        return Response(data=payload, status=status.HTTP_200_OK)
+
+
+class Continent_Batch(View):
+    """
+    API endpoint for managing continents.
+    """
+
+    serializer_class = Continent_Serializer
+    queryset = CONTINENT.objects.all()
+
+    def __init__(self):
+        super().__init__()
+
+    def post(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle POST request to create a new continent.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        if self.C_BATCH in request.data.keys():
+            _status = status.HTTP_200_OK
+            _payload = []
+            _message = []
+            for data in request.data[self.C_BATCH]:
+                continent_de_serialized = Continent_Serializer(data=data)
+                try:
+                    continent_de_serialized.initial_data[
+                        self.C_COMPANY_CODE
+                    ] = self.company_code
+                except AttributeError:
+                    pass
+                if continent_de_serialized.is_valid():
+                    try:
+                        continent_de_serialized.save()
+                    except IntegrityError as e:
+                        _payload.append(
+                            Continent_Serializer(
+                                CONTINENT.objects.get(
+                                    eng_name=continent_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=False,
+                            ).data
+                        )
+                        _message.append(f"{Continent().get_view_name()}_EXISTS")
+                        _status = status.HTTP_409_CONFLICT
+                    else:
+                        _payload.append(continent_de_serialized.data)
+                        _message.append(None)
+                else:
+                    _payload.append(None)
+                    _message.append(
+                        "SERIALIZING_ERROR : {}".format(continent_de_serialized.errors)
+                    )
+
+            payload = super().create_payload(
+                success=True if _status == status.HTTP_200_OK else False,
+                data=_payload,
+                message=_message,
+            )
+            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            payload = super().create_payload(
+                success=False,
+                message="BATCH DATA NOT PROVIDED",
+            )
+            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+
+    def options(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle OPTIONS request to provide information about supported methods and headers.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        payload = dict()
+        payload["Allow"] = "POST OPTIONS".split()
+        payload["HEADERS"] = dict()
+        payload["HEADERS"]["Content-Type"] = "application/json"
+        payload["HEADERS"]["Authorization"] = "Token JWT"
+        payload["name"] = self.get_view_name()
+        payload["method"] = dict()
+        payload["method"]["POST"] = {
+            "batch": [
+                {"eng_name": "String : 32", "local_name": "String : 32"},
+                {"eng_name": "String : 32", "local_name": "String : 32"},
+                {"eng_name": "String : 32", "local_name": "String : 32"},
+            ]
+        }
         return Response(data=payload, status=status.HTTP_200_OK)

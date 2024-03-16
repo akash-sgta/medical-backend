@@ -2,8 +2,8 @@
 from django.urls import re_path
 
 from app_master.pkg_views.check_city import City
-from app_master.pkg_views.check_continent import Continent
-from app_master.pkg_views.check_country import Country
+from app_master.pkg_views.check_continent import Continent, Continent_Batch
+from app_master.pkg_views.check_country import Country, Country_Batch
 from app_master.pkg_views.check_currency import Currency
 from app_master.pkg_views.check_language import Language
 from app_master.pkg_views.check_product_type import (
@@ -62,9 +62,19 @@ urlpatterns = [
         name="Check_Continent",
     ),
     re_path(
+        r"check/continent/batch/$",
+        Continent_Batch.as_view(),
+        name="Check_Continent_Batch",
+    ),
+    re_path(
         r"check/country/(?P<pk>\d*)$",
         Country.as_view(),
         name="Check_Country",
+    ),
+    re_path(
+        r"check/country/batch/$",
+        Country_Batch.as_view(),
+        name="Check_Country_Batch",
     ),
     re_path(
         r"check/currency/(?P<pk>\d*)$",
