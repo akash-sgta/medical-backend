@@ -418,6 +418,35 @@
 									"response": []
 								},
 								{
+									"name": "create batch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+												"type": "text"
+											},
+											{
+												"key": "uauth",
+												"value": "Token aaa",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"batch\": [\n        {\n            \"eng_name\": \"Aisa\",\n            \"local_name\": \"Asia\"\n        },\n        {\n            \"eng_name\": \"North America\",\n            \"local_name\": \"North America\"\n        },\n        {\n            \"eng_name\": \"South America\",\n            \"local_name\": \"South America\"\n        },\n        {\n            \"eng_name\": \"Europe\",\n            \"local_name\": \"Europe\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{localhost}}{{master_check_continent}}batch/"
+									},
+									"response": []
+								},
+								{
 									"name": "get all",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true
@@ -583,6 +612,35 @@
 									"response": []
 								},
 								{
+									"name": "create batch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+												"type": "text"
+											},
+											{
+												"key": "uauth",
+												"value": "Token aaa",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"batch\": [\n        {\n            \"continent\": 1,\n            \"eng_name\": \"India\",\n            \"local_name\": \"भारत\"\n        },\n        {\n            \"continent\": 1,\n            \"eng_name\": \"Bangladesh\",\n            \"local_name\": \"বাংলাদেশ\"\n        },\n        {\n            \"continent\": 2,\n            \"eng_name\": \"USA\",\n            \"local_name\": \"USA\"\n        },\n        {\n            \"continent\": 2,\n            \"eng_name\": \"Canada\",\n            \"local_name\": \"Canada\"\n        },\n        {\n            \"continent\": 3,\n            \"eng_name\": \"Brazil\",\n            \"local_name\": \"Brasil\"\n        },\n        {\n            \"continent\": 3,\n            \"eng_name\": \"Chile\",\n            \"local_name\": \"Chile\"\n        },\n        {\n            \"continent\": 4,\n            \"eng_name\": \"England\",\n            \"local_name\": \"England\"\n        },\n        {\n            \"continent\": 4,\n            \"eng_name\": \"Poland\",\n            \"local_name\": \"Poland\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{localhost}}{{master_check_country}}batch/"
+									},
+									"response": []
+								},
+								{
 									"name": "get all",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true
@@ -700,7 +758,7 @@
 												}
 											}
 										},
-										"url": "{{localhost}}{{master_check_country}}1"
+										"url": "{{localhost}}{{master_check_country}}9"
 									},
 									"response": []
 								}
@@ -744,6 +802,35 @@
 											}
 										},
 										"url": "{{localhost}}{{master_check_state}}"
+									},
+									"response": []
+								},
+								{
+									"name": "create batch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+												"type": "text"
+											},
+											{
+												"key": "uauth",
+												"value": "Token aaa",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"batch\": [\n        {\n            \"country\": 1,\n            \"eng_name\": \"West Bengal\",\n            \"local_name\": \"পশ্চিমবঙ্গ\"\n        },\n        {\n            \"country\": 1,\n            \"eng_name\": \"Maharashtra\",\n            \"local_name\": \"महाराष्ट्र\"\n        },\n        {\n            \"country\": 2,\n            \"eng_name\": \"Chitagong\",\n            \"local_name\": \"চট্টগ্রাম\"\n        },\n        {\n            \"country\": 2,\n            \"eng_name\": \"Dhaka\",\n            \"local_name\": \"ঢাকা\"\n        },\n        {\n            \"country\": 3,\n            \"eng_name\": \"New York\",\n            \"local_name\": \"New York\"\n        },\n        {\n            \"country\": 3,\n            \"eng_name\": \"Texas\",\n            \"local_name\": \"Texas\"\n        },\n        {\n            \"country\": 4,\n            \"eng_name\": \"Ontario\",\n            \"local_name\": \"Ontario\"\n        },\n        {\n            \"country\": 4,\n            \"eng_name\": \"Labrador\",\n            \"local_name\": \"Labrador\"\n        },\n        {\n            \"country\": 5,\n            \"eng_name\": \"Alagoas\",\n            \"local_name\": \"Alagoas\"\n        },\n        {\n            \"country\": 5,\n            \"eng_name\": \"Maranhao\",\n            \"local_name\": \"Maranhao\"\n        },\n        {\n            \"country\": 6,\n            \"eng_name\": \"Santiago\",\n            \"local_name\": \"Santiago\"\n        },\n        {\n            \"country\": 6,\n            \"eng_name\": \"Valdivia\",\n            \"local_name\": \"Valdivia\"\n        },\n        {\n            \"country\": 7,\n            \"eng_name\": \"Wales\",\n            \"local_name\": \"Wales\"\n        },\n        {\n            \"country\": 7,\n            \"eng_name\": \"Bristol\",\n            \"local_name\": \"Bristol\"\n        },\n        {\n            \"country\": 8,\n            \"eng_name\": \"Lodz\",\n            \"local_name\": \"Lodzkie\"\n        },\n        {\n            \"country\": 8,\n            \"eng_name\": \"Lublin\",\n            \"local_name\": \"Lubelskie\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{localhost}}{{master_check_state}}batch/"
 									},
 									"response": []
 								},

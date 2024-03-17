@@ -22,8 +22,15 @@ class STATE(CHANGE_LOG):
         managed = True
         verbose_name = "State"
         verbose_name_plural = "States"
-        ordering = CHANGE_LOG.get_ordering() + ("eng_name",)
-        unique_together = CHANGE_LOG.get_unique_together() + ("country", "eng_name")
+        ordering = CHANGE_LOG.get_ordering() + (
+            "country__continent",
+            "country",
+            "eng_name",
+        )
+        unique_together = CHANGE_LOG.get_unique_together() + (
+            "country",
+            "eng_name",
+        )
 
     id = models.BigAutoField(
         primary_key=True,

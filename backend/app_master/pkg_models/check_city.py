@@ -22,7 +22,12 @@ class CITY(CHANGE_LOG):
         managed = True
         verbose_name = "City"
         verbose_name_plural = "Cities"
-        ordering = CHANGE_LOG.get_ordering() + ("eng_name",)
+        ordering = CHANGE_LOG.get_ordering() + (
+            "state__country__continent",
+            "state__country",
+            "state",
+            "eng_name",
+        )
         unique_together = CHANGE_LOG.get_unique_together() + (
             "state",
             "eng_name",

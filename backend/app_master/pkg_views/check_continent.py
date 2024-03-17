@@ -253,7 +253,7 @@ class Continent_Batch(View):
                 data=_payload,
                 message=_message,
             )
-            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=payload, status=_status)
         else:
             payload = super().create_payload(
                 success=False,

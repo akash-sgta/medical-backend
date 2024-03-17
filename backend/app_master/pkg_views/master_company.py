@@ -6,19 +6,19 @@ from rest_framework.response import Response
 
 from app_master.pkg_models.master_company import COMPANY
 from app_master.pkg_serializers.master_company import (
-    Compamy as Compamy_Serializer,
+    Company as Company_Serializer,
 )
 from utility.abstract_view import View
 
 # ========================================================================
 
 
-class Compamy(View):
+class Company(View):
     """
     API endpoint for managing companys.
     """
 
-    serializer_class = Compamy_Serializer
+    serializer_class = Company_Serializer
     queryset = COMPANY.objects.all()
 
     def __init__(self):
@@ -31,14 +31,14 @@ class Compamy(View):
         """
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
-        company_de_serialized = Compamy_Serializer(data=request.data)
+        company_de_serialized = Company_Serializer(data=request.data)
         if company_de_serialized.is_valid():
             try:
                 company_de_serialized.save()
             except IntegrityError:
                 payload = super().create_payload(
                     success=False,
-                    data=Compamy_Serializer(
+                    data=Company_Serializer(
                         COMPANY.objects.filter(
                             name=company_de_serialized.validated_data["name"].upper(),
                         ),
@@ -68,13 +68,13 @@ class Compamy(View):
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
-            company_serialized = Compamy_Serializer(COMPANY.objects.all(), many=True)
+            company_serialized = Company_Serializer(COMPANY.objects.all(), many=True)
             payload = super().create_payload(success=True, data=company_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
             try:
                 company_ref = COMPANY.objects.get(id=int(pk))
-                company_serialized = Compamy_Serializer(company_ref, many=False)
+                company_serialized = Company_Serializer(company_ref, many=False)
                 payload = super().create_payload(
                     success=True, data=[company_serialized.data]
                 )
@@ -100,7 +100,7 @@ class Compamy(View):
         else:
             try:
                 company_ref = COMPANY.objects.get(id=int(pk))
-                company_de_serialized = Compamy_Serializer(
+                company_de_serialized = Company_Serializer(
                     company_ref, data=request.data, partial=True
                 )
                 if company_de_serialized.is_valid():
@@ -109,7 +109,7 @@ class Compamy(View):
                     except IntegrityError:
                         payload = super().create_payload(
                             success=False,
-                            data=Compamy_Serializer(
+                            data=Company_Serializer(
                                 COMPANY.objects.filter(
                                     name=company_de_serialized.validated_data[
                                         "name"
@@ -158,7 +158,7 @@ class Compamy(View):
         else:
             try:
                 company_ref = COMPANY.objects.get(id=int(pk))
-                company_de_serialized = Compamy_Serializer(company_ref)
+                company_de_serialized = Company_Serializer(company_ref)
                 try:
                     company_ref.delete()
                 except Exception as e:
@@ -202,12 +202,12 @@ class Compamy(View):
         return Response(data=payload, status=status.HTTP_200_OK)
 
 
-class Compamy_Batch(View):
+class Company_Batch(View):
     """
     API endpoint for managing companys.
     """
 
-    serializer_class = Compamy_Serializer
+    serializer_class = Company_Serializer
     queryset = COMPANY.objects.all()
 
     def __init__(self):
@@ -225,13 +225,13 @@ class Compamy_Batch(View):
             _payload = []
             _message = []
             for data in request.data[self.C_BATCH]:
-                company_de_serialized = Compamy_Serializer(data=data)
+                company_de_serialized = Company_Serializer(data=data)
                 if company_de_serialized.is_valid():
                     try:
                         company_de_serialized.save()
                     except IntegrityError:
                         _payload.append(
-                            Compamy_Serializer(
+                            Company_Serializer(
                                 COMPANY.objects.get(
                                     name=company_de_serialized.validated_data[
                                         "name"
@@ -240,7 +240,7 @@ class Compamy_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Compamy().get_view_name()}_EXISTS")
+                        _message.append(f"{Company().get_view_name()}_EXISTS")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(company_de_serialized.data)
@@ -256,7 +256,7 @@ class Compamy_Batch(View):
                 data=_payload,
                 message=_message,
             )
-            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=payload, status=_status)
         else:
             payload = super().create_payload(
                 success=False,

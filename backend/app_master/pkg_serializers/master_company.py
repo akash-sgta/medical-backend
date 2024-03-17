@@ -4,7 +4,7 @@ from utility.abstract_serializer import Serializer
 
 
 # ========================================================================
-class Compamy(Serializer):
+class Company(Serializer):
     class Meta:
         model = COMPANY
         fields = "__all__"

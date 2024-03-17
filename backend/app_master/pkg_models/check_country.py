@@ -21,7 +21,10 @@ class COUNTRY(CHANGE_LOG):
         managed = True
         verbose_name = "Country"
         verbose_name_plural = "Countries"
-        ordering = CHANGE_LOG.get_ordering() + ("eng_name",)
+        ordering = CHANGE_LOG.get_ordering() + (
+            "continent",
+            "eng_name",
+        )
         unique_together = CHANGE_LOG.get_unique_together() + (
             "continent",
             "eng_name",

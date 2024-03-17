@@ -195,3 +195,111 @@ class Currency(View):
         payload["method"]["DELETE"] = None
 
         return Response(data=payload, status=status.HTTP_200_OK)
+
+
+class Currency_Batch(View):
+    """
+    API endpoint for managing continents.
+    """
+
+    serializer_class = Currency_Serializer
+    queryset = CURRENCY.objects.all()
+
+    def __init__(self):
+        super().__init__()
+
+    def post(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle POST request to create a new continent.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        if self.C_BATCH in request.data.keys():
+            _status = status.HTTP_200_OK
+            _payload = []
+            _message = []
+            for data in request.data[self.C_BATCH]:
+                currency_de_serialized = Currency_Serializer(data=data)
+                try:
+                    currency_de_serialized.initial_data[
+                        self.C_COMPANY_CODE
+                    ] = self.company_code
+                except AttributeError:
+                    pass
+                if currency_de_serialized.is_valid():
+                    try:
+                        currency_de_serialized.save()
+                    except IntegrityError as e:
+                        _payload.append(
+                            Currency_Serializer(
+                                CURRENCY.objects.get(
+                                    code=currency_de_serialized.validated_data["code"],
+                                    eng_name=currency_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=False,
+                            ).data
+                        )
+                        _message.append(f"{Currency().get_view_name()}_EXISTS")
+                        _status = status.HTTP_409_CONFLICT
+                    else:
+                        _payload.append(currency_de_serialized.data)
+                        _message.append(None)
+                else:
+                    _payload.append(None)
+                    _message.append(
+                        "SERIALIZING_ERROR : {}".format(currency_de_serialized.errors)
+                    )
+
+            payload = super().create_payload(
+                success=True if _status == status.HTTP_200_OK else False,
+                data=_payload,
+                message=_message,
+            )
+            return Response(data=payload, status=_status)
+        else:
+            payload = super().create_payload(
+                success=False,
+                message="BATCH DATA NOT PROVIDED",
+            )
+            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+
+    def options(self, request, pk=None):
+        pk = self.update_pk(pk)
+        """
+        Handle OPTIONS request to provide information about supported methods and headers.
+        """
+        auth = super().authorize(request=request)  # Authorization logic - TODO
+
+        payload = dict()
+        payload["Allow"] = "POST OPTIONS".split()
+        payload["HEADERS"] = dict()
+        payload["HEADERS"]["Content-Type"] = "application/json"
+        payload["HEADERS"]["Authorization"] = "Token JWT"
+        payload["name"] = self.get_view_name()
+        payload["method"] = dict()
+        payload["method"]["POST"] = {
+            "batch": [
+                {
+                    "code": "String : 4",
+                    "eng_name": "String : 32",
+                    "local_name": "String : 32",
+                    "symbol": "String : 4",
+                },
+                {
+                    "code": "String : 4",
+                    "eng_name": "String : 32",
+                    "local_name": "String : 32",
+                    "symbol": "String : 4",
+                },
+                {
+                    "code": "String : 4",
+                    "eng_name": "String : 32",
+                    "local_name": "String : 32",
+                    "symbol": "String : 4",
+                },
+            ]
+        }
+        return Response(data=payload, status=status.HTTP_200_OK)
