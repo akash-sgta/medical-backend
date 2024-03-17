@@ -10,10 +10,3528 @@
 			"name": "master",
 			"item": [
 				{
+					"name": "check",
+					"item": [
+						{
+							"name": "section_000 - others",
+							"item": [
+								{
+									"name": "language",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_language}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"eng_name\": \"lang1\",\n    \"local_name\": \"lang1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_language}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"eng_name\": \"English\",\n            \"local_name\": \"English\"\n        },\n        {\n            \"eng_name\": \"Hindi\",\n            \"local_name\": \"हिंदी\"\n        },\n        {\n            \"eng_name\": \"Bengali\",\n            \"local_name\": \"বাংলা\"\n        },\n        {\n            \"eng_name\": \"Telegu\",\n            \"local_name\": \"తెలుగు\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_language}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_language}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_language}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"eng_name\": \"JAPANESE\",\n    \"local_name\": \"日本語 AHh\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_language}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_language}}1"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "section_001 - location",
+							"item": [
+								{
+									"name": "continent",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_continent}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"eng_name\": \"Continent1\",\n    \"local_name\": \"Continent1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_continent}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"eng_name\": \"Aisa\",\n            \"local_name\": \"Asia\"\n        },\n        {\n            \"eng_name\": \"North America\",\n            \"local_name\": \"North America\"\n        },\n        {\n            \"eng_name\": \"South America\",\n            \"local_name\": \"South America\"\n        },\n        {\n            \"eng_name\": \"Europe\",\n            \"local_name\": \"Europe\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_continent}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_continent}}0"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_continent}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"eng_name\": \"JAPANESE\",\n    \"local_name\": \"日本語 AHh\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_continent}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_continent}}1"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "country",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_country}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"continent\": 2,\n    \"eng_name\": \"Country1\",\n    \"local_name\": \"Country1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_country}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"continent\": 1,\n            \"eng_name\": \"India\",\n            \"local_name\": \"भारत\"\n        },\n        {\n            \"continent\": 1,\n            \"eng_name\": \"Bangladesh\",\n            \"local_name\": \"বাংলাদেশ\"\n        },\n        {\n            \"continent\": 2,\n            \"eng_name\": \"USA\",\n            \"local_name\": \"USA\"\n        },\n        {\n            \"continent\": 2,\n            \"eng_name\": \"Canada\",\n            \"local_name\": \"Canada\"\n        },\n        {\n            \"continent\": 3,\n            \"eng_name\": \"Brazil\",\n            \"local_name\": \"Brasil\"\n        },\n        {\n            \"continent\": 3,\n            \"eng_name\": \"Chile\",\n            \"local_name\": \"Chile\"\n        },\n        {\n            \"continent\": 4,\n            \"eng_name\": \"England\",\n            \"local_name\": \"England\"\n        },\n        {\n            \"continent\": 4,\n            \"eng_name\": \"Poland\",\n            \"local_name\": \"Poland\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_country}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_country}}0"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_country}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"continent\": 2,\n    \"eng_name\": \"Country1\",\n    \"local_name\": \"Country1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_country}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_country}}9"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "state",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_state}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"country\": 2,\n    \"eng_name\": \"State1\",\n    \"local_name\": \"State1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_state}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"country\": 1,\n            \"eng_name\": \"West Bengal\",\n            \"local_name\": \"পশ্চিমবঙ্গ\"\n        },\n        {\n            \"country\": 1,\n            \"eng_name\": \"Maharashtra\",\n            \"local_name\": \"महाराष्ट्र\"\n        },\n        {\n            \"country\": 2,\n            \"eng_name\": \"Chitagong\",\n            \"local_name\": \"চট্টগ্রাম\"\n        },\n        {\n            \"country\": 2,\n            \"eng_name\": \"Dhaka\",\n            \"local_name\": \"ঢাকা\"\n        },\n        {\n            \"country\": 3,\n            \"eng_name\": \"New York\",\n            \"local_name\": \"New York\"\n        },\n        {\n            \"country\": 3,\n            \"eng_name\": \"Texas\",\n            \"local_name\": \"Texas\"\n        },\n        {\n            \"country\": 4,\n            \"eng_name\": \"Ontario\",\n            \"local_name\": \"Ontario\"\n        },\n        {\n            \"country\": 4,\n            \"eng_name\": \"Labrador\",\n            \"local_name\": \"Labrador\"\n        },\n        {\n            \"country\": 5,\n            \"eng_name\": \"Alagoas\",\n            \"local_name\": \"Alagoas\"\n        },\n        {\n            \"country\": 5,\n            \"eng_name\": \"Maranhao\",\n            \"local_name\": \"Maranhao\"\n        },\n        {\n            \"country\": 6,\n            \"eng_name\": \"Santiago\",\n            \"local_name\": \"Santiago\"\n        },\n        {\n            \"country\": 6,\n            \"eng_name\": \"Valdivia\",\n            \"local_name\": \"Valdivia\"\n        },\n        {\n            \"country\": 7,\n            \"eng_name\": \"Wales\",\n            \"local_name\": \"Wales\"\n        },\n        {\n            \"country\": 7,\n            \"eng_name\": \"Bristol\",\n            \"local_name\": \"Bristol\"\n        },\n        {\n            \"country\": 8,\n            \"eng_name\": \"Lodz\",\n            \"local_name\": \"Lodzkie\"\n        },\n        {\n            \"country\": 8,\n            \"eng_name\": \"Lublin\",\n            \"local_name\": \"Lubelskie\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_state}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_state}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_state}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"country\": 2,\n    \"eng_name\": \"State2\",\n    \"local_name\": \"State2\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_state}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_state}}1"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "city",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_city}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"state\": 2,\n    \"eng_name\": \"City1\",\n    \"local_name\": \"City1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_city}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"state\": 2,\n            \"eng_name\": \"City1\",\n            \"local_name\": \"City1\"\n        },\n        {\n            \"state\": 2,\n            \"eng_name\": \"City1\",\n            \"local_name\": \"City1\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_city}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_city}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_city}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"state\": 2,\n    \"eng_name\": \"City1\",\n    \"local_name\": \"City1\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_city}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_city}}1"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "section_002 - measurement",
+							"item": [
+								{
+									"name": "unit",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_unit}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"KG\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_unit}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"MASS\"\n        },\n        {\n            \"name\": \"VOLUME\"\n        },\n        {\n            \"name\": \"temperature\"\n        },\n        {\n            \"name\": \"density\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_unit}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_unit}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_unit}}9"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"deca gram\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_unit}}9"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_unit}}9"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "uom",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_uom}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"unit\": 9,\n    \"name\": \"kilo gram\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_uom}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"unit\": 9,\n            \"name\": \"kilo gram\"\n        },\n        {\n            \"unit\": 9,\n            \"name\": \"hecto gram\"\n        },\n        {\n            \"unit\": 9,\n            \"name\": \"deca gram\"\n        },\n        {\n            \"unit\": 9,\n            \"name\": \"gram\"\n        },\n        {\n            \"unit\": 9,\n            \"name\": \"deci gram\"\n        },\n        {\n            \"unit\": 9,\n            \"name\": \"centi gram\"\n        },\n        {\n            \"unit\": 9,\n            \"name\": \"mili gram\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_uom}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_uom}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_uom}}2"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"unit\": 9,\n    \"name\": \"test gram\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_uom}}2"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_uom}}2"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "section_003 - product type",
+							"item": [
+								{
+									"name": "product type",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_product_type}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"unit\": 9,\n    \"name\": \"kilo gram\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Tablet\"\n        },\n        {\n            \"name\": \"Capsule\"\n        },\n        {\n            \"name\": \"Syrup\"\n        },\n        {\n            \"name\": \"Oinment\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}2"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"ass up cream\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}2"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}2"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "product type text",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_product_type_text}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"type\": 1,\n            \"lang\": 1,\n            \"text\": 1\n        },\n        {\n            \"type\": 1,\n            \"lang\": 2,\n            \"text\": 2\n        },\n        {\n            \"type\": 1,\n            \"lang\": 3,\n            \"text\": 3\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}1"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "section_004 - order status",
+							"item": [
+								{
+									"name": "order status - sales",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_product_type}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"unit\": 9,\n    \"name\": \"kilo gram\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Tablet\"\n        },\n        {\n            \"name\": \"Capsule\"\n        },\n        {\n            \"name\": \"Syrup\"\n        },\n        {\n            \"name\": \"Oinment\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}2"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"ass up cream\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}2"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type}}2"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "order status - inventory",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_product_type_text}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"type\": 1,\n            \"lang\": 1,\n            \"text\": 1\n        },\n        {\n            \"type\": 1,\n            \"lang\": 2,\n            \"text\": 2\n        },\n        {\n            \"type\": 1,\n            \"lang\": 3,\n            \"text\": 3\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_product_type_text}}1"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "master",
 					"item": [
 						{
-							"name": "company",
+							"name": "section_000 - others",
+							"item": [
+								{
+									"name": "company",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "address",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "text",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "http://127.0.0.1:8000/master/text/"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"text\": \"Ching Chong ding fond\",\n    \"lang\": 2\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "http://127.0.0.1:8000/master/text/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "http://127.0.0.1:8000/master/text/0"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "http://127.0.0.1:8000/master/text/11"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"text\": \"Ching Chong ding big slimy gud\",\n    \"lang\": 1\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "http://127.0.0.1:8000/master/text/13"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "http://127.0.0.1:8000/master/text/12"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "section_001 - user",
+							"item": [
+								{
+									"name": "credential",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "profile",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "section_002 - product",
+							"item": [
+								{
+									"name": "product",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "product connection",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cdn",
+			"item": [
+				{
+					"name": "check",
+					"item": [
+						{
+							"name": "file_type",
 							"item": [
 								{
 									"name": "options",
@@ -205,16 +3723,21 @@
 									"response": []
 								}
 							]
-						},
+						}
+					]
+				},
+				{
+					"name": "master",
+					"item": [
 						{
-							"name": "text",
+							"name": "file",
 							"item": [
 								{
 									"name": "options",
 									"request": {
 										"method": "OPTIONS",
 										"header": [],
-										"url": "http://127.0.0.1:8000/master/text/"
+										"url": "{{localhost}}{{master_master_company}}"
 									},
 									"response": []
 								},
@@ -236,14 +3759,43 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"text\": \"Ching Chong ding fond\",\n    \"lang\": 2\n}",
+											"raw": "{\n    \"name\": \"Company_01\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/text/"
+										"url": "{{localhost}}{{master_master_company}}"
+									},
+									"response": []
+								},
+								{
+									"name": "create batch",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+												"type": "text"
+											},
+											{
+												"key": "uauth",
+												"value": "Token aaa",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{localhost}}{{master_master_company}}batch/"
 									},
 									"response": []
 								},
@@ -275,7 +3827,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/text/0"
+										"url": "{{localhost}}{{master_master_company}}"
 									},
 									"response": []
 								},
@@ -307,7 +3859,7 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/text/11"
+										"url": "{{localhost}}{{master_master_company}}4"
 									},
 									"response": []
 								},
@@ -329,14 +3881,14 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"text\": \"Ching Chong ding big slimy gud\",\n    \"lang\": 1\n}",
+											"raw": "{\n    \"name\": \"DEV22\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/text/13"
+										"url": "{{localhost}}{{master_master_company}}1"
 									},
 									"response": []
 								},
@@ -365,926 +3917,810 @@
 												}
 											}
 										},
-										"url": "http://127.0.0.1:8000/master/text/12"
+										"url": "{{localhost}}{{master_master_company}}1"
 									},
 									"response": []
 								}
 							]
 						}
 					]
-				},
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"item": [
 				{
-					"name": "check",
+					"name": "inventory_management",
 					"item": [
 						{
-							"name": "continent",
+							"name": "product_inventory",
 							"item": [
 								{
-									"name": "options",
-									"request": {
-										"method": "OPTIONS",
-										"header": [],
-										"url": "{{localhost}}{{master_check_continent}}"
-									},
-									"response": []
+									"name": "product_inventory_summary",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
 								},
 								{
-									"name": "create",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+									"name": "product_inventory_item",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"Continent1\",\n    \"local_name\": \"Continent1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_continent}}"
-									},
-									"response": []
-								},
-								{
-									"name": "create batch",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"batch\": [\n        {\n            \"eng_name\": \"Aisa\",\n            \"local_name\": \"Asia\"\n        },\n        {\n            \"eng_name\": \"North America\",\n            \"local_name\": \"North America\"\n        },\n        {\n            \"eng_name\": \"South America\",\n            \"local_name\": \"South America\"\n        },\n        {\n            \"eng_name\": \"Europe\",\n            \"local_name\": \"Europe\"\n        }\n    ]\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_continent}}batch/"
-									},
-									"response": []
-								},
-								{
-									"name": "get all",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_continent}}0"
-									},
-									"response": []
-								},
-								{
-									"name": "get selective",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_continent}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "update",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"JAPANESE\",\n    \"local_name\": \"日本語 AHh\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_continent}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_continent}}1"
-									},
-									"response": []
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
 								}
 							]
-						},
+						}
+					]
+				},
+				{
+					"name": "sales_and_distribution",
+					"item": [
 						{
-							"name": "country",
+							"name": "product_sales",
 							"item": [
 								{
-									"name": "options",
-									"request": {
-										"method": "OPTIONS",
-										"header": [],
-										"url": "{{localhost}}{{master_check_country}}"
-									},
-									"response": []
+									"name": "product_sales_summary",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
+											},
+											"response": []
+										}
+									]
 								},
 								{
-									"name": "create",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+									"name": "product_sales_item",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_master_company}}"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"continent\": 2,\n    \"eng_name\": \"Country1\",\n    \"local_name\": \"Country1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_country}}"
-									},
-									"response": []
-								},
-								{
-									"name": "create batch",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"batch\": [\n        {\n            \"continent\": 1,\n            \"eng_name\": \"India\",\n            \"local_name\": \"भारत\"\n        },\n        {\n            \"continent\": 1,\n            \"eng_name\": \"Bangladesh\",\n            \"local_name\": \"বাংলাদেশ\"\n        },\n        {\n            \"continent\": 2,\n            \"eng_name\": \"USA\",\n            \"local_name\": \"USA\"\n        },\n        {\n            \"continent\": 2,\n            \"eng_name\": \"Canada\",\n            \"local_name\": \"Canada\"\n        },\n        {\n            \"continent\": 3,\n            \"eng_name\": \"Brazil\",\n            \"local_name\": \"Brasil\"\n        },\n        {\n            \"continent\": 3,\n            \"eng_name\": \"Chile\",\n            \"local_name\": \"Chile\"\n        },\n        {\n            \"continent\": 4,\n            \"eng_name\": \"England\",\n            \"local_name\": \"England\"\n        },\n        {\n            \"continent\": 4,\n            \"eng_name\": \"Poland\",\n            \"local_name\": \"Poland\"\n        }\n    ]\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_country}}batch/"
-									},
-									"response": []
-								},
-								{
-									"name": "get all",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}batch/"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_country}}0"
-									},
-									"response": []
-								},
-								{
-									"name": "get selective",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_country}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "update",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"continent\": 2,\n    \"eng_name\": \"Country1\",\n    \"local_name\": \"Country1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_country}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_country}}9"
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "state",
-							"item": [
-								{
-									"name": "options",
-									"request": {
-										"method": "OPTIONS",
-										"header": [],
-										"url": "{{localhost}}{{master_check_state}}"
-									},
-									"response": []
-								},
-								{
-									"name": "create",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}4"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"country\": 2,\n    \"eng_name\": \"State1\",\n    \"local_name\": \"State1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_state}}"
-									},
-									"response": []
-								},
-								{
-									"name": "create batch",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"batch\": [\n        {\n            \"country\": 1,\n            \"eng_name\": \"West Bengal\",\n            \"local_name\": \"পশ্চিমবঙ্গ\"\n        },\n        {\n            \"country\": 1,\n            \"eng_name\": \"Maharashtra\",\n            \"local_name\": \"महाराष्ट्र\"\n        },\n        {\n            \"country\": 2,\n            \"eng_name\": \"Chitagong\",\n            \"local_name\": \"চট্টগ্রাম\"\n        },\n        {\n            \"country\": 2,\n            \"eng_name\": \"Dhaka\",\n            \"local_name\": \"ঢাকা\"\n        },\n        {\n            \"country\": 3,\n            \"eng_name\": \"New York\",\n            \"local_name\": \"New York\"\n        },\n        {\n            \"country\": 3,\n            \"eng_name\": \"Texas\",\n            \"local_name\": \"Texas\"\n        },\n        {\n            \"country\": 4,\n            \"eng_name\": \"Ontario\",\n            \"local_name\": \"Ontario\"\n        },\n        {\n            \"country\": 4,\n            \"eng_name\": \"Labrador\",\n            \"local_name\": \"Labrador\"\n        },\n        {\n            \"country\": 5,\n            \"eng_name\": \"Alagoas\",\n            \"local_name\": \"Alagoas\"\n        },\n        {\n            \"country\": 5,\n            \"eng_name\": \"Maranhao\",\n            \"local_name\": \"Maranhao\"\n        },\n        {\n            \"country\": 6,\n            \"eng_name\": \"Santiago\",\n            \"local_name\": \"Santiago\"\n        },\n        {\n            \"country\": 6,\n            \"eng_name\": \"Valdivia\",\n            \"local_name\": \"Valdivia\"\n        },\n        {\n            \"country\": 7,\n            \"eng_name\": \"Wales\",\n            \"local_name\": \"Wales\"\n        },\n        {\n            \"country\": 7,\n            \"eng_name\": \"Bristol\",\n            \"local_name\": \"Bristol\"\n        },\n        {\n            \"country\": 8,\n            \"eng_name\": \"Lodz\",\n            \"local_name\": \"Lodzkie\"\n        },\n        {\n            \"country\": 8,\n            \"eng_name\": \"Lublin\",\n            \"local_name\": \"Lubelskie\"\n        }\n    ]\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
+											"response": []
 										},
-										"url": "{{localhost}}{{master_check_state}}batch/"
-									},
-									"response": []
-								},
-								{
-									"name": "get all",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_master_company}}1"
 											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_state}}"
-									},
-									"response": []
-								},
-								{
-									"name": "get selective",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_state}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "update",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"country\": 2,\n    \"eng_name\": \"State2\",\n    \"local_name\": \"State2\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_state}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_state}}1"
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "city",
-							"item": [
-								{
-									"name": "options",
-									"request": {
-										"method": "OPTIONS",
-										"header": [],
-										"url": "{{localhost}}{{master_check_city}}"
-									},
-									"response": []
-								},
-								{
-									"name": "create",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"state\": 2,\n    \"eng_name\": \"City1\",\n    \"local_name\": \"City1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_city}}"
-									},
-									"response": []
-								},
-								{
-									"name": "get all",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_city}}"
-									},
-									"response": []
-								},
-								{
-									"name": "get selective",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_city}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "update",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"state\": 2,\n    \"eng_name\": \"City1\",\n    \"local_name\": \"City1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_city}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_city}}1"
-									},
-									"response": []
-								}
-							]
-						},
-						{
-							"name": "language",
-							"item": [
-								{
-									"name": "options",
-									"request": {
-										"method": "OPTIONS",
-										"header": [],
-										"url": "{{localhost}}{{master_check_language}}"
-									},
-									"response": []
-								},
-								{
-									"name": "create",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"lang1\",\n    \"local_name\": \"lang1\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_language}}"
-									},
-									"response": []
-								},
-								{
-									"name": "get all",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_language}}"
-									},
-									"response": []
-								},
-								{
-									"name": "get selective",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_language}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "update",
-									"request": {
-										"method": "PUT",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"eng_name\": \"JAPANESE\",\n    \"local_name\": \"日本語 AHh\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_language}}1"
-									},
-									"response": []
-								},
-								{
-									"name": "delete",
-									"request": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Authorization",
-												"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-												"type": "text"
-											},
-											{
-												"key": "uauth",
-												"value": "Token aaa",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": "{{localhost}}{{master_check_language}}1"
-									},
-									"response": []
+											"response": []
+										}
+									]
 								}
 							]
 						}
@@ -1326,13 +4762,13 @@
 			"type": "string"
 		},
 		{
-			"key": "master_check_city",
-			"value": "master/check/city/",
+			"key": "master_master_company",
+			"value": "master/master/company/",
 			"type": "string"
 		},
 		{
-			"key": "master_master_company",
-			"value": "master/master/company/",
+			"key": "master_check_city",
+			"value": "master/check/city/",
 			"type": "string"
 		},
 		{
@@ -1353,6 +4789,36 @@
 		{
 			"key": "master_check_language",
 			"value": "master/check/language/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_unit",
+			"value": "master/check/unit/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_uom",
+			"value": "master/check/uom/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_product_type",
+			"value": "master/check/product_type/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_product_type_text",
+			"value": "master/check/product_type/text/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_order_status_sales",
+			"value": "master/check/order_status/sales/",
+			"type": "string"
+		},
+		{
+			"key": "master_check_order_status_inventory",
+			"value": "master/check/order_status/invventory/",
 			"type": "string"
 		}
 	]
