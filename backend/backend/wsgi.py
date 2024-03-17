@@ -1,16 +1,16 @@
-"""
-WSGI config for backend project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
-"""
-
+# ========================================================================
 import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+import multiprocessing
+
+# ========================================================================
+
+WORKER_COUNT = (multiprocessing.cpu_count() * 2) + 1
+THREAD_COUNT = int(WORKER_COUNT / 2)
+
+# ========================================================================
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 
 application = get_wsgi_application()
