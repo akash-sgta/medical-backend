@@ -89,9 +89,7 @@ class Product_Inventory_Summary(View):
 
         if int(pk) <= 0:
             product_inventory_summary_serialized = Product_Inventory_Summary_Serializer(
-                PRODUCT_INVENTORY_SUMMARY.objects.filter(
-                    company_code=View().company_code
-                ),
+                PRODUCT_INVENTORY_SUMMARY.objects.all(),
                 many=True,
             )
             payload = super().create_payload(
@@ -312,12 +310,12 @@ class Product_Inventory_Item(View):
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
-            product_inventory_Item_serialized = Product_Inventory_Item_Serializer(
-                PRODUCT_INVENTORY_ITEM.objects.filter(company_code=View().company_code),
+            product_inventory_item_serialized = Product_Inventory_Item_Serializer(
+                PRODUCT_INVENTORY_ITEM.objects.all(),
                 many=True,
             )
             payload = super().create_payload(
-                success=True, data=product_inventory_Item_serialized.data
+                success=True, data=product_inventory_item_serialized.data
             )
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
@@ -325,11 +323,11 @@ class Product_Inventory_Item(View):
                 product_inventory_Item_ref = PRODUCT_INVENTORY_ITEM.objects.get(
                     id=int(pk)
                 )
-                product_inventory_Item_serialized = Product_Inventory_Item_Serializer(
+                product_inventory_item_serialized = Product_Inventory_Item_Serializer(
                     product_inventory_Item_ref, many=False
                 )
                 payload = super().create_payload(
-                    success=True, data=[product_inventory_Item_serialized.data]
+                    success=True, data=[product_inventory_item_serialized.data]
                 )
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:

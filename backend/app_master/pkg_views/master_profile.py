@@ -64,7 +64,7 @@ class Profile(View):
 
         if int(pk) <= 0:
             profile_serialized = Profile_Serializer(
-                PROFILE.objects.filter(company_code=View().company_code),
+                PROFILE.objects.all(),
                 many=True,
             )
             payload = super().create_payload(success=True, data=profile_serialized.data)

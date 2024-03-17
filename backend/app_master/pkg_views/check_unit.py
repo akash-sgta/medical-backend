@@ -63,9 +63,7 @@ class Unit(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            unit_serialized = Unit_Serializer(
-                UNIT.objects.filter(company_code=View().company_code), many=True
-            )
+            unit_serialized = Unit_Serializer(UNIT.objects.all(), many=True)
             payload = super().create_payload(success=True, data=unit_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:

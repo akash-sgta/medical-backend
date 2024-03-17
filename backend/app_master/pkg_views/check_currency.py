@@ -66,9 +66,7 @@ class Currency(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            currency_serialized = Currency_Serializer(
-                CURRENCY.objects.filter(company_code=View().company_code), many=True
-            )
+            currency_serialized = Currency_Serializer(CURRENCY.objects.all(), many=True)
             payload = super().create_payload(
                 success=True, data=currency_serialized.data
             )

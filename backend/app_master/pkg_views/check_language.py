@@ -65,9 +65,7 @@ class Language(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            language_serialized = Language_Serializer(
-                LANGUAGE.objects.filter(company_code=View().company_code), many=True
-            )
+            language_serialized = Language_Serializer(LANGUAGE.objects.all(), many=True)
             payload = super().create_payload(
                 success=True, data=language_serialized.data
             )

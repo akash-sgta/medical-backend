@@ -20,10 +20,13 @@ class UOM(CHANGE_LOG):
         managed = True
         verbose_name = "UOM"
         verbose_name_plural = "UOMs"
-        ordering = CHANGE_LOG.get_ordering() + ("name",)
-        unique_together = CHANGE_LOG.get_unique_together() + (
-            "name",
+        ordering = CHANGE_LOG.get_ordering() + (
             "unit",
+            "name",
+        )
+        unique_together = CHANGE_LOG.get_unique_together() + (
+            "unit",
+            "name",
         )
 
     id = models.BigAutoField(

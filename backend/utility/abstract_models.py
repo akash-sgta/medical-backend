@@ -30,7 +30,8 @@ class BASE_MODEL_MANAGER(models.Manager):
             kwargs["company_code"] = View().company_code
         if "forced" in kwargs.keys():
             kwargs["is_deleted"] = not kwargs["forced"]
-
+        else:
+            kwargs["is_deleted"] = False
         return (
             super(BASE_MODEL_MANAGER, self)
             .get_queryset()
@@ -45,6 +46,8 @@ class BASE_MODEL_MANAGER(models.Manager):
             kwargs["company_code"] = View().company_code
         if "forced" in kwargs.keys():
             kwargs["is_deleted"] = not kwargs["forced"]
+        else:
+            kwargs["is_deleted"] = False
         return (
             super(BASE_MODEL_MANAGER, self)
             .get_queryset()
@@ -59,6 +62,8 @@ class BASE_MODEL_MANAGER(models.Manager):
             kwargs["company_code"] = View().company_code
         if "forced" in kwargs.keys():
             kwargs["is_deleted"] = not kwargs["forced"]
+        else:
+            kwargs["is_deleted"] = False
         data = super(BASE_MODEL_MANAGER, self).get_queryset().filter(*args, **kwargs)
         if len(data) <= 0:
             raise ObjectDoesNotExist

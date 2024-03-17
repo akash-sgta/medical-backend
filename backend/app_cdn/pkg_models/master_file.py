@@ -24,6 +24,10 @@ class FILE(CHANGE_LOG):
         managed = True
         verbose_name = "File"
         verbose_name_plural = "Files"
+        ordering = CHANGE_LOG.get_ordering() + (
+            "type",
+            "name",
+        )
         unique_together = CHANGE_LOG.get_unique_together() + (
             "type",
             "name",

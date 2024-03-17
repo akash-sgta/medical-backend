@@ -1,6 +1,10 @@
 # ========================================================================
 from django.urls import re_path
 
+from app_master.pkg_views.master_company import (
+    Company,
+    Company_Batch,
+)
 from app_master.pkg_views.check_city import (
     City,
     City_Batch,
@@ -23,7 +27,9 @@ from app_master.pkg_views.check_language import (
 )
 from app_master.pkg_views.check_product_type import (
     Product_Type,
+    Product_Type_Batch,
     Product_Type_T,
+    Product_Type_T_Batch,
 )
 from app_master.pkg_views.check_state import (
     State,
@@ -37,20 +43,18 @@ from app_master.pkg_views.check_unit_of_measurement import (
     Uom,
     Uom_Batch,
 )
+from app_master.pkg_views.check_order_status import (
+    Sales_Order_Status,
+    Sales_Order_Status_Batch,
+    Inventory_Order_Status,
+    Inventory_Order_Status_Batch,
+)
 from app_master.pkg_views.master_address import Address
 from app_master.pkg_views.master_credential import Credential
 from app_master.pkg_views.master_product import Product
 from app_master.pkg_views.master_product_connection import Product_Connection
 from app_master.pkg_views.master_profile import Profile
 from app_master.pkg_views.master_text import Text
-from app_master.pkg_views.master_company import (
-    Company,
-    Company_Batch,
-)
-from app_master.pkg_views.check_order_status import (
-    Sales_Order_Status,
-    Inventory_Order_Status,
-)
 
 # ========================================================================
 
@@ -158,42 +162,42 @@ urlpatterns = [
         Product_Type.as_view(),
         name="Check_Product_Type",
     ),
-    # re_path(
-    #     r"check/product_type/batch/$",
-    #     Product_Type_Batch.as_view(),
-    #     name="Check_Product_Type_Batch",
-    # ),
+    re_path(
+        r"check/product_type/batch/$",
+        Product_Type_Batch.as_view(),
+        name="Check_Product_Type_Batch",
+    ),
     re_path(
         r"check/product_type/text/(?P<pk>\d*)$",
         Product_Type_T.as_view(),
         name="Check_Product_Type_T",
     ),
-    # re_path(
-    #     r"check/product_type/text/batch/$",
-    #     Product_Type_T_Batch.as_view(),
-    #     name="Check_Product_Type_T_Batch",
-    # ),
+    re_path(
+        r"check/product_type/text/batch/$",
+        Product_Type_T_Batch.as_view(),
+        name="Check_Product_Type_T_Batch",
+    ),
     # ------------------------------------------------------
     re_path(
         r"check/order_status/sales/(?P<pk>\d*)$",
         Sales_Order_Status.as_view(),
         name="Check_Sales_Order_Status",
     ),
-    # re_path(
-    #     r"check/order_status/sales/batch/$",
-    #     Sales_Order_Status_Batch.as_view(),
-    #     name="Check_Sales_Order_Status_Batch",
-    # ),
+    re_path(
+        r"check/order_status/sales/batch/$",
+        Sales_Order_Status_Batch.as_view(),
+        name="Check_Sales_Order_Status_Batch",
+    ),
     re_path(
         r"check/order_status/inventory/(?P<pk>\d*)$",
         Inventory_Order_Status.as_view(),
         name="Check_Inventory_Order_Status",
     ),
-    # re_path(
-    #     r"check/order_status/inventory/batch/$",
-    #     Inventory_Order_Status_Batch.as_view(),
-    #     name="Check_Inventory_Order_Status_Batch",
-    # ),
+    re_path(
+        r"check/order_status/inventory/batch/$",
+        Inventory_Order_Status_Batch.as_view(),
+        name="Check_Inventory_Order_Status_Batch",
+    ),
     # ------------------------------------------------------
     # MASTER
     # ------------------------------------------------------

@@ -77,7 +77,7 @@ class Continent(View):
 
         if int(pk) <= 0:
             continent_serialized = Continent_Serializer(
-                CONTINENT.objects.filter(), many=True
+                CONTINENT.objects.all(), many=True
             )
             payload = super().create_payload(
                 success=True, data=continent_serialized.data

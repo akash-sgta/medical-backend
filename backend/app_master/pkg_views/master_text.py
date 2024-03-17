@@ -49,9 +49,7 @@ class Text(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            text_serialized = Text_Serializer(
-                TEXT.objects.filter(company_code=View().company_code), many=True
-            )
+            text_serialized = Text_Serializer(TEXT.objects.all(), many=True)
             payload = super().create_payload(success=True, data=text_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:

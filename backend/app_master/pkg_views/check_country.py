@@ -75,7 +75,7 @@ class Country(View):
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
-            country_serialized = Country_Serializer(COUNTRY.objects.filter(), many=True)
+            country_serialized = Country_Serializer(COUNTRY.objects.all(), many=True)
             payload = super().create_payload(success=True, data=country_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:

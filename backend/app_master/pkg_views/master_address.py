@@ -63,9 +63,7 @@ class Address(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            address_serialized = Address_Serializer(
-                ADDRESS.objects.filter(company_code=View().company_code), many=True
-            )
+            address_serialized = Address_Serializer(ADDRESS.objects.all(), many=True)
             payload = super().create_payload(success=True, data=address_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:

@@ -77,9 +77,7 @@ class City(View):
         auth = super().authorize(request=request)  # Authorization logic - TODO
 
         if int(pk) <= 0:
-            city_serialized = City_Serializer(
-                CITY.objects.filter(company_code=View().company_code), many=True
-            )
+            city_serialized = City_Serializer(CITY.objects.all(), many=True)
             payload = super().create_payload(success=True, data=city_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:

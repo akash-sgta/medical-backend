@@ -75,7 +75,7 @@ class Product_Connection(View):
 
         if int(pk) <= 0:
             product_connection_serialized = Product_Connection_Serializer(
-                PRODUCT_CONNECTION.objects.filter(company_code=View().company_code),
+                PRODUCT_CONNECTION.objects.all(),
                 many=True,
             )
             payload = super().create_payload(

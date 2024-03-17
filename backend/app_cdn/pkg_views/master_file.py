@@ -1,4 +1,5 @@
 # ========================================================================
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import IntegrityError
 from rest_framework import status
 from rest_framework.response import Response
@@ -43,7 +44,6 @@ class File(View):
                     success=False,
                     data=File_Serializer(
                         FILE.objects.filter(
-                            company_code=self.company_code,
                             type=file_de_serialized.validated_data["type"],
                             name=file_de_serialized.validated_data["name"].upper(),
                         ),
@@ -73,9 +73,7 @@ class File(View):
         auth = super().authorize(request=request)  # TODO : Do stuff
 
         if int(pk) <= 0:
-            file_serialized = File_Serializer(
-                FILE.objects.filter(company_code=View().company_code), many=True
-            )
+            file_serialized = File_Serializer(FILE.objects.all(), many=True)
             payload = super().create_payload(success=True, data=file_serialized.data)
             return Response(data=payload, status=status.HTTP_200_OK)
         else:
@@ -118,7 +116,6 @@ class File(View):
                             success=False,
                             data=File_Serializer(
                                 FILE.objects.filter(
-                                    company_code=self.company_code,
                                     type=file_de_serialized.validated_data["type"],
                                     name=file_de_serialized.validated_data[
                                         "name"

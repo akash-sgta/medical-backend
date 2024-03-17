@@ -87,7 +87,7 @@ class Product_Sales_Summary(View):
 
         if int(pk) <= 0:
             product_sales_summary_serialized = Product_Sales_Summary_Serializer(
-                PRODUCT_SALES_SUMMARY.objects.filter(company_code=View().company_code),
+                PRODUCT_SALES_SUMMARY.objects.all(),
                 many=True,
             )
             payload = super().create_payload(
@@ -303,7 +303,7 @@ class Product_Sales_Item(View):
 
         if int(pk) <= 0:
             product_sales_item_serialized = Product_Sales_Item_Serializer(
-                PRODUCT_SALES_ITEM.objects.filter(company_code=View().company_code),
+                PRODUCT_SALES_ITEM.objects.all(),
                 many=True,
             )
             payload = super().create_payload(

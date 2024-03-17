@@ -73,7 +73,7 @@ class Uom(View):
 
         if int(pk) <= 0:
             unit_of_measurement_serialized = Uom_Serializer(
-                UOM.objects.filter(company_code=View().company_code), many=True
+                UOM.objects.all(), many=True
             )
             payload = super().create_payload(
                 success=True, data=unit_of_measurement_serialized.data

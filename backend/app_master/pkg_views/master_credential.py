@@ -70,7 +70,7 @@ class Credential(View):
 
         if int(pk) <= 0:
             credential_serialized = Credential_Serializer(
-                CREDENTIAL.objects.filter(company_code=View().company_code), many=True
+                CREDENTIAL.objects.all(), many=True
             )
             payload = super().create_payload(
                 success=True, data=credential_serialized.data

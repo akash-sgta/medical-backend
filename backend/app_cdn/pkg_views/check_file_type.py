@@ -76,7 +76,7 @@ class File_Type(View):
 
         if int(pk) <= 0:
             file_type_serialized = File_Type_Serializer(
-                FILE_TYPE.objects.filter(company_code=View().company_code), many=True
+                FILE_TYPE.objects.all(), many=True
             )
             payload = super().create_payload(
                 success=True, data=file_type_serialized.data
