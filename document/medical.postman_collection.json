@@ -1025,7 +1025,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"KG\"\n}",
+													"raw": "{\n    \"name\": \"MASS\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1219,7 +1219,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"unit\": 9,\n    \"name\": \"kilo gram\"\n}",
+													"raw": "{\n            \"unit\": 9,\n            \"name\": \"hecto gram\"\n        }",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1612,7 +1612,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 2\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1641,7 +1641,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"type\": 1,\n            \"lang\": 1,\n            \"text\": 1\n        },\n        {\n            \"type\": 1,\n            \"lang\": 2,\n            \"text\": 2\n        },\n        {\n            \"type\": 1,\n            \"lang\": 3,\n            \"text\": 3\n        }\n    ]\n}",
+													"raw": "{\n    \"batch\": [\n        {\n            \"type\": 1,\n            \"lang\": 1,\n            \"text\": 2\n        },\n        {\n            \"type\": 1,\n            \"lang\": 2,\n            \"text\": 3\n        },\n        {\n            \"type\": 1,\n            \"lang\": 3,\n            \"text\": 4\n        }\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -1734,14 +1734,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"raw": "{\n    \"type\": 1,\n    \"lang\": 2,\n    \"text\": 2\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}1"
+												"url": "{{localhost}}{{master_check_product_type_text}}2"
 											},
 											"response": []
 										},
@@ -1789,7 +1789,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "{{localhost}}{{master_check_product_type}}"
+												"url": "{{localhost}}{{master_check_order_status_sales}}"
 											},
 											"response": []
 										},
@@ -1811,14 +1811,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"unit\": 9,\n    \"name\": \"kilo gram\"\n}",
+													"raw": "{\n    \"name\": \"A\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type}}"
+												"url": "{{localhost}}{{master_check_order_status_sales}}"
 											},
 											"response": []
 										},
@@ -1840,14 +1840,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Tablet\"\n        },\n        {\n            \"name\": \"Capsule\"\n        },\n        {\n            \"name\": \"Syrup\"\n        },\n        {\n            \"name\": \"Oinment\"\n        }\n    ]\n}",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"A\"\n        },\n        {\n            \"name\": \"B\"\n        },\n        {\n            \"name\": \"A\"\n        },\n        {\n            \"name\": \"C\"\n        }\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type}}batch/"
+												"url": "{{localhost}}{{master_check_order_status_sales}}batch/"
 											},
 											"response": []
 										},
@@ -1879,7 +1879,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type}}"
+												"url": "{{localhost}}{{master_check_order_status_sales}}"
 											},
 											"response": []
 										},
@@ -1911,7 +1911,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type}}2"
+												"url": "{{localhost}}{{master_check_order_status_sales}}3"
 											},
 											"response": []
 										},
@@ -1940,7 +1940,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type}}2"
+												"url": "{{localhost}}{{master_check_order_status_sales}}2"
 											},
 											"response": []
 										},
@@ -1969,7 +1969,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type}}2"
+												"url": "{{localhost}}{{master_check_order_status_sales}}2"
 											},
 											"response": []
 										}
@@ -1983,7 +1983,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "{{localhost}}{{master_check_product_type_text}}"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}"
 											},
 											"response": []
 										},
@@ -2005,14 +2005,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"raw": "{\n    \"name\": \"A\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}"
 											},
 											"response": []
 										},
@@ -2034,14 +2034,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"type\": 1,\n            \"lang\": 1,\n            \"text\": 1\n        },\n        {\n            \"type\": 1,\n            \"lang\": 2,\n            \"text\": 2\n        },\n        {\n            \"type\": 1,\n            \"lang\": 3,\n            \"text\": 3\n        }\n    ]\n}",
+													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"A\"\n        },\n        {\n            \"name\": \"B\"\n        },\n        {\n            \"name\": \"A\"\n        },\n        {\n            \"name\": \"C\"\n        }\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}batch/"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}batch/"
 											},
 											"response": []
 										},
@@ -2073,7 +2073,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}"
 											},
 											"response": []
 										},
@@ -2105,7 +2105,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}1"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}1"
 											},
 											"response": []
 										},
@@ -2127,14 +2127,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"type\": 1,\n    \"lang\": 1,\n    \"text\": 1\n}",
+													"raw": "{\n    \"name\" : \"unga\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}1"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}1"
 											},
 											"response": []
 										},
@@ -2163,7 +2163,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_check_product_type_text}}1"
+												"url": "{{localhost}}{{master_check_order_status_inventory}}1"
 											},
 											"response": []
 										}
@@ -2575,7 +2575,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "http://127.0.0.1:8000/master/text/"
+												"url": "{{localhost}}{{master_master_text}}"
 											},
 											"response": []
 										},
@@ -2597,14 +2597,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"text\": \"Ching Chong ding fond\",\n    \"lang\": 2\n}",
+													"raw": "{\n    \"text\": \"Ching Chong ding fond\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "http://127.0.0.1:8000/master/text/"
+												"url": "{{localhost}}{{master_master_text}}"
 											},
 											"response": []
 										},
@@ -2636,7 +2636,7 @@
 														}
 													}
 												},
-												"url": "http://127.0.0.1:8000/master/text/0"
+												"url": "{{localhost}}{{master_master_text}}"
 											},
 											"response": []
 										},
@@ -2668,7 +2668,7 @@
 														}
 													}
 												},
-												"url": "http://127.0.0.1:8000/master/text/11"
+												"url": "{{localhost}}{{master_master_text}}1"
 											},
 											"response": []
 										},
@@ -2690,14 +2690,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"text\": \"Ching Chong ding big slimy gud\",\n    \"lang\": 1\n}",
+													"raw": "{\n    \"text\": \"Ching Chong ding big slimy gud\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "http://127.0.0.1:8000/master/text/13"
+												"url": "{{localhost}}{{master_master_text}}1"
 											},
 											"response": []
 										},
@@ -2726,7 +2726,7 @@
 														}
 													}
 												},
-												"url": "http://127.0.0.1:8000/master/text/12"
+												"url": "{{localhost}}{{master_master_text}}1"
 											},
 											"response": []
 										}
@@ -4818,7 +4818,12 @@
 		},
 		{
 			"key": "master_check_order_status_inventory",
-			"value": "master/check/order_status/invventory/",
+			"value": "master/check/order_status/inventory/",
+			"type": "string"
+		},
+		{
+			"key": "master_master_text",
+			"value": "master/master/text/",
 			"type": "string"
 		}
 	]

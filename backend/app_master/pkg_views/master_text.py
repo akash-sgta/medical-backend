@@ -138,12 +138,10 @@ class Text(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "lang_id": "Integer : /master/language/0",
             "text": "String : 128",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "lang_id": "Integer : /master/language/0",
             "text": "String : 128",
         }
         payload["method"]["DELETE"] = None

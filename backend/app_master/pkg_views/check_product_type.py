@@ -337,12 +337,31 @@ class Product_Type_T(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message="SERIALIZING_ERROR : {}".format(
-                    product_type_de_serialized.errors
-                ),
-            )
+            for error in product_type_de_serialized.errors.values():
+                print(error[0].code)
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{Product_Type_T().get_view_name()}_EXISTS",
+                        data=[
+                            Product_Type_T_Serializer(
+                                PRODUCT_TYPE_T.objects.get(
+                                    type=product_type_de_serialized.data["type"],
+                                    text=product_type_de_serialized.data["text"],
+                                    lang=product_type_de_serialized.data["lang"],
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message="SERIALIZING_ERROR : {}".format(
+                            product_type_de_serialized.errors
+                        ),
+                    )
+                break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -543,12 +562,29 @@ class Product_Type_T_Batch(View):
                         _payload.append(product_type_t_de_serialized.data)
                         _message.append(None)
                 else:
-                    _payload.append(None)
-                    _message.append(
-                        "SERIALIZING_ERROR : {}".format(
-                            product_type_t_de_serialized.errors
-                        )
-                    )
+                    for error in product_type_t_de_serialized.errors.values():
+                        if error[0].code == "unique":
+                            _payload.append(
+                                Product_Type_T_Serializer(
+                                    PRODUCT_TYPE_T.objects.get(
+                                        type=product_type_t_de_serialized.data["type"],
+                                        text=product_type_t_de_serialized.data["text"],
+                                        lang=product_type_t_de_serialized.data["lang"],
+                                    ),
+                                    many=False,
+                                ).data
+                            )
+                            _message.append(
+                                f"{Product_Type_T().get_view_name()}_EXISTS"
+                            )
+                        else:
+                            _payload.append(None)
+                            _message.append(
+                                "SERIALIZING_ERROR : {}".format(
+                                    product_type_t_de_serialized.errors
+                                )
+                            )
+                        break
 
             payload = super().create_payload(
                 success=True if _status == status.HTTP_200_OK else False,

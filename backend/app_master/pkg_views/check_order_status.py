@@ -68,12 +68,28 @@ class Sales_Order_Status(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message="SERIALIZING_ERROR : {}".format(
-                    sales_order_status_de_serialized.errors
-                ),
-            )
+            for error in sales_order_status_de_serialized.errors.values():
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{Sales_Order_Status().get_view_name()}_EXISTS",
+                        data=[
+                            Sales_Order_Status_Serializer(
+                                SALES_ORDER_STATUS.objects.get(
+                                    name=sales_order_status_de_serialized.data["name"],
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message="SERIALIZING_ERROR : {}".format(
+                            sales_order_status_de_serialized.errors
+                        ),
+                    )
+                break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -276,12 +292,30 @@ class Sales_Order_Status_Batch(View):
                         _payload.append(sales_order_status_de_serialized.data)
                         _message.append(None)
                 else:
-                    _payload.append(None)
-                    _message.append(
-                        "SERIALIZING_ERROR : {}".format(
-                            sales_order_status_de_serialized.errors
-                        )
-                    )
+                    for error in sales_order_status_de_serialized.errors.values():
+                        if error[0].code == "unique":
+                            _status = status.HTTP_409_CONFLICT
+                            _payload.append(
+                                Sales_Order_Status_Serializer(
+                                    SALES_ORDER_STATUS.objects.get(
+                                        name=sales_order_status_de_serialized.data[
+                                            "name"
+                                        ],
+                                    ),
+                                    many=False,
+                                ).data
+                            )
+                            _message.append(
+                                f"{Sales_Order_Status().get_view_name()}_EXISTS"
+                            )
+                        else:
+                            _payload.append(
+                                "SERIALIZING_ERROR : {}".format(
+                                    sales_order_status_de_serialized.errors
+                                )
+                            )
+                            _message.append(None)
+                        break
 
             payload = super().create_payload(
                 success=True if _status == status.HTTP_200_OK else False,
@@ -378,12 +412,30 @@ class Inventory_Order_Status(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message="SERIALIZING_ERROR : {}".format(
-                    inventory_order_status_de_serialized.errors
-                ),
-            )
+            for error in inventory_order_status_de_serialized.errors.values():
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{Inventory_Order_Status().get_view_name()}_EXISTS",
+                        data=[
+                            Inventory_Order_Status_Serializer(
+                                INVENTORY_ORDER_STATUS.objects.get(
+                                    name=inventory_order_status_de_serialized.data[
+                                        "name"
+                                    ],
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message="SERIALIZING_ERROR : {}".format(
+                            inventory_order_status_de_serialized.errors
+                        ),
+                    )
+                break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -595,12 +647,30 @@ class Inventory_Order_Status_Batch(View):
                         _payload.append(inventory_order_status_de_serialized.data)
                         _message.append(None)
                 else:
-                    _payload.append(None)
-                    _message.append(
-                        "SERIALIZING_ERROR : {}".format(
-                            inventory_order_status_de_serialized.errors
-                        )
-                    )
+                    for error in inventory_order_status_de_serialized.errors.values():
+                        if error[0].code == "unique":
+                            _status = status.HTTP_409_CONFLICT
+                            _payload.append(
+                                Inventory_Order_Status_Serializer(
+                                    INVENTORY_ORDER_STATUS.objects.get(
+                                        name=inventory_order_status_de_serialized.data[
+                                            "name"
+                                        ],
+                                    ),
+                                    many=False,
+                                ).data
+                            )
+                            _message.append(
+                                f"{Inventory_Order_Status().get_view_name()}_EXISTS"
+                            )
+                        else:
+                            _payload.append(
+                                "SERIALIZING_ERROR : {}".format(
+                                    inventory_order_status_de_serialized.errors
+                                )
+                            )
+                            _message.append(None)
+                        break
 
             payload = super().create_payload(
                 success=True if _status == status.HTTP_200_OK else False,

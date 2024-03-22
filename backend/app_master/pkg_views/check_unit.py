@@ -38,7 +38,6 @@ class Unit(View):
                     success=False,
                     data=Unit_Serializer(
                         UNIT.objects.filter(
-                            company_code=self.company_code,
                             name=unit_de_serialized.validated_data["name"].upper(),
                         ),
                         many=True,
@@ -52,10 +51,28 @@ class Unit(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message="SERIALIZING_ERROR : {}".format(unit_de_serialized.errors),
-            )
+            for error in unit_de_serialized.errors.values():
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{Unit().get_view_name()}_EXISTS",
+                        data=[
+                            Unit_Serializer(
+                                UNIT.objects.get(
+                                    name=unit_de_serialized.data["name"],
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message="SERIALIZING_ERROR : {}".format(
+                            unit_de_serialized.errors
+                        ),
+                    )
+                break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -231,10 +248,27 @@ class Unit_Batch(View):
                         _payload.append(unit_de_serialized.data)
                         _message.append(None)
                 else:
-                    _payload.append(None)
-                    _message.append(
-                        "SERIALIZING_ERROR : {}".format(unit_de_serialized.errors)
-                    )
+                    for error in unit_de_serialized.errors.values():
+                        if error[0].code == "unique":
+                            _payload.append(
+                                Unit_Serializer(
+                                    UNIT.objects.get(
+                                        name=unit_de_serialized.data["name"],
+                                    ),
+                                    many=False,
+                                ).data
+                            )
+                            _message.append(
+                                f"{Unit().get_view_name()}_EXISTS",
+                            )
+                        else:
+                            _payload.append(None)
+                            _message.append(
+                                "SERIALIZING_ERROR : {}".format(
+                                    unit_de_serialized.errors
+                                )
+                            )
+                        break
 
             payload = super().create_payload(
                 success=True if _status == status.HTTP_200_OK else False,
