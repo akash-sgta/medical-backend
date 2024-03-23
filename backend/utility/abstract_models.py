@@ -108,7 +108,7 @@ class CHANGE_LOG(models.Model):
     @staticmethod
     def get_ordering():
         return (
-            "company_code",
+            "company_code__id",
             "is_deleted",
         )
 

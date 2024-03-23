@@ -23,8 +23,8 @@ class STATE(CHANGE_LOG):
         verbose_name = "State"
         verbose_name_plural = "States"
         ordering = CHANGE_LOG.get_ordering() + (
-            "country__continent",
-            "country",
+            "country__continent__id",
+            "country__id",
             "eng_name",
         )
         unique_together = CHANGE_LOG.get_unique_together() + (

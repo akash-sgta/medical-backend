@@ -23,9 +23,9 @@ class CITY(CHANGE_LOG):
         verbose_name = "City"
         verbose_name_plural = "Cities"
         ordering = CHANGE_LOG.get_ordering() + (
-            "state__country__continent",
-            "state__country",
-            "state",
+            "state__country__continent__id",
+            "state__country__id",
+            "state__id",
             "eng_name",
         )
         unique_together = CHANGE_LOG.get_unique_together() + (
@@ -43,10 +43,10 @@ class CITY(CHANGE_LOG):
     )
 
     eng_name = models.CharField(
-        max_length=32,
+        max_length=128,
     )
     local_name = models.CharField(
-        max_length=32,
+        max_length=128,
     )
 
     def save(self, *args, **kwargs):
@@ -60,6 +60,4 @@ class CITY(CHANGE_LOG):
         """
         Returns a string representation of the city.
         """
-        return "[{}] {} -> {}".format(
-            self.company_code, self.state.eng_name, self.eng_name
-        )
+        return "[{}] {} -> {}".format(self.company_code, self.state, self.eng_name)

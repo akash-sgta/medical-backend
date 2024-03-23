@@ -16,14 +16,7 @@ class Credential(Serializer):
 
         model = CREDENTIAL
         fields = "__all__"
-        extra_kwargs = (
-            Serializer().extra()
-            # .update(
-            #     {
-            #         "pwd": {"write_only": True},
-            #     }
-            # )
-        )
+        extra_kwargs = Serializer().extra()
 
     def to_representation(self, instance):
         """
@@ -37,7 +30,19 @@ class Credential(Serializer):
         """
         data = super().to_representation(instance)
         try:
-            data["pwd"] = "▓R▓E▓D▓A▓C▓T▓E▓D▓"
+            del data["pwd"]
+        except Exception:
+            pass
+        try:
+            del data["is_admin"]
+        except Exception:
+            pass
+        try:
+            del data["is_internal_user"]
+        except Exception:
+            pass
+        try:
+            del data["is_external_user"]
         except Exception:
             pass
         return data

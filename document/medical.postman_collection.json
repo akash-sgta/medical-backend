@@ -855,7 +855,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"state\": 2,\n            \"eng_name\": \"City1\",\n            \"local_name\": \"City1\"\n        },\n        {\n            \"state\": 2,\n            \"eng_name\": \"City1\",\n            \"local_name\": \"City1\"\n        }\n    ]\n}",
+													"raw": "{\n    \"batch\": [\n        {\n            \"state\": 1,\n            \"eng_name\": \"kOLKATA\",\n            \"local_name\": \"কলকাতা\"\n        },\n        {\n            \"state\": 1,\n            \"eng_name\": \"North 24 District\",\n            \"local_name\": \"উত্তর 24 পরগনা\"\n        },\n        {\n            \"state\": 2,\n            \"eng_name\": \"Mumbai\",\n            \"local_name\": \"मुंबई\"\n        },\n        {\n            \"state\": 2,\n            \"eng_name\": \"Nagpur\",\n            \"local_name\": \"नागपूर\"\n        },\n        {\n            \"state\": 3,\n            \"eng_name\": \"Akbarshah\",\n            \"local_name\": \"আকবরশাহ\"\n        },\n        {\n            \"state\": 3,\n            \"eng_name\": \"Sadarghat\",\n            \"local_name\": \"সদরঘাট\"\n        }\n    ]\n}",
 													"options": {
 														"raw": {
 															"language": "json"
@@ -2381,7 +2381,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_address}}"
 											},
 											"response": []
 										},
@@ -2403,43 +2403,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"raw": "{\n    \"city\": \"2\",\n    \"street\": \"GG\",\n    \"postal_code\": \"123-345-4\",\n    \"additional_line\": \"2\",\n    \"latitude\": 101.22,\n    \"longitude\": 101.22\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
-											},
-											"response": []
-										},
-										{
-											"name": "create batch",
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-														"type": "text"
-													},
-													{
-														"key": "uauth",
-														"value": "Token aaa",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": "{{localhost}}{{master_master_company}}batch/"
+												"url": "{{localhost}}{{master_master_address}}"
 											},
 											"response": []
 										},
@@ -2471,7 +2442,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_address}}"
 											},
 											"response": []
 										},
@@ -2503,7 +2474,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}4"
+												"url": "{{localhost}}{{master_master_address}}1"
 											},
 											"response": []
 										},
@@ -2525,14 +2496,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"raw": "{\n    \"city\": \"2\",\n    \"street\": \"GG\",\n    \"postal_code\": \"69-69-69\",\n    \"additional_line\": \"2\",\n    \"latitude\": 101.22,\n    \"longitude\": 101.22\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_address}}1"
 											},
 											"response": []
 										},
@@ -2561,7 +2532,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_address}}1"
 											},
 											"response": []
 										}
@@ -2745,7 +2716,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_cred}}"
 											},
 											"response": []
 										},
@@ -2767,43 +2738,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"raw": "{\n    \"email\": \"admin2@admin.com\",\n    \"pwd\": \"password\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
-											},
-											"response": []
-										},
-										{
-											"name": "create batch",
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-														"type": "text"
-													},
-													{
-														"key": "uauth",
-														"value": "Token aaa",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": "{{localhost}}{{master_master_company}}batch/"
+												"url": "{{localhost}}{{master_master_cred}}"
 											},
 											"response": []
 										},
@@ -2835,7 +2777,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_cred}}"
 											},
 											"response": []
 										},
@@ -2867,7 +2809,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}4"
+												"url": "{{localhost}}{{master_master_cred}}1"
 											},
 											"response": []
 										},
@@ -2889,14 +2831,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"pwd\": \"admin\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_cred}}1"
 											},
 											"response": []
 										},
@@ -2925,7 +2867,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_cred}}2"
 											},
 											"response": []
 										}
@@ -4824,6 +4766,16 @@
 		{
 			"key": "master_master_text",
 			"value": "master/master/text/",
+			"type": "string"
+		},
+		{
+			"key": "master_master_address",
+			"value": "master/master/address/",
+			"type": "string"
+		},
+		{
+			"key": "master_master_cred",
+			"value": "master/master/credential/",
 			"type": "string"
 		}
 	]

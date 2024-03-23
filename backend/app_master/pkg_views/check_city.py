@@ -46,7 +46,6 @@ class City(View):
                     success=False,
                     data=City_Serializer(
                         CITY.objects.filter(
-                            company_code=self.company_code,
                             state=city_de_serialized.validated_data["state"],
                             eng_name=city_de_serialized.validated_data[
                                 "eng_name"
@@ -63,10 +62,31 @@ class City(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message="SERIALIZING_ERROR : {}".format(city_de_serialized.errors),
-            )
+            for error in city_de_serialized.errors.values():
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{City().get_view_name()}_EXISTS",
+                        data=[
+                            City_Serializer(
+                                CITY.objects.get(
+                                    state=city_de_serialized.validated_data["state"],
+                                    eng_name=city_de_serialized.validated_data[
+                                        "eng_name"
+                                    ].upper(),
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message="SERIALIZING_ERROR : {}".format(
+                            city_de_serialized.errors
+                        ),
+                    )
+                break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -120,7 +140,6 @@ class City(View):
                             success=False,
                             data=City_Serializer(
                                 CITY.objects.filter(
-                                    company_code=self.company_code,
                                     state=city_de_serialized.validated_data["state"],
                                     eng_name=city_de_serialized.validated_data[
                                         "eng_name"
@@ -260,10 +279,32 @@ class City_Batch(View):
                         _payload.append(city_de_serialized.data)
                         _message.append(None)
                 else:
-                    _payload.append(None)
-                    _message.append(
-                        "SERIALIZING_ERROR : {}".format(city_de_serialized.errors)
-                    )
+                    for error in city_de_serialized.errors.values():
+                        if error[0].code == "unique":
+                            _payload.append(
+                                City_Serializer(
+                                    CITY.objects.get(
+                                        state=city_de_serialized.validated_data[
+                                            "state"
+                                        ],
+                                        eng_name=city_de_serialized.validated_data[
+                                            "eng_name"
+                                        ].upper(),
+                                    ),
+                                    many=False,
+                                ).data
+                            )
+                            _message.append(
+                                f"{City().get_view_name()}_EXISTS",
+                            )
+                        else:
+                            _payload.append(None)
+                            _message.append(
+                                "SERIALIZING_ERROR : {}".format(
+                                    city_de_serialized.errors
+                                )
+                            )
+                        break
 
             payload = super().create_payload(
                 success=True if _status == status.HTTP_200_OK else False,

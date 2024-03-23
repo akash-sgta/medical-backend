@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import freecurrencyapi
 from django.conf import settings
+import hashlib
 
 
 # ========================================================================
@@ -74,3 +75,7 @@ def currency_convert(source, *targets):
             rate_out[source] = exchange_rate
 
     return rate_out
+
+
+def plaintext_to_sha256(pt: str):
+    return hashlib.sha256(pt.encode("utf-8")).hexdigest()[:128]

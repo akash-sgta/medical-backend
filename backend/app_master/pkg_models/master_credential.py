@@ -2,6 +2,8 @@
 from django.db import models
 
 from utility.abstract_models import CHANGE_LOG
+from utility.methods import plaintext_to_sha256
+
 
 # ========================================================================
 
@@ -50,6 +52,8 @@ class CREDENTIAL(CHANGE_LOG):
         Overrides the save method to ensure email is always in uppercase before saving.
         """
         self.email = self.email.upper()
+        if self.pwd[:7] != "sha256_":
+            self.pwd = "sha256_" + plaintext_to_sha256(self.pwd)
         super(CREDENTIAL, self).save(*args, **kwargs)
 
     def __str__(self):

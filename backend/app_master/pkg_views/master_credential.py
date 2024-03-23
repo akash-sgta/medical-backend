@@ -184,17 +184,17 @@ class Credential(View):
         payload["method"]["POST"] = {
             "email": "String : 128",
             "pwd": "String : 128",
-            "is_admin": "Boolean : true/false",
-            "is_internal_user": "Boolean : true/false",
-            "is_external_user": "Boolean : true/false",
+            # "is_admin": "Boolean : true/false",
+            # "is_internal_user": "Boolean : true/false",
+            # "is_external_user": "Boolean : true/false",
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
             "email": "String : 128",
             "pwd": "String : 128",
-            "is_admin": "Boolean : true/false",
-            "is_internal_user": "Boolean : true/false",
-            "is_external_user": "Boolean : true/false",
+            # "is_admin": "Boolean : true/false",
+            # "is_internal_user": "Boolean : true/false",
+            # "is_external_user": "Boolean : true/false",
         }
         payload["method"]["DELETE"] = None
 
