@@ -31,6 +31,7 @@ class File(Change_Log):
         Returns:
             str: The type of the file.
         """
+
         return "{}".format(obj.type.name)
 
     def created(self, obj):
@@ -43,6 +44,7 @@ class File(Change_Log):
         Returns:
             str: The creation details.
         """
+
         return super().created(FILE.objects.get(id=obj.id))
 
     def changed(self, obj):
@@ -55,4 +57,5 @@ class File(Change_Log):
         Returns:
             str: The change details.
         """
+
         return super().changed(FILE.objects.get(id=obj.id))

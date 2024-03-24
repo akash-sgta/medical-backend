@@ -116,11 +116,16 @@ class CHANGE_LOG(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        kwargs["forced"] = True  # TODO : Remove later
+        # kwargs["forced"] = True  # TODO : Remove later
         if "forced" in kwargs.keys() and kwargs["forced"] is True:
             if self.is_deleted is True:
                 self.is_deleted = False
-        del kwargs["forced"]
+        else:
+            self.is_deleted = False
+        try:
+            del kwargs["forced"]
+        except KeyError:
+            pass
 
         if self.created_on == 0:
             self.created_on = get_current_ts()

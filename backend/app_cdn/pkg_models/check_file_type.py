@@ -14,6 +14,9 @@ class FILE_TYPE(CHANGE_LOG):
     """
 
     class Meta:
+        """
+        Meta class for defining model metadata.
+        """
         db_table = "cdn_check_file_type"
         managed = True
         verbose_name = "File Type"

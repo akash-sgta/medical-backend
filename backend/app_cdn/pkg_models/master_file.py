@@ -61,6 +61,7 @@ class FILE(CHANGE_LOG):
 
     def __str__(self):
         """
-        Returns a string representation of the file.
+        Returns:
+            str: A string representation of the file.
         """
         return "[{}] {} -> {}".format(self.company_code, self.type, self.name)
