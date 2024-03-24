@@ -9,6 +9,7 @@ from app_master.pkg_serializers.check_country import (
     Country as Country_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 
 # ========================================================================
@@ -52,7 +53,7 @@ class Country(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -63,7 +64,7 @@ class Country(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(country_de_serialized.errors),
+                message=f"{SERIALIZING_ERROR} : {country_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -89,7 +90,7 @@ class Country(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -102,7 +103,7 @@ class Country(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -128,7 +129,7 @@ class Country(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -141,15 +142,13 @@ class Country(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            country_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {country_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -162,7 +161,7 @@ class Country(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -176,7 +175,7 @@ class Country(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -235,9 +234,9 @@ class Country_Batch(View):
             for data in request.data[self.C_BATCH]:
                 country_de_serialized = Country_Serializer(data=data)
                 try:
-                    country_de_serialized.initial_data[
-                        self.C_COMPANY_CODE
-                    ] = self.company_code
+                    country_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                        self.company_code
+                    )
                 except AttributeError:
                     pass
                 if country_de_serialized.is_valid():
@@ -257,7 +256,7 @@ class Country_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Country().get_view_name()}_EXISTS")
+                        _message.append(f"{Country().get_view_name()} {EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(country_de_serialized.data)
@@ -265,7 +264,7 @@ class Country_Batch(View):
                 else:
                     _payload.append(None)
                     _message.append(
-                        "SERIALIZING_ERROR : {}".format(country_de_serialized.errors)
+                        f"{SERIALIZING_ERROR} : {country_de_serialized.errors}"
                     )
 
             payload = super().create_payload(

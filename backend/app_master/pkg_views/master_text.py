@@ -9,6 +9,7 @@ from app_master.pkg_serializers.master_text import (
     Text as Text_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 
 # ========================================================================
@@ -40,7 +41,7 @@ class Text(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(text_de_serialized.errors),
+                message=f"{SERIALIZING_ERROR} : {text_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -62,7 +63,7 @@ class Text(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -72,7 +73,7 @@ class Text(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -91,14 +92,12 @@ class Text(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            text_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {text_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -108,7 +107,7 @@ class Text(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -122,7 +121,7 @@ class Text(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 

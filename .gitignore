@@ -170,3 +170,4 @@ cython_debug/
 /.idea/runConfigurations/test.xml
 /backend/app_transaction/migrations/
 /.idea/medical-backend.iml
+medical-backend.code-workspace

@@ -2881,7 +2881,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_profile}}"
 											},
 											"response": []
 										},
@@ -2903,43 +2903,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"raw": "{\n    \"cred\": 1,\n    \"address\": 2,\n    \"image\": null,\n    \"bio\": 2,\n    \"first_name\": \"Admin\",\n    \"middle_name\": null,\n    \"last_name\": \"Admin\",\n    \"date_of_birth\": \"20240202\",\n    \"facebook_profile\": \"https://www.facebook.com\",\n    \"twitter_profile\": \"https://www.facebook.com\",\n    \"linkedin_profile\": \"https://www.facebook.com\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
-											},
-											"response": []
-										},
-										{
-											"name": "create batch",
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-														"type": "text"
-													},
-													{
-														"key": "uauth",
-														"value": "Token aaa",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": "{{localhost}}{{master_master_company}}batch/"
+												"url": "{{localhost}}{{master_master_profile}}"
 											},
 											"response": []
 										},
@@ -2971,7 +2942,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_profile}}"
 											},
 											"response": []
 										},
@@ -3003,7 +2974,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}4"
+												"url": "{{localhost}}{{master_master_profile}}1"
 											},
 											"response": []
 										},
@@ -3025,14 +2996,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"raw": "{\n    \"cred\": 1,\n    \"address\": 2,\n    \"image\": null,\n    \"bio\": 2,\n    \"first_name\": \"Admin Ahh\",\n    \"middle_name\": null,\n    \"last_name\": \"Admin\",\n    \"date_of_birth\": \"20240202\",\n    \"facebook_profile\": \"https://www.facebook.com\",\n    \"twitter_profile\": \"https://www.facebook.com\",\n    \"linkedin_profile\": \"https://www.facebook.com\"\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_profile}}1"
 											},
 											"response": []
 										},
@@ -3061,7 +3032,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_profile}}1"
 											},
 											"response": []
 										}
@@ -4776,6 +4747,11 @@
 		{
 			"key": "master_master_cred",
 			"value": "master/master/credential/",
+			"type": "string"
+		},
+		{
+			"key": "master_master_profile",
+			"value": "master/master/profile/",
 			"type": "string"
 		}
 	]

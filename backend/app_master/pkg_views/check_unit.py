@@ -9,6 +9,7 @@ from app_master.pkg_serializers.check_unit import (
     Unit as Unit_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 
 # ========================================================================
@@ -42,7 +43,7 @@ class Unit(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -55,7 +56,7 @@ class Unit(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Unit().get_view_name()}_EXISTS",
+                        message=f"{Unit().get_view_name()} {EXISTS}",
                         data=[
                             Unit_Serializer(
                                 UNIT.objects.get(
@@ -68,9 +69,7 @@ class Unit(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            unit_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {unit_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -93,7 +92,7 @@ class Unit(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -103,7 +102,7 @@ class Unit(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -127,7 +126,7 @@ class Unit(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -140,14 +139,12 @@ class Unit(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            unit_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {unit_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -157,7 +154,7 @@ class Unit(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -171,7 +168,7 @@ class Unit(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -223,9 +220,9 @@ class Unit_Batch(View):
             for data in request.data[self.C_BATCH]:
                 unit_de_serialized = Unit_Serializer(data=data)
                 try:
-                    unit_de_serialized.initial_data[
-                        self.C_COMPANY_CODE
-                    ] = self.company_code
+                    unit_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                        self.company_code
+                    )
                 except AttributeError:
                     pass
                 if unit_de_serialized.is_valid():
@@ -242,7 +239,7 @@ class Unit_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Unit().get_view_name()}_EXISTS")
+                        _message.append(f"{Unit().get_view_name()} {EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(unit_de_serialized.data)
@@ -259,14 +256,12 @@ class Unit_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{Unit().get_view_name()}_EXISTS",
+                                f"{Unit().get_view_name()} {EXISTS}",
                             )
                         else:
                             _payload.append(None)
                             _message.append(
-                                "SERIALIZING_ERROR : {}".format(
-                                    unit_de_serialized.errors
-                                )
+                                f"{SERIALIZING_ERROR} : {unit_de_serialized.errors}"
                             )
                         break
 

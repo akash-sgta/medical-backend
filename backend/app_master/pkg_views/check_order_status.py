@@ -13,6 +13,7 @@ from app_master.pkg_serializers.check_order_status import (
     Inventory_Order_Status as Inventory_Order_Status_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 # ========================================================================
 
@@ -39,9 +40,9 @@ class Sales_Order_Status(View):
             data=request.data
         )
         try:
-            sales_order_status_de_serialized.initial_data[
-                self.C_COMPANY_CODE
-            ] = self.company_code
+            sales_order_status_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                self.company_code
+            )
         except AttributeError:
             pass
         if sales_order_status_de_serialized.is_valid():
@@ -58,7 +59,7 @@ class Sales_Order_Status(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -72,7 +73,7 @@ class Sales_Order_Status(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Sales_Order_Status().get_view_name()}_EXISTS",
+                        message=f"{Sales_Order_Status().get_view_name()} {EXISTS}",
                         data=[
                             Sales_Order_Status_Serializer(
                                 SALES_ORDER_STATUS.objects.get(
@@ -85,9 +86,7 @@ class Sales_Order_Status(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            sales_order_status_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {sales_order_status_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -120,7 +119,7 @@ class Sales_Order_Status(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -133,7 +132,7 @@ class Sales_Order_Status(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -156,7 +155,7 @@ class Sales_Order_Status(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -169,15 +168,13 @@ class Sales_Order_Status(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            sales_order_status_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {sales_order_status_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -191,7 +188,7 @@ class Sales_Order_Status(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -208,7 +205,7 @@ class Sales_Order_Status(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -285,7 +282,7 @@ class Sales_Order_Status_Batch(View):
                             ).data
                         )
                         _message.append(
-                            f"{Sales_Order_Status().get_view_name()}_EXISTS"
+                            f"{Sales_Order_Status().get_view_name()} {EXISTS}"
                         )
                         _status = status.HTTP_409_CONFLICT
                     else:
@@ -306,13 +303,11 @@ class Sales_Order_Status_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{Sales_Order_Status().get_view_name()}_EXISTS"
+                                f"{Sales_Order_Status().get_view_name()} {EXISTS}"
                             )
                         else:
                             _payload.append(
-                                "SERIALIZING_ERROR : {}".format(
-                                    sales_order_status_de_serialized.errors
-                                )
+                                f"{SERIALIZING_ERROR} : {sales_order_status_de_serialized.errors}"
                             )
                             _message.append(None)
                         break
@@ -382,9 +377,9 @@ class Inventory_Order_Status(View):
             data=request.data
         )
         try:
-            inventory_order_status_de_serialized.initial_data[
-                self.C_COMPANY_CODE
-            ] = self.company_code
+            inventory_order_status_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                self.company_code
+            )
         except AttributeError:
             pass
         if inventory_order_status_de_serialized.is_valid():
@@ -402,7 +397,7 @@ class Inventory_Order_Status(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -416,7 +411,7 @@ class Inventory_Order_Status(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Inventory_Order_Status().get_view_name()}_EXISTS",
+                        message=f"{Inventory_Order_Status().get_view_name()} {EXISTS}",
                         data=[
                             Inventory_Order_Status_Serializer(
                                 INVENTORY_ORDER_STATUS.objects.get(
@@ -431,9 +426,7 @@ class Inventory_Order_Status(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            inventory_order_status_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {inventory_order_status_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -468,7 +461,7 @@ class Inventory_Order_Status(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -481,7 +474,7 @@ class Inventory_Order_Status(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -508,7 +501,7 @@ class Inventory_Order_Status(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -522,15 +515,13 @@ class Inventory_Order_Status(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            inventory_order_status_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {inventory_order_status_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -544,7 +535,7 @@ class Inventory_Order_Status(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -563,7 +554,7 @@ class Inventory_Order_Status(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -640,7 +631,7 @@ class Inventory_Order_Status_Batch(View):
                             ).data
                         )
                         _message.append(
-                            f"{Inventory_Order_Status().get_view_name()}_EXISTS"
+                            f"{Inventory_Order_Status().get_view_name()} {EXISTS}"
                         )
                         _status = status.HTTP_409_CONFLICT
                     else:
@@ -661,13 +652,11 @@ class Inventory_Order_Status_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{Inventory_Order_Status().get_view_name()}_EXISTS"
+                                f"{Inventory_Order_Status().get_view_name()} {EXISTS}"
                             )
                         else:
                             _payload.append(
-                                "SERIALIZING_ERROR : {}".format(
-                                    inventory_order_status_de_serialized.errors
-                                )
+                                f"{SERIALIZING_ERROR} : {inventory_order_status_de_serialized.errors}"
                             )
                             _message.append(None)
                         break

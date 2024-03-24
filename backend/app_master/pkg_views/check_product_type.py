@@ -13,6 +13,7 @@ from app_master.pkg_serializers.check_product_type import (
     Product_Type_T as Product_Type_T_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 # ========================================================================
 
@@ -30,9 +31,9 @@ class Product_Type(View):
 
         product_type_de_serialized = Product_Type_Serializer(data=request.data)
         try:
-            product_type_de_serialized.initial_data[
-                self.C_COMPANY_CODE
-            ] = self.company_code
+            product_type_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                self.company_code
+            )
         except AttributeError:
             pass
         if product_type_de_serialized.is_valid():
@@ -50,7 +51,7 @@ class Product_Type(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -62,9 +63,7 @@ class Product_Type(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(
-                    product_type_de_serialized.errors
-                ),
+                message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -92,7 +91,7 @@ class Product_Type(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -102,7 +101,7 @@ class Product_Type(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -126,7 +125,7 @@ class Product_Type(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -139,15 +138,13 @@ class Product_Type(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            product_type_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -158,7 +155,7 @@ class Product_Type(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -173,7 +170,7 @@ class Product_Type(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -225,9 +222,9 @@ class Product_Type_Batch(View):
             for data in request.data[self.C_BATCH]:
                 product_type_de_serialized = Product_Type_Serializer(data=data)
                 try:
-                    product_type_de_serialized.initial_data[
-                        self.C_COMPANY_CODE
-                    ] = self.company_code
+                    product_type_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                        self.company_code
+                    )
                 except AttributeError:
                     pass
                 if product_type_de_serialized.is_valid():
@@ -244,7 +241,7 @@ class Product_Type_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Product_Type().get_view_name()}_EXISTS")
+                        _message.append(f"{Product_Type().get_view_name()} {EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(product_type_de_serialized.data)
@@ -252,9 +249,7 @@ class Product_Type_Batch(View):
                 else:
                     _payload.append(None)
                     _message.append(
-                        "SERIALIZING_ERROR : {}".format(
-                            product_type_de_serialized.errors
-                        )
+                        f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}"
                     )
 
             payload = super().create_payload(
@@ -327,7 +322,7 @@ class Product_Type_T(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -342,7 +337,7 @@ class Product_Type_T(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Product_Type_T().get_view_name()}_EXISTS",
+                        message=f"{Product_Type_T().get_view_name()} {EXISTS}",
                         data=[
                             Product_Type_T_Serializer(
                                 PRODUCT_TYPE_T.objects.get(
@@ -357,9 +352,7 @@ class Product_Type_T(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            product_type_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -389,7 +382,7 @@ class Product_Type_T(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -399,7 +392,7 @@ class Product_Type_T(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -428,7 +421,7 @@ class Product_Type_T(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -441,15 +434,13 @@ class Product_Type_T(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            product_type_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -460,7 +451,7 @@ class Product_Type_T(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -475,7 +466,7 @@ class Product_Type_T(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -531,9 +522,9 @@ class Product_Type_T_Batch(View):
             for data in request.data[self.C_BATCH]:
                 product_type_t_de_serialized = Product_Type_T_Serializer(data=data)
                 try:
-                    product_type_t_de_serialized.initial_data[
-                        self.C_COMPANY_CODE
-                    ] = self.company_code
+                    product_type_t_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                        self.company_code
+                    )
                 except AttributeError:
                     pass
                 if product_type_t_de_serialized.is_valid():
@@ -556,7 +547,7 @@ class Product_Type_T_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Product_Type_T().get_view_name()}_EXISTS")
+                        _message.append(f"{Product_Type_T().get_view_name()} {EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(product_type_t_de_serialized.data)
@@ -575,14 +566,12 @@ class Product_Type_T_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{Product_Type_T().get_view_name()}_EXISTS"
+                                f"{Product_Type_T().get_view_name()} {EXISTS}"
                             )
                         else:
                             _payload.append(None)
                             _message.append(
-                                "SERIALIZING_ERROR : {}".format(
-                                    product_type_t_de_serialized.errors
-                                )
+                                f"{SERIALIZING_ERROR} : {product_type_t_de_serialized.errors}"
                             )
                         break
 

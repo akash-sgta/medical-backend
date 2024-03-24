@@ -9,6 +9,7 @@ from app_master.pkg_serializers.master_company import (
     Company as Company_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 # ========================================================================
 
@@ -44,7 +45,7 @@ class Company(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -56,7 +57,7 @@ class Company(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(company_de_serialized.errors),
+                message=f"{SERIALIZING_ERROR} : {company_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -81,7 +82,7 @@ class Company(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -94,7 +95,7 @@ class Company(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -117,7 +118,7 @@ class Company(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -130,15 +131,13 @@ class Company(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            company_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {company_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -152,7 +151,7 @@ class Company(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -172,7 +171,7 @@ class Company(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()}_DOES_NOT_EXIST",
+                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -240,7 +239,7 @@ class Company_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Company().get_view_name()}_EXISTS")
+                        _message.append(f"{Company().get_view_name()} {EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(company_de_serialized.data)
@@ -248,7 +247,7 @@ class Company_Batch(View):
                 else:
                     _payload.append(None)
                     _message.append(
-                        "SERIALIZING_ERROR : {}".format(company_de_serialized.errors)
+                        f"{SERIALIZING_ERROR} : {company_de_serialized.errors}"
                     )
 
             payload = super().create_payload(

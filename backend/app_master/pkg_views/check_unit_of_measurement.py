@@ -9,6 +9,7 @@ from app_master.pkg_serializers.check_unit_of_measurement import (
     Uom as Uom_Serializer,
 )
 from utility.abstract_view import View
+from utility.constants import *
 
 
 # ========================================================================
@@ -27,9 +28,9 @@ class Uom(View):
 
         unit_of_measurement_de_serialized = Uom_Serializer(data=request.data)
         try:
-            unit_of_measurement_de_serialized.initial_data[
-                self.C_COMPANY_CODE
-            ] = self.company_code
+            unit_of_measurement_de_serialized.initial_data[self.C_COMPANY_CODE] = (
+                self.company_code
+            )
         except AttributeError:
             pass
         if unit_of_measurement_de_serialized.is_valid():
@@ -50,7 +51,7 @@ class Uom(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()}_EXISTS",
+                    message=f"{self.get_view_name()} {EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -61,9 +62,7 @@ class Uom(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message="SERIALIZING_ERROR : {}".format(
-                    unit_of_measurement_de_serialized.errors
-                ),
+                message=f"{SERIALIZING_ERROR} : {unit_of_measurement_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,7 +90,7 @@ class Uom(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -101,7 +100,7 @@ class Uom(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -128,7 +127,7 @@ class Uom(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()}_EXISTS",
+                            message=f"{self.get_view_name()} {EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -141,14 +140,12 @@ class Uom(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message="SERIALIZING_ERROR : {}".format(
-                            unit_of_measurement_de_serialized.errors
-                        ),
+                        message=f"{SERIALIZING_ERROR} : {unit_of_measurement_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -158,7 +155,7 @@ class Uom(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -174,7 +171,7 @@ class Uom(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()}_DOES_NOT_EXIST"
+                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -250,7 +247,7 @@ class Uom_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Uom().get_view_name()}_EXISTS")
+                        _message.append(f"{Uom().get_view_name()} {EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(unit_of_measurement_de_serialized.data)
@@ -258,9 +255,7 @@ class Uom_Batch(View):
                 else:
                     _payload.append(None)
                     _message.append(
-                        "SERIALIZING_ERROR : {}".format(
-                            unit_of_measurement_de_serialized.errors
-                        )
+                        f"{SERIALIZING_ERROR} : {unit_of_measurement_de_serialized.errors}"
                     )
 
             payload = super().create_payload(
