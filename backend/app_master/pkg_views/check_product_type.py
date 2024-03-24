@@ -51,7 +51,7 @@ class Product_Type(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -63,7 +63,7 @@ class Product_Type(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
+                message=f"{C_SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,7 +91,7 @@ class Product_Type(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -101,7 +101,7 @@ class Product_Type(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -125,7 +125,7 @@ class Product_Type(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -138,13 +138,13 @@ class Product_Type(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                    message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -155,7 +155,7 @@ class Product_Type(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -170,7 +170,7 @@ class Product_Type(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                    message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -241,7 +241,7 @@ class Product_Type_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Product_Type().get_view_name()} {EXISTS}")
+                        _message.append(f"{Product_Type().get_view_name()} {C_EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(product_type_de_serialized.data)
@@ -249,7 +249,7 @@ class Product_Type_Batch(View):
                 else:
                     _payload.append(None)
                     _message.append(
-                        f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}"
+                        f"{C_SERIALIZING_ERROR} : {product_type_de_serialized.errors}"
                     )
 
             payload = super().create_payload(
@@ -322,7 +322,7 @@ class Product_Type_T(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -337,7 +337,7 @@ class Product_Type_T(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Product_Type_T().get_view_name()} {EXISTS}",
+                        message=f"{Product_Type_T().get_view_name()} {C_EXISTS}",
                         data=[
                             Product_Type_T_Serializer(
                                 PRODUCT_TYPE_T.objects.get(
@@ -352,7 +352,7 @@ class Product_Type_T(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -382,7 +382,7 @@ class Product_Type_T(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -392,7 +392,7 @@ class Product_Type_T(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -421,7 +421,7 @@ class Product_Type_T(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -434,13 +434,13 @@ class Product_Type_T(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {product_type_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                    message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -451,7 +451,7 @@ class Product_Type_T(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -466,7 +466,7 @@ class Product_Type_T(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                    message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -547,7 +547,9 @@ class Product_Type_T_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Product_Type_T().get_view_name()} {EXISTS}")
+                        _message.append(
+                            f"{Product_Type_T().get_view_name()} {C_EXISTS}"
+                        )
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(product_type_t_de_serialized.data)
@@ -566,12 +568,12 @@ class Product_Type_T_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{Product_Type_T().get_view_name()} {EXISTS}"
+                                f"{Product_Type_T().get_view_name()} {C_EXISTS}"
                             )
                         else:
                             _payload.append(None)
                             _message.append(
-                                f"{SERIALIZING_ERROR} : {product_type_t_de_serialized.errors}"
+                                f"{C_SERIALIZING_ERROR} : {product_type_t_de_serialized.errors}"
                             )
                         break
 

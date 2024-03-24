@@ -48,7 +48,7 @@ class Credential(View):
                     #     ),
                     #     many=True,
                     # ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -59,7 +59,7 @@ class Credential(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message=f"{SERIALIZING_ERROR} : {credential_de_serialized.errors}",
+                message=f"{C_SERIALIZING_ERROR} : {credential_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -87,7 +87,7 @@ class Credential(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -97,7 +97,7 @@ class Credential(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -121,7 +121,7 @@ class Credential(View):
                             #     ),
                             #     many=True,
                             # ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -134,12 +134,12 @@ class Credential(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {credential_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {credential_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -149,7 +149,7 @@ class Credential(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -163,7 +163,7 @@ class Credential(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 

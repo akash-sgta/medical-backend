@@ -86,12 +86,10 @@ class CHANGE_LOG(models.Model):
         blank=True,
     )
     created_by = models.CharField(
-        default="DEMO",
         max_length=16,
         blank=True,
     )
     changed_by = models.CharField(
-        default="DEMO",
         max_length=16,
         blank=True,
     )
@@ -116,12 +114,13 @@ class CHANGE_LOG(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        # kwargs["forced"] = True  # TODO : Remove later
         if "forced" in kwargs.keys() and kwargs["forced"] is True:
             if self.is_deleted is True:
                 self.is_deleted = False
         else:
-            self.is_deleted = False
+            if self.is_deleted is True:
+                self.is_deleted = False
+                self.created_on = get_current_ts()
         try:
             del kwargs["forced"]
         except KeyError:

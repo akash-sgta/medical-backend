@@ -43,7 +43,7 @@ class Profile(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -56,7 +56,7 @@ class Profile(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Profile().get_view_name()} {EXISTS}",
+                        message=f"{Profile().get_view_name()} {C_EXISTS}",
                         data=[
                             Profile_Serializer(
                                 PROFILE.objects.get(
@@ -70,7 +70,7 @@ class Profile(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {profile_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {profile_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -96,7 +96,7 @@ class Profile(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -106,7 +106,7 @@ class Profile(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -128,7 +128,7 @@ class Profile(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -141,12 +141,12 @@ class Profile(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {profile_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {profile_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -157,7 +157,7 @@ class Profile(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -171,7 +171,7 @@ class Profile(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 

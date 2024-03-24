@@ -45,7 +45,7 @@ class State(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -57,7 +57,7 @@ class State(View):
         else:
             payload = super().create_payload(
                 success=False,
-                message=f"{SERIALIZING_ERROR} : {state_de_serialized.errors}",
+                message=f"{C_SERIALIZING_ERROR} : {state_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -79,7 +79,7 @@ class State(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -89,7 +89,7 @@ class State(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -113,7 +113,7 @@ class State(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -127,13 +127,13 @@ class State(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {state_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {state_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                    message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -144,7 +144,7 @@ class State(View):
         if int(pk) <= 0:
             payload = super().create_payload(
                 success=False,
-                data=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -159,7 +159,7 @@ class State(View):
             except ObjectDoesNotExist:
                 payload = super().create_payload(
                     success=False,
-                    message=f"{self.get_view_name()} {DOES_NOT_EXIST}",
+                    message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}",
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -237,7 +237,7 @@ class State_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{State().get_view_name()} {EXISTS}")
+                        _message.append(f"{State().get_view_name()} {C_EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(state_de_serialized.data)

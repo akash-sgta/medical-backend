@@ -46,7 +46,7 @@ class Currency(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -59,7 +59,7 @@ class Currency(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{Currency().get_view_name()} {EXISTS}",
+                        message=f"{Currency().get_view_name()} {C_EXISTS}",
                         data=[
                             Currency_Serializer(
                                 CURRENCY.objects.get(
@@ -77,12 +77,12 @@ class Currency(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {currency_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {currency_de_serialized.errors}",
                     )
                 break
             payload = super().create_payload(
                 success=False,
-                message=f"{SERIALIZING_ERROR} : {currency_de_serialized.errors}",
+                message=f"{C_SERIALIZING_ERROR} : {currency_de_serialized.errors}",
             )
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
@@ -106,7 +106,7 @@ class Currency(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -116,7 +116,7 @@ class Currency(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -142,7 +142,7 @@ class Currency(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -155,12 +155,12 @@ class Currency(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {currency_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {currency_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -170,7 +170,7 @@ class Currency(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -184,7 +184,7 @@ class Currency(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -262,7 +262,7 @@ class Currency_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{Currency().get_view_name()} {EXISTS}")
+                        _message.append(f"{Currency().get_view_name()} {C_EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(currency_de_serialized.data)
@@ -284,12 +284,12 @@ class Currency_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{Currency().get_view_name()} {EXISTS}",
+                                f"{Currency().get_view_name()} {C_EXISTS}",
                             )
                         else:
                             _payload.append(None)
                             _message.append(
-                                f"{SERIALIZING_ERROR} : {currency_de_serialized.errors}"
+                                f"{C_SERIALIZING_ERROR} : {currency_de_serialized.errors}"
                             )
                         break
 

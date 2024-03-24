@@ -54,7 +54,7 @@ class City(View):
                         ),
                         many=True,
                     ).data,
-                    message=f"{self.get_view_name()} {EXISTS}",
+                    message=f"{self.get_view_name()} {C_EXISTS}",
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -67,7 +67,7 @@ class City(View):
                 if error[0].code == "unique":
                     payload = super().create_payload(
                         success=False,
-                        message=f"{City().get_view_name()} {EXISTS}",
+                        message=f"{City().get_view_name()} {C_EXISTS}",
                         data=[
                             City_Serializer(
                                 CITY.objects.get(
@@ -83,7 +83,7 @@ class City(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {city_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {city_de_serialized.errors}",
                     )
                 break
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
@@ -109,7 +109,7 @@ class City(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -122,7 +122,7 @@ class City(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -146,7 +146,7 @@ class City(View):
                                 ),
                                 many=True,
                             ).data,
-                            message=f"{self.get_view_name()} {EXISTS}",
+                            message=f"{self.get_view_name()} {C_EXISTS}",
                         )
                         return Response(
                             data=payload, status=status.HTTP_400_BAD_REQUEST
@@ -159,12 +159,12 @@ class City(View):
                 else:
                     payload = super().create_payload(
                         success=False,
-                        message=f"{SERIALIZING_ERROR} : {city_de_serialized.errors}",
+                        message=f"{C_SERIALIZING_ERROR} : {city_de_serialized.errors}",
                     )
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -177,7 +177,7 @@ class City(View):
 
         if int(pk) <= 0:
             payload = super().create_payload(
-                success=False, data=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                success=False, data=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
             )
             return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
         else:
@@ -191,7 +191,7 @@ class City(View):
                 return Response(data=payload, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 payload = super().create_payload(
-                    success=False, message=f"{self.get_view_name()} {DOES_NOT_EXIST}"
+                    success=False, message=f"{self.get_view_name()} {C_DOES_NOT_EXIST}"
                 )
                 return Response(data=payload, status=status.HTTP_404_NOT_FOUND)
 
@@ -270,7 +270,7 @@ class City_Batch(View):
                                 many=False,
                             ).data
                         )
-                        _message.append(f"{City().get_view_name()} {EXISTS}")
+                        _message.append(f"{City().get_view_name()} {C_EXISTS}")
                         _status = status.HTTP_409_CONFLICT
                     else:
                         _payload.append(city_de_serialized.data)
@@ -292,12 +292,12 @@ class City_Batch(View):
                                 ).data
                             )
                             _message.append(
-                                f"{City().get_view_name()} {EXISTS}",
+                                f"{City().get_view_name()} {C_EXISTS}",
                             )
                         else:
                             _payload.append(None)
                             _message.append(
-                                f"{SERIALIZING_ERROR} : {city_de_serialized.errors}"
+                                f"{C_SERIALIZING_ERROR} : {city_de_serialized.errors}"
                             )
                         break
 
