@@ -39,7 +39,6 @@ class Product(View):
                     success=False,
                     data=Product_Serializer(
                         PRODUCT.objects.filter(
-                            company_code=self.company_code,
                             type=product_de_serialized.validated_data["type"],
                             name=product_de_serialized.validated_data["name"].upper(),
                         ),
@@ -54,10 +53,30 @@ class Product(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message=f"{SERIALIZING_ERROR} : {product_de_serialized.errors}",
-            )
+            for error in product_de_serialized.errors.values():
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{Product().get_view_name()} {EXISTS}",
+                        data=[
+                            Product_Serializer(
+                                PRODUCT.objects.get(
+                                    type=product_de_serialized.validated_data["type"],
+                                    name=product_de_serialized.validated_data[
+                                        "name"
+                                    ].upper(),
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{SERIALIZING_ERROR} : {product_de_serialized.errors}",
+                    )
+                break
+
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -105,7 +124,6 @@ class Product(View):
                             success=False,
                             data=Product_Serializer(
                                 PRODUCT.objects.filter(
-                                    company_code=self.company_code,
                                     type=product_de_serialized.validated_data["type"],
                                     name=product_de_serialized.validated_data[
                                         "name"
