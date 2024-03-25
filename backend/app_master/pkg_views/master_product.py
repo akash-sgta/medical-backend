@@ -39,7 +39,7 @@ class Product(View):
                     success=False,
                     data=Product_Serializer(
                         PRODUCT.objects.filter(
-                            type=product_de_serialized.validated_data["type"].id,
+                            type=product_de_serialized.validated_data["type"],
                             name=product_de_serialized.validated_data["name"].upper(),
                         ),
                         many=True,
@@ -187,7 +187,7 @@ class Product(View):
         payload["name"] = self.get_view_name()
         payload["method"] = dict()
         payload["method"]["POST"] = {
-            "type": "Integer : /master/check/type/0",
+            "type": "Integer : /master/check/product_type/0",
             "image_01": "Integer : /master/master/file/0",
             "image_02": "Integer : /master/master/file/0",
             "image_03": "Integer : /master/master/file/0",
@@ -206,7 +206,7 @@ class Product(View):
         }
         payload["method"]["GET"] = None
         payload["method"]["PUT"] = {
-            "type": "Integer : /master/check/type/0",
+            "type": "Integer : /master/check/product_type/0",
             "image_01": "Integer : /master/master/file/0",
             "image_02": "Integer : /master/master/file/0",
             "image_03": "Integer : /master/master/file/0",

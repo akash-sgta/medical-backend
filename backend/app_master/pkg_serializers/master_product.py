@@ -30,7 +30,7 @@ class Product(Serializer):
         """
         data = super().to_representation(instance)
         try:
-            data["type"] = f"master/check/type/{instance.type.id}"
+            data["type"] = f"master/check/product_type/{instance.type.id}"
         except Exception:
             pass
         try:
@@ -50,9 +50,9 @@ class Product(Serializer):
         except Exception:
             pass
         try:
-            data[
-                "storage_instructions"
-            ] = f"master/master/text/{instance.storage_instructions.id}"
+            data["storage_instructions"] = (
+                f"master/master/text/{instance.storage_instructions.id}"
+            )
         except Exception:
             pass
         try:
@@ -60,9 +60,9 @@ class Product(Serializer):
         except Exception:
             pass
         try:
-            data[
-                "warnings_precautions"
-            ] = f"master/master/text/{instance.warnings_precautions.id}"
+            data["warnings_precautions"] = (
+                f"master/master/text/{instance.warnings_precautions.id}"
+            )
         except Exception:
             pass
         return data

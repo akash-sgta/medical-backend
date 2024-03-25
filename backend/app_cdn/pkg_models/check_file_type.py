@@ -17,11 +17,12 @@ class FILE_TYPE(CHANGE_LOG):
         """
         Meta class for defining model metadata.
         """
+
         db_table = "cdn_check_file_type"
         managed = True
         verbose_name = "File Type"
         verbose_name_plural = "File Types"
-        ordering = ["name"]
+        ordering = CHANGE_LOG.get_ordering() + ("name",)
         unique_together = CHANGE_LOG.get_unique_together() + ("name",)
 
     id = models.BigAutoField(

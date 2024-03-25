@@ -43,17 +43,33 @@ class Product_Connection(View):
                     success=False,
                     data=Product_Connection_Serializer(
                         PRODUCT_CONNECTION.objects.filter(
-                            company_code=self.company_code,
-                            type=product_connection_de_serialized.validated_data[
-                                "type"
+                            parent=product_connection_de_serialized.validated_data[
+                                "parrnt"
                             ],
-                            name=product_connection_de_serialized.validated_data[
-                                "name"
-                            ].upper(),
+                            child=product_connection_de_serialized.validated_data[
+                                "child"
+                            ],
                         ),
                         many=True,
                     ).data,
                     message=f"{self.get_view_name()} {C_EXISTS}",
+                )
+                return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+            except Exception as e:
+                payload = super().create_payload(
+                    success=False,
+                    data=Product_Connection_Serializer(
+                        PRODUCT_CONNECTION.objects.filter(
+                            parent=product_connection_de_serialized.validated_data[
+                                "parent"
+                            ],
+                            child=product_connection_de_serialized.validated_data[
+                                "child"
+                            ],
+                        ),
+                        many=True,
+                    ).data,
+                    message=str(e),
                 )
                 return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             else:
@@ -62,10 +78,32 @@ class Product_Connection(View):
                 )
                 return Response(data=payload, status=status.HTTP_201_CREATED)
         else:
-            payload = super().create_payload(
-                success=False,
-                message=f"{C_SERIALIZING_ERROR} : {product_connection_de_serialized.errors}",
-            )
+            for error in product_connection_de_serialized.errors.values():
+                if error[0].code == "unique":
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{Product_Connection().get_view_name()} {C_EXISTS}",
+                        data=[
+                            Product_Connection_Serializer(
+                                PRODUCT_CONNECTION.objects.get(
+                                    parent=product_connection_de_serialized.data[
+                                        "parent"
+                                    ],
+                                    child=product_connection_de_serialized.data[
+                                        "child"
+                                    ],
+                                ),
+                                many=False,
+                            ).data
+                        ],
+                    )
+                else:
+                    payload = super().create_payload(
+                        success=False,
+                        message=f"{C_SERIALIZING_ERROR} : {product_connection_de_serialized.errors}",
+                    )
+                break
+
             return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, pk=None):
@@ -141,10 +179,31 @@ class Product_Connection(View):
                         )
                         return Response(data=payload, status=status.HTTP_201_CREATED)
                 else:
-                    payload = super().create_payload(
-                        success=False,
-                        message=f"{C_SERIALIZING_ERROR} : {product_connection_de_serialized.errors}",
-                    )
+                    for error in product_connection_de_serialized.errors.values():
+                        if error[0].code == "unique":
+                            payload = super().create_payload(
+                                success=False,
+                                message=f"{Product_Connection().get_view_name()} {C_EXISTS}",
+                                data=[
+                                    Product_Connection_Serializer(
+                                        PRODUCT_CONNECTION.objects.get(
+                                            parent=product_connection_de_serialized.data[
+                                                "parent"
+                                            ],
+                                            child=product_connection_de_serialized.data[
+                                                "child"
+                                            ],
+                                        ),
+                                        many=False,
+                                    ).data
+                                ],
+                            )
+                        else:
+                            payload = super().create_payload(
+                                success=False,
+                                message=f"{C_SERIALIZING_ERROR} : {product_connection_de_serialized.errors}",
+                            )
+                        break
                     return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 payload = super().create_payload(

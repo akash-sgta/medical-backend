@@ -65,6 +65,8 @@ class PRODUCT_CONNECTION(CHANGE_LOG):
         """
         Overrides the save method to save the object.
         """
+        if self.parent == self.child:
+            raise Exception("Parent === Child Not supported")
         super(PRODUCT_CONNECTION, self).save(*args, **kwargs)
 
     def __str__(self):
