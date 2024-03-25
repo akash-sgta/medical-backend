@@ -208,6 +208,200 @@
 											"response": []
 										}
 									]
+								},
+								{
+									"name": "currency",
+									"item": [
+										{
+											"name": "options",
+											"request": {
+												"method": "OPTIONS",
+												"header": [],
+												"url": "{{localhost}}{{master_check_currency}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"code\": \"INR\",\n    \"eng_name\": \"indian rupee\",\n    \"local_name\": \"Indian rupee\",\n    \"symbol\": \"Rs\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_currency}}"
+											},
+											"response": []
+										},
+										{
+											"name": "create batch",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"batch\": [\n        {\n            \"code\": \"INR\",\n            \"eng_name\": \"indian rupee\",\n            \"local_name\": \"Indian rupee\",\n            \"symbol\": \"Rs\"\n        },\n        {\n            \"code\": \"USD\",\n            \"eng_name\": \"US Dollar\",\n            \"local_name\": \"one Mon\",\n            \"symbol\": \"$\"\n        },\n        {\n            \"code\": \"INR\",\n            \"eng_name\": \"indian rupee\",\n            \"local_name\": \"Indian rupee\",\n            \"symbol\": \"Rs\"\n        },\n        {\n            \"code\": \"INR\",\n            \"eng_name\": \"indian rupee\",\n            \"local_name\": \"Indian rupee\",\n            \"symbol\": \"Rs\"\n        }\n    ]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_currency}}batch/"
+											},
+											"response": []
+										},
+										{
+											"name": "get all",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_currency}}"
+											},
+											"response": []
+										},
+										{
+											"name": "get selective",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_currency}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "update",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"code\": \"INR\",\n    \"eng_name\": \"indian rupee\",\n    \"local_name\": \"Gu Gu gaga\",\n    \"symbol\": \"Rs\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_currency}}1"
+											},
+											"response": []
+										},
+										{
+											"name": "delete",
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
+														"type": "text"
+													},
+													{
+														"key": "uauth",
+														"value": "Token aaa",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{localhost}}{{master_check_currency}}2"
+											},
+											"response": []
+										}
+									]
 								}
 							]
 						},
@@ -3051,7 +3245,7 @@
 											"request": {
 												"method": "OPTIONS",
 												"header": [],
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_product}}"
 											},
 											"response": []
 										},
@@ -3073,43 +3267,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"Company_01\"\n}",
+													"raw": "{\n    \"type\": 1,\n    \"image_01\": null,\n    \"image_02\": null,\n    \"image_03\": null,\n    \"currency\": 2,\n    \"description\": 2,\n    \"storage_instructions\": 2,\n    \"side_effects\": 2,\n    \"warnings_precautions\": 2,\n    \"contraindications\": 2,\n    \"name\": \"Unga Bunga\",\n    \"manufacturer\": \"Jhinga Punga\",\n    \"dosage\": \"1 per podu\",\n    \"price\": 100.02,\n    \"url\": \"https://www.fb.com\",\n    \"is_prescription_required\": true\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
-											},
-											"response": []
-										},
-										{
-											"name": "create batch",
-											"request": {
-												"method": "POST",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "Token QvGaXG1CeScETGsnhJolFokaWFl3hEA9v2lI3RlEcXKJngifvcd4K49KciTI8eJm",
-														"type": "text"
-													},
-													{
-														"key": "uauth",
-														"value": "Token aaa",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"batch\": [\n        {\n            \"name\": \"Company_01\"\n        },\n        {\n            \"name\": \"Company_02\"\n        },\n        {\n            \"name\": \"Company_03\"\n        },\n        {\n            \"name\": \"Company_04\"\n        },\n        {\n            \"name\": \"Company_05\"\n        }\n    ]\n}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": "{{localhost}}{{master_master_company}}batch/"
+												"url": "{{localhost}}{{master_master_product}}"
 											},
 											"response": []
 										},
@@ -3141,7 +3306,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}"
+												"url": "{{localhost}}{{master_master_product}}"
 											},
 											"response": []
 										},
@@ -3173,7 +3338,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}4"
+												"url": "{{localhost}}{{master_master_product}}1"
 											},
 											"response": []
 										},
@@ -3195,14 +3360,14 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\n    \"name\": \"DEV22\"\n}",
+													"raw": "{\n    \"type\": 1,\n    \"image_01\": null,\n    \"image_02\": null,\n    \"image_03\": null,\n    \"currency\": 2,\n    \"description\": 3,\n    \"storage_instructions\": 2,\n    \"side_effects\": 2,\n    \"warnings_precautions\": 2,\n    \"contraindications\": 2,\n    \"name\": \"Unga Bunga\",\n    \"manufacturer\": \"Jhinga Punga\",\n    \"dosage\": \"1 per podu\",\n    \"price\": 100.02,\n    \"url\": \"https://www.fb.com\",\n    \"is_prescription_required\": true\n}",
 													"options": {
 														"raw": {
 															"language": "json"
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_product}}1"
 											},
 											"response": []
 										},
@@ -3231,7 +3396,7 @@
 														}
 													}
 												},
-												"url": "{{localhost}}{{master_master_company}}1"
+												"url": "{{localhost}}{{master_master_product}}1"
 											},
 											"response": []
 										}
@@ -4735,6 +4900,11 @@
 			"type": "string"
 		},
 		{
+			"key": "master_check_currency",
+			"value": "master/check/currency/",
+			"type": "string"
+		},
+		{
 			"key": "master_master_text",
 			"value": "master/master/text/",
 			"type": "string"
@@ -4752,6 +4922,11 @@
 		{
 			"key": "master_master_profile",
 			"value": "master/master/profile/",
+			"type": "string"
+		},
+		{
+			"key": "master_master_product",
+			"value": "master/master/product/",
 			"type": "string"
 		}
 	]
